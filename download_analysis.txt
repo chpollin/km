@@ -1,0 +1,21 @@
+
+Total objects analysed: 0
+
+Objects by type:
+  TEI: 0
+  LIDO: 0
+  Unknown: 0
+
+File download success rates:
+  RDF: 0 success, 0 failure (success rate 0.00% )
+  TEI: 0 success, 0 failure (success rate 0.00% )
+  LIDO: 0 success, 0 failure (success rate 0.00% )
+  IMAGE: 0 success, 0 failure (success rate 0.00% )
+
+No valid creation dates found.
+
+
+Objects with descriptions: 0
+Objects without descriptions: 0
+
+File size distribution (bytes):

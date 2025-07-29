@@ -1,0 +1,1449 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<sparql xmlns="http://www.w3.org/2001/sw/DataAccess/rf1/result">
+  <head>
+    <variable name="container"/>
+    <variable name="cid"/>
+    <variable name="pid"/>
+    <variable name="model"/>
+    <variable name="ownerId"/>
+    <variable name="createdDate"/>
+    <variable name="lastModifiedDate"/>
+    <variable name="title"/>
+    <variable name="identifier"/>
+    <variable name="description"/>
+    <variable name="source"/>
+  </head>
+  <results>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.9"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:15:24.353Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:52.522Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.9</title>
+      <identifier>o:km.9</identifier>
+      <description bound="false"/>
+      <source>9</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.10"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T14:28:28.859Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:46.312Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.10</title>
+      <identifier>o:km.10</identifier>
+      <description bound="false"/>
+      <source>10</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.18"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T16:45:58.856Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:46.882Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.18</title>
+      <identifier>o:km.18</identifier>
+      <description bound="false"/>
+      <source>18</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.22"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T16:54:21.366Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:52.809Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.22</title>
+      <identifier>o:km.22</identifier>
+      <description bound="false"/>
+      <source>22</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.29"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:08:14.036Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:53.111Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.29</title>
+      <identifier>o:km.29</identifier>
+      <description bound="false"/>
+      <source>29</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.34"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:18:17.882Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:48.274Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.34</title>
+      <identifier>o:km.34</identifier>
+      <description bound="false"/>
+      <source>34</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.36"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:22:25.753Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:56.392Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.36</title>
+      <identifier>o:km.36</identifier>
+      <description bound="false"/>
+      <source>36</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8030"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T20:56:00.712Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:01.188Z</lastModifiedDate>
+      <title>Gewehr KM-O.42</title>
+      <identifier>o:km.8030</identifier>
+      <description>Militärgewehr mit abnehmbarem Lauf, umgearbeitet zu Wilderergewehr</description>
+      <source>42</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.62"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T18:16:18.801Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:59.916Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.62</title>
+      <identifier>o:km.62</identifier>
+      <description bound="false"/>
+      <source>62</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.73"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T18:39:07.186Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:01.912Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.73</title>
+      <identifier>o:km.73</identifier>
+      <description bound="false"/>
+      <source>73</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.87"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:08:48.734Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:07.633Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.87</title>
+      <identifier>o:km.87</identifier>
+      <description bound="false"/>
+      <source>87</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.88"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:11:04.465Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:48.58Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.88</title>
+      <identifier>o:km.88</identifier>
+      <description bound="false"/>
+      <source>88</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.91"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:17:41.336Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:02.574Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.91</title>
+      <identifier>o:km.91</identifier>
+      <description bound="false"/>
+      <source>91</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.94"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:23:43.301Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:48.87Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.94</title>
+      <identifier>o:km.94</identifier>
+      <description bound="false"/>
+      <source>94</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.95"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:25:43.083Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:49.163Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.95</title>
+      <identifier>o:km.95</identifier>
+      <description bound="false"/>
+      <source>95</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.120"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T15:08:59.671Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:03.87Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.120</title>
+      <identifier>o:km.120</identifier>
+      <description bound="false"/>
+      <source>120</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.132"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T15:33:25.956Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:04.532Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.132</title>
+      <identifier>o:km.132</identifier>
+      <description bound="false"/>
+      <source>132</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8128"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T18:21:38.827Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:27:00.497Z</lastModifiedDate>
+      <title>Vergiftete Maiskörner KM-O.147</title>
+      <identifier>o:km.8128</identifier>
+      <description>Mit Schwefelphosphor vergiftete Maiskörner</description>
+      <source>147</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.175"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T16:45:01.222Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:07.944Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.175</title>
+      <identifier>o:km.175</identifier>
+      <description bound="false"/>
+      <source>175</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.195"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T16:49:22.063Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:46.6Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.195</title>
+      <identifier>o:km.195</identifier>
+      <description bound="false"/>
+      <source>195</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.205"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T16:51:28.922Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:47.73Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.205</title>
+      <identifier>o:km.205</identifier>
+      <description bound="false"/>
+      <source>205</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.219"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T16:54:09.713Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:48Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.219</title>
+      <identifier>o:km.219</identifier>
+      <description bound="false"/>
+      <source>219</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.223"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T16:55:07.351Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:56.976Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.223</title>
+      <identifier>o:km.223</identifier>
+      <description bound="false"/>
+      <source>223</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.229"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T16:56:12.314Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:57.542Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.229</title>
+      <identifier>o:km.229</identifier>
+      <description bound="false"/>
+      <source>229</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.234"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T16:57:14.947Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:07.334Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.234</title>
+      <identifier>o:km.234</identifier>
+      <description bound="false"/>
+      <source>234</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.237"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T16:57:49.493Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:57.849Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.237</title>
+      <identifier>o:km.237</identifier>
+      <description bound="false"/>
+      <source>237</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.242"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T16:58:54.001Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:59.608Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.242</title>
+      <identifier>o:km.242</identifier>
+      <description bound="false"/>
+      <source>242</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.297"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:09:40.642Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:03.526Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.297</title>
+      <identifier>o:km.297</identifier>
+      <description bound="false"/>
+      <source>297</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.310"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:12:34.19Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:05.778Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.310</title>
+      <identifier>o:km.310</identifier>
+      <description bound="false"/>
+      <source>310</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.322"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:14:54.877Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:06.701Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.322</title>
+      <identifier>o:km.322</identifier>
+      <description bound="false"/>
+      <source>322</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.323"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:15:06.679Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:07.005Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.323</title>
+      <identifier>o:km.323</identifier>
+      <description bound="false"/>
+      <source>323</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.325"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:15:29.081Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:52.235Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.325</title>
+      <identifier>o:km.325</identifier>
+      <description bound="false"/>
+      <source>325</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.347"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:19:47.398Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:57.26Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.347</title>
+      <identifier>o:km.347</identifier>
+      <description bound="false"/>
+      <source>347</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.368"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:24:07.826Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:58.138Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.368</title>
+      <identifier>o:km.368</identifier>
+      <description bound="false"/>
+      <source>368</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.380"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:26:34.26Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:58.419Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.380</title>
+      <identifier>o:km.380</identifier>
+      <description bound="false"/>
+      <source>380</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.381"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:26:46.021Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:58.722Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.381</title>
+      <identifier>o:km.381</identifier>
+      <description bound="false"/>
+      <source>381</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.382"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:26:57.411Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:58.999Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.382</title>
+      <identifier>o:km.382</identifier>
+      <description bound="false"/>
+      <source>382</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.387"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:27:52.757Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:59.293Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.387</title>
+      <identifier>o:km.387</identifier>
+      <description bound="false"/>
+      <source>387</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.410"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:32:58.915Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:00.208Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.410</title>
+      <identifier>o:km.410</identifier>
+      <description bound="false"/>
+      <source>410</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.426"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:36:15.473Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:00.566Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.426</title>
+      <identifier>o:km.426</identifier>
+      <description bound="false"/>
+      <source>426</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8384"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T20:59:10.275Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:05.187Z</lastModifiedDate>
+      <title>Legebüchse KM-O.430</title>
+      <identifier>o:km.8384</identifier>
+      <description>Legebüchse (Wildererwaffe), mit dem Schloss eines militärischen Steinschlossgewehres und drei Hebeln zur Hahnspannung versehen</description>
+      <source>430</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.439"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T17:38:59.185Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:01.558Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.439</title>
+      <identifier>o:km.439</identifier>
+      <description bound="false"/>
+      <source>439</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8397"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:06:00.453Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:11.437Z</lastModifiedDate>
+      <title>Hauenflinte (Wildererwaffe) KM-O.446</title>
+      <identifier>o:km.8397</identifier>
+      <description>Hauenflinte (Wildererwaffe), Kaliber .22, Haue mit hohlem Stiel, in dem der Lauf eines Kugelgewehrs verborgen ist, das Verschlusssystem, an das ein Stück Metallrohr behelfsmäßig angeschweißt ist, ragt aus dem Stiel hervor. Gefertigt von dem Büchsenmacher Johann Peterlongo aus Innsbruck</description>
+      <source>446</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8408"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:10:47.336Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:17.826Z</lastModifiedDate>
+      <title>Wilderermaske KM-O.460</title>
+      <identifier>o:km.8408</identifier>
+      <description>Wilderermaske aus Leder und Schnur</description>
+      <source>460</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8427"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:19:44.253Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:28.524Z</lastModifiedDate>
+      <title>Beil mit Gewehr KM-O.483</title>
+      <identifier>o:km.8427</identifier>
+      <description>Beil mit Gewehr im (ausgehöhltem) Stiel</description>
+      <source>483</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8429"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:20:21.192Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:29.173Z</lastModifiedDate>
+      <title>Fangeisen (Tierfalle) KM-O.485</title>
+      <identifier>o:km.8429</identifier>
+      <description>Fangeisen (Tierfalle) aus Stahl</description>
+      <source>485</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8431"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:20:55.149Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:29.77Z</lastModifiedDate>
+      <title>Tierfalle KM-O.487</title>
+      <identifier>o:km.8431</identifier>
+      <description>Tierfalle aus Stahl, Drahtkorb mit Haltegriff</description>
+      <source>487</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8434"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:23:07.876Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:31.839Z</lastModifiedDate>
+      <title>Angel KM-O.490</title>
+      <identifier>o:km.8434</identifier>
+      <description>Angel, selbstgerfertigt aus Schnur, Draht, Korken und 2 Haken</description>
+      <source>490</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8449"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:32:17.418Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:39.551Z</lastModifiedDate>
+      <title>Gewehr (Wilderergewehr) KM-O.507</title>
+      <identifier>o:km.8449</identifier>
+      <description>Einschüssiges Hinterladergewehr (Wilderergewehr) mit Zylinderschloss, abnehmbarer Kolben, ziviles System mit militärischen Lauf, Abzug mit deutschem Stecher, Kugelfeuerung, eingerichtet für eine Patrone Kaliber 11 mm mit extrem dicken Boden, mit Gravuren im Metall, Vorbild dieser Waffe war vermutlich das Gewehr Mauser, Modell 1871</description>
+      <source>507</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8452"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:33:14.461Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:40.854Z</lastModifiedDate>
+      <title>Karabiner (Wilderergewehr) KM-O.510</title>
+      <identifier>o:km.8452</identifier>
+      <description>Karabiner (Gewehr), Mannlicher, &quot;M 95, Budapest&quot;, zur Wildererwaffe umgebaut: schlankere Schäftung und verkürzter Lauf, Kaliber 8 mm</description>
+      <source>510</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8453"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:33:24.232Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:41.173Z</lastModifiedDate>
+      <title>Karabiner (Wilderergewehr) KM-O.511</title>
+      <identifier>o:km.8453</identifier>
+      <description>Karabiner (Gewehr), Mannlicher, &quot;M 95, Budapest&quot;, zur Wildererwaffe umgebaut: abschraubbarer Lauf und fehlender Vorderschaft, Kaliber 8 mm</description>
+      <source>511</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8454"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:33:46.885Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:41.479Z</lastModifiedDate>
+      <title>Karabiner (Wilderergewehr) KM-O.512</title>
+      <identifier>o:km.8454</identifier>
+      <description>Karabiner (Gewehr), Mauser, K 98, gefertigt von &quot;Waffenfabrik Steyr Austria&quot;, zur Wildererwaffe umgebaut: geänderte Schäftung und leicht abschraubbarer Lauf mit Bajonettverschluss im Vorderschaft, Kal. 757, Seriennummer: S_G3806</description>
+      <source>512</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8455"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:34:02.295Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:41.832Z</lastModifiedDate>
+      <title>Kugelgewehr KM-O.513</title>
+      <identifier>o:km.8455</identifier>
+      <description>Kugelgewehr (Wilderergewehr) mit Martini-Fallblockverschluss, Kaliber 9 mm, mit Gravuren im Metall, Aufkleber: &quot;20 Unter Premstätten&quot;, Jahr 1933</description>
+      <source>513</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8456"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:34:28.891Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:42.158Z</lastModifiedDate>
+      <title>Gewehr (Wilderergewehr) KM-O.514</title>
+      <identifier>o:km.8456</identifier>
+      <description>Wenzel-Hinterladergewehr, das Schloss stammt von einem Steinschlossgewehr (Wilderergewehr), Jahr 1937</description>
+      <source>514</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8458"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:35:34.315Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:43.491Z</lastModifiedDate>
+      <title>Karabiner (Wilderergewehr) KM-O.518</title>
+      <identifier>o:km.8458</identifier>
+      <description>Jagdlicher Umbau des östereichischen Militärkarabiners Mannlicher &quot;M 95&quot; zu einer Wildererwaffe, mit ziviler Visierung und abschraubbarem Lauf, Nr. 896S, Kaliber 8 mm</description>
+      <source>518</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8460"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:36:36.742Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:44.507Z</lastModifiedDate>
+      <title>Wilderergewehr KM-O.520</title>
+      <identifier>o:km.8460</identifier>
+      <description>Wilderergewehr mit Warnand-Verschlusssystem, Kaliber 9 mm (Randfeuer), der Schaft ist gekürzt bis auf ein kleines Holzstück hinter dem Abzug</description>
+      <source>520</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.583"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T11:57:17.709Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:02.266Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.583</title>
+      <identifier>o:km.583</identifier>
+      <description bound="false"/>
+      <source>583</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.628"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T18:18:07.196Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:49.47Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.628</title>
+      <identifier>o:km.628</identifier>
+      <description bound="false"/>
+      <source>628</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8565"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T22:31:54.085Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:30:29.153Z</lastModifiedDate>
+      <title>Taschenlampe (&quot;Scheinwerfer&quot;) KM-O.634</title>
+      <identifier>o:km.8565</identifier>
+      <description>Taschenlampe aus silbernem Metall, als &quot;Scheinwerfer&quot; an einem Wilderergewehr angebracht, Jahr 1940</description>
+      <source>634</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8571"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T22:52:23.971Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:30:43.82Z</lastModifiedDate>
+      <title>Kipplaufflinte (Wilderergewehr) KM-O.642</title>
+      <identifier>o:km.8571</identifier>
+      <description>Kipplaufflinte (Wilderergewehr), selbstgefertigt, Jahr 1928</description>
+      <source>642</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.644"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T18:21:29.206Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:49.833Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.644</title>
+      <identifier>o:km.644</identifier>
+      <description bound="false"/>
+      <source>644</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8573"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T22:52:52.988Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:30:44.435Z</lastModifiedDate>
+      <title>Gewehr (Wildererwaffe) KM-O.644</title>
+      <identifier>o:km.8573</identifier>
+      <description>Gewehr (Wildererwaffe), alter Vorderlader mit abschraubbarem Lauf, zerlegbar, Jahr 1918</description>
+      <source>644</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.645"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T18:21:41.552Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:50.137Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.645</title>
+      <identifier>o:km.645</identifier>
+      <description bound="false"/>
+      <source>645</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.646"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T18:21:53.237Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:50.444Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.646</title>
+      <identifier>o:km.646</identifier>
+      <description bound="false"/>
+      <source>646</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.647"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T18:22:04.989Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:50.742Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.647</title>
+      <identifier>o:km.647</identifier>
+      <description bound="false"/>
+      <source>647</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.648"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T18:22:16.519Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:51.056Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.648</title>
+      <identifier>o:km.648</identifier>
+      <description bound="false"/>
+      <source>648</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8615"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T23:19:51.953Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:31:07.575Z</lastModifiedDate>
+      <title>Luftdruckgewehr (Wilderergewehr) KM-O.690</title>
+      <identifier>o:km.8615</identifier>
+      <description>Luftdruckgewehr (Wilderergewehr), selbstgefertigt aus einem Stück &quot;Rundeisen&quot;</description>
+      <source>690</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8737"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-16T01:08:03.132Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:32:36.413Z</lastModifiedDate>
+      <title>Dose aus Stahl, gefüllt mit Kockelskörnern (vergiftete Fischkörner) KM-O.849</title>
+      <identifier>o:km.8737</identifier>
+      <description>Dose aus Stahl, gefüllt mit Kockelskörnern (vergiftete Fischkörner), Jahr ca. 1896</description>
+      <source>849</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8742"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-16T01:10:15.502Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:32:41.601Z</lastModifiedDate>
+      <title>Brandlegungsapparat KM-O.855</title>
+      <identifier>o:km.8742</identifier>
+      <description>Brandlegungsapparat, selbstgefertigt aus Holz, Näglen und Zündholzschachteln, Jahr ca. 1914</description>
+      <source>855</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.875"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:10:02.704Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:47.451Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.875</title>
+      <identifier>o:km.875</identifier>
+      <description bound="false"/>
+      <source>875</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.952"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:26:16.385Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:53.402Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.952</title>
+      <identifier>o:km.952</identifier>
+      <description bound="false"/>
+      <source>952</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.953"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:26:28.391Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:53.712Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.953</title>
+      <identifier>o:km.953</identifier>
+      <description bound="false"/>
+      <source>953</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.954"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:26:40.082Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:54.006Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.954</title>
+      <identifier>o:km.954</identifier>
+      <description bound="false"/>
+      <source>954</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.955"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:26:51.699Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:54.297Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.955</title>
+      <identifier>o:km.955</identifier>
+      <description bound="false"/>
+      <source>955</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.956"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:27:03.305Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:54.599Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.956</title>
+      <identifier>o:km.956</identifier>
+      <description bound="false"/>
+      <source>956</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.957"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:27:15.191Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:54.892Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.957</title>
+      <identifier>o:km.957</identifier>
+      <description bound="false"/>
+      <source>957</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.958"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:27:27.485Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:55.197Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.958</title>
+      <identifier>o:km.958</identifier>
+      <description bound="false"/>
+      <source>958</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.959"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:27:39.62Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:55.489Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.959</title>
+      <identifier>o:km.959</identifier>
+      <description bound="false"/>
+      <source>959</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.960"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:28:03.773Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:55.774Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.960</title>
+      <identifier>o:km.960</identifier>
+      <description bound="false"/>
+      <source>960</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.962"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:28:26.742Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:56.087Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.962</title>
+      <identifier>o:km.962</identifier>
+      <description bound="false"/>
+      <source>962</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8826"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-16T01:40:38.846Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:33:53.976Z</lastModifiedDate>
+      <title>Kugelsegen KM-O.962</title>
+      <identifier>o:km.8826</identifier>
+      <description>Kugelsegen resp. Waffensegen, bei einem Wilderer in Gstatterboden gefunden, Jahr 1896</description>
+      <source>962</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.965"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T19:29:01.538Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:56.695Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.965</title>
+      <identifier>o:km.965</identifier>
+      <description bound="false"/>
+      <source>965</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.1016"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T14:32:13.948Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:51.347Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.1016</title>
+      <identifier>o:km.1016</identifier>
+      <description bound="false"/>
+      <source>1016</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.1017"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T14:32:25.696Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:02.905Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.1017</title>
+      <identifier>o:km.1017</identifier>
+      <description bound="false"/>
+      <source>1017</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.1026"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T14:34:08.607Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:03.215Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.1026</title>
+      <identifier>o:km.1026</identifier>
+      <description bound="false"/>
+      <source>1026</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.1033"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T14:35:35.344Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:04.197Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.1033</title>
+      <identifier>o:km.1033</identifier>
+      <description bound="false"/>
+      <source>1033</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.1056"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T14:40:10.309Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:04.85Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.1056</title>
+      <identifier>o:km.1056</identifier>
+      <description bound="false"/>
+      <source>1056</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.1057"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T14:40:21.777Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:05.148Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.1057</title>
+      <identifier>o:km.1057</identifier>
+      <description bound="false"/>
+      <source>1057</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.1061"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T14:41:17.987Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:05.453Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.1061</title>
+      <identifier>o:km.1061</identifier>
+      <description bound="false"/>
+      <source>1061</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.1089"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T14:46:38.496Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:06.075Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.1089</title>
+      <identifier>o:km.1089</identifier>
+      <description bound="false"/>
+      <source>1089</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.1097"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T14:48:14.582Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:16:06.393Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.1097</title>
+      <identifier>o:km.1097</identifier>
+      <description bound="false"/>
+      <source>1097</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8912"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T14:54:24.85Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:23:02.798Z</lastModifiedDate>
+      <title>Schürze KM-O.1108</title>
+      <identifier>o:km.8912</identifier>
+      <description>Schürze zum Hühnerfang, aus gelber Textilie</description>
+      <source>1108</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.1113"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T14:51:33.684Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:51.641Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.1113</title>
+      <identifier>o:km.1113</identifier>
+      <description bound="false"/>
+      <source>1113</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.1114"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T14:51:44.25Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:51.959Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.1114</title>
+      <identifier>o:km.1114</identifier>
+      <description bound="false"/>
+      <source>1114</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.8951"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T15:19:35.429Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:24:01.11Z</lastModifiedDate>
+      <title>Tierfalle KM-O.1179</title>
+      <identifier>o:km.8951</identifier>
+      <description>Tierfalle, mit aufgeklebtem Papier</description>
+      <source>1179</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.1292"/>
+      <model uri="info:fedora/cm:TEI"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-01-19T15:27:36.322Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T18:15:47.162Z</lastModifiedDate>
+      <title>Karteikarte KM-KK.1292</title>
+      <identifier>o:km.1292</identifier>
+      <description bound="false"/>
+      <source>1292</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.9046"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T17:59:58.126Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:26:40.973Z</lastModifiedDate>
+      <title>Tierfalle (Trittfalle) KM-O.1377</title>
+      <identifier>o:km.9046</identifier>
+      <description>Tierfalle (Trittfalle) aus Stahl</description>
+      <source>1377</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.9057"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T18:05:13.229Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:26:45.434Z</lastModifiedDate>
+      <title>Tierfalle KM-O.1389</title>
+      <identifier>o:km.9057</identifier>
+      <description>Tierfalle aus Stahl</description>
+      <source>1389</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.9060"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T18:06:02.416Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:26:47.049Z</lastModifiedDate>
+      <title>Brandlegungsapparat, Bügeleisen KM-O.1392</title>
+      <identifier>o:km.9060</identifier>
+      <description>Brandlegungsapparat, ausgebranntes Bügeleisen mit Draht, Schnur und Reibfläche</description>
+      <source>1392</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.9062"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T18:06:36.856Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:26:48.467Z</lastModifiedDate>
+      <title>Fischgere KM-O.1394</title>
+      <identifier>o:km.9062</identifier>
+      <description>Fischgere aus Stahl</description>
+      <source>1394</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.9861"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:21:49.832Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:30.869Z</lastModifiedDate>
+      <title>Tellereisen (Tierfalle) KM-O.491-1</title>
+      <identifier>o:km.9861</identifier>
+      <description>Tellereisen (Tierfalle) aus Stahl</description>
+      <source>491-1</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.9862"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:23:19.177Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:32.15Z</lastModifiedDate>
+      <title>Tellereisen (Tierfalle) KM-O.491-2</title>
+      <identifier>o:km.9862</identifier>
+      <description>Tellereisen (Tierfalle) aus Stahl</description>
+      <source>491-2</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.9871"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:35:21.807Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:43.161Z</lastModifiedDate>
+      <title>Schrotgewehr (Wilderergewehr) KM-O.527-1</title>
+      <identifier>o:km.9871</identifier>
+      <description>Mittelstück eines zerlegbaren Schrotgewehrs (Wilderergewehr)</description>
+      <source>527-1</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.9872"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:38:25.404Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:46.924Z</lastModifiedDate>
+      <title>Schrotgewehr (Wilderergewehr) KM-O.527-2</title>
+      <identifier>o:km.9872</identifier>
+      <description>Kolben eines zerlegbaren Schrotgewehrs (Wilderergewehr)</description>
+      <source>527-2</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.9873"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:38:37.949Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:47.257Z</lastModifiedDate>
+      <title>Schrotgewehr (Wilderergewehr) KM-O.527-3</title>
+      <identifier>o:km.9873</identifier>
+      <description>Kolben eines zerlegbaren Schrotgewehrs (Wilderergewehr)</description>
+      <source>527-3</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.9874"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:39:01.821Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:47.628Z</lastModifiedDate>
+      <title>Schrotgewehr (Wilderergewehr) KM-O.527-4</title>
+      <identifier>o:km.9874</identifier>
+      <description>Lauf eines zerlegbaren Schrotgewehrs (Wilderergewehr)</description>
+      <source>527-4</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.9875"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T21:39:11.347Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:29:47.962Z</lastModifiedDate>
+      <title>Schrotgewehr (Wilderergewehr) KM-O.527-5</title>
+      <identifier>o:km.9875</identifier>
+      <description>Lauf eines zerlegbaren Schrotgewehrs (Wilderergewehr)</description>
+      <source>527-5</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.9935"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T22:49:52.393Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:30:41.335Z</lastModifiedDate>
+      <title>Schädeldecke KM-O.638-1</title>
+      <identifier>o:km.9935</identifier>
+      <description>Schädeldecke, Jahr 1920</description>
+      <source>638-1</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.9936"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-15T22:50:22.103Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:30:41.962Z</lastModifiedDate>
+      <title>Knochensplitter KM-O.638-2</title>
+      <identifier>o:km.9936</identifier>
+      <description>Knochensplitter samt Projektil, Jahr 1920</description>
+      <source>638-2</source>
+    </result>
+    <result>
+      <container>Wildererobjekte</container>
+      <cid>context:km.wilderer</cid>
+      <pid uri="info:fedora/o:km.10207"/>
+      <model uri="info:fedora/cm:LIDO"/>
+      <ownerId>km</ownerId>
+      <createdDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-02-16T01:32:05.058Z</createdDate>
+      <lastModifiedDate datatype="http://www.w3.org/2001/XMLSchema#dateTime">2023-03-02T19:33:33.273Z</lastModifiedDate>
+      <title>Brandlegungsapparat KM-O.916-1</title>
+      <identifier>o:km.10207</identifier>
+      <description>Brandlegungsapparat aus Holz, Holzspäne, Draht und Schnur, Jahr 1896</description>
+      <source>916-1</source>
+    </result>
+  </results>
+</sparql>
