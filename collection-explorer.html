@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection Explorer - Hans Gross Kriminalmuseum Archive</title>
+    <meta name="description" content="Spatial visualization interface for exploring the Hans Gross Criminal Museum collection">
+    
+    <!-- Preconnect to GAMS for faster image loading -->
+    <link rel="preconnect" href="https://gams.uni-graz.at">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="explorer-styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗺️</text></svg>">
+</head>
+<body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-canvas" class="skip-link">Skip to collection explorer</a>
+
+    <!-- Header with Collection Info -->
+    <header class="explorer-header">
+        <div class="header-content">
+            <div class="header-title">
+                <h1>
+                    <span class="header-icon">🗺️</span>
+                    Collection Explorer
+                </h1>
+                <p class="header-subtitle">Hans Gross Kriminalmuseum Archive</p>
+            </div>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="total-objects">3,892</span>
+                    <span class="stat-label">Objects</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="visible-objects">0</span>
+                    <span class="stat-label">Visible</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h2>Loading Collection</h2>
+            <p>Preparing spatial visualization of 3,892 objects...</p>
+            <div class="loading-progress">
+                <div class="progress-bar" id="loadingProgress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Explorer Interface -->
+    <main class="explorer-main">
+        <!-- Canvas Container -->
+        <div class="canvas-container" id="canvasContainer">
+            <canvas id="main-canvas" class="main-canvas"></canvas>
+            
+            <!-- Grid Overlay -->
+            <canvas id="grid-overlay" class="grid-overlay"></canvas>
+            
+            <!-- Zoom Level Indicator -->
+            <div class="zoom-indicator" id="zoomIndicator">
+                <span class="zoom-label">Zoom:</span>
+                <span class="zoom-value">0.5x</span>
+                <div class="zoom-description">Overview</div>
+            </div>
+        </div>
+
+        <!-- Search Overlay -->
+        <section class="search-overlay" aria-label="Search interface">
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <input 
+                        type="search" 
+                        id="searchInput" 
+                        class="search-input"
+                        placeholder="Search collection..."
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-label="Search objects by title, description, or ID"
+                    >
+                    <button class="search-clear" id="searchClear" aria-label="Clear search">
+                        <span aria-hidden="true">✕</span>
+                    </button>
+                </div>
+                <div class="search-results" id="searchResults">
+                    <span class="results-count" id="resultsCount"></span>
+                    <button class="search-zoom-fit" id="searchZoomFit" style="display: none;">
+                        <span aria-hidden="true">🎯</span>
+                        Zoom to Results
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation Controls -->
+        <nav class="nav-controls" aria-label="Navigation controls">
+            <!-- Zoom Controls -->
+            <div class="zoom-controls">
+                <button class="zoom-btn zoom-in" id="zoomIn" aria-label="Zoom in">
+                    <span aria-hidden="true">+</span>
+                </button>
+                <div class="zoom-slider-container">
+                    <input 
+                        type="range" 
+                        id="zoomSlider" 
+                        class="zoom-slider"
+                        min="0.1" 
+                        max="5" 
+                        step="0.1" 
+                        value="0.5"
+                        aria-label="Zoom level"
+                        orient="vertical"
+                    >
+                </div>
+                <button class="zoom-btn zoom-out" id="zoomOut" aria-label="Zoom out">
+                    <span aria-hidden="true">−</span>
+                </button>
+                <button class="zoom-btn reset-view" id="resetView" aria-label="Reset view">
+                    <span aria-hidden="true">⌂</span>
+                </button>
+            </div>
+
+            <!-- View Mode Toggle -->
+            <div class="view-mode-controls">
+                <button class="view-mode-btn active" data-mode="spatial" aria-label="Spatial view">
+                    <span aria-hidden="true">🗺️</span>
+                </button>
+                <button class="view-mode-btn" data-mode="clustered" aria-label="Clustered view">
+                    <span aria-hidden="true">🔲</span>
+                </button>
+                <button class="view-mode-btn" data-mode="temporal" aria-label="Temporal view">
+                    <span aria-hidden="true">📅</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Minimap -->
+        <div class="minimap" id="minimap">
+            <div class="minimap-header">
+                <span class="minimap-title">Collection Map</span>
+                <button class="minimap-toggle" id="minimapToggle" aria-label="Toggle minimap">
+                    <span aria-hidden="true">📍</span>
+                </button>
+            </div>
+            <canvas id="minimapCanvas" class="minimap-canvas"></canvas>
+            <div class="minimap-viewport" id="minimapViewport"></div>
+        </div>
+
+        <!-- Information Panel -->
+        <aside class="info-panel" id="infoPanel" aria-label="Object details">
+            <div class="panel-header">
+                <h2 class="panel-title">Object Details</h2>
+                <button class="panel-close" id="panelClose" aria-label="Close panel">
+                    <span aria-hidden="true">←</span>
+                </button>
+            </div>
+            <div class="panel-content" id="panelContent">
+                <div class="no-selection">
+                    <div class="no-selection-icon">🔍</div>
+                    <h3>No Object Selected</h3>
+                    <p>Click on any object in the collection to view its details.</p>
+                    <div class="interaction-hints">
+                        <div class="hint-item">
+                            <span class="hint-key">Click</span>
+                            <span class="hint-action">Select object</span>
+                        </div>
+                        <div class="hint-item">
+                            <span class="hint-key">Scroll</span>
+                            <span class="hint-action">Zoom in/out</span>
+                        </div>
+                        <div class="hint-item">
+                            <span class="hint-key">Drag</span>
+                            <span class="hint-action">Pan around</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Legend -->
+        <div class="legend" id="legend">
+            <div class="legend-header">
+                <span class="legend-title">Legend</span>
+                <button class="legend-toggle" id="legendToggle" aria-label="Toggle legend">
+                    <span aria-hidden="true">▼</span>
+                </button>
+            </div>
+            <div class="legend-content">
+                <div class="legend-section">
+                    <h4>Object Types</h4>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <div class="legend-color karteikarten"></div>
+                            <span>Karteikarten</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color objekte"></div>
+                            <span>Objekte</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="legend-section">
+                    <h4>Data Quality</h4>
+                    <div class="legend-items">
+                        <div class="legend-item">
+                            <div class="legend-color complete"></div>
+                            <span>Complete (90%+)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color partial"></div>
+                            <span>Partial (50-90%)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color incomplete"></div>
+                            <span>Incomplete (&lt;50%)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="legend-section">
+                    <h4>Zoom Levels</h4>
+                    <div class="zoom-levels">
+                        <div class="zoom-level-item">
+                            <span class="zoom-range">0.1x - 0.3x</span>
+                            <span class="zoom-desc">Dots</span>
+                        </div>
+                        <div class="zoom-level-item">
+                            <span class="zoom-range">0.3x - 0.6x</span>
+                            <span class="zoom-desc">Chips</span>
+                        </div>
+                        <div class="zoom-level-item">
+                            <span class="zoom-range">0.6x - 1.5x</span>
+                            <span class="zoom-desc">Thumbnails</span>
+                        </div>
+                        <div class="zoom-level-item">
+                            <span class="zoom-range">1.5x - 3.0x</span>
+                            <span class="zoom-desc">Cards</span>
+                        </div>
+                        <div class="zoom-level-item">
+                            <span class="zoom-range">3.0x+</span>
+                            <span class="zoom-desc">Full Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Help Overlay -->
+    <div class="help-overlay" id="helpOverlay">
+        <div class="help-content">
+            <div class="help-header">
+                <h2>Collection Explorer Help</h2>
+                <button class="help-close" id="helpClose" aria-label="Close help">
+                    <span aria-hidden="true">✕</span>
+                </button>
+            </div>
+            <div class="help-body">
+                <div class="help-section">
+                    <h3>Navigation</h3>
+                    <div class="help-shortcuts">
+                        <div class="shortcut">
+                            <span class="shortcut-keys">Mouse Wheel</span>
+                            <span class="shortcut-desc">Zoom in/out</span>
+                        </div>
+                        <div class="shortcut">
+                            <span class="shortcut-keys">Click + Drag</span>
+                            <span class="shortcut-desc">Pan around collection</span>
+                        </div>
+                        <div class="shortcut">
+                            <span class="shortcut-keys">Click Object</span>
+                            <span class="shortcut-desc">Select and view details</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="help-section">
+                    <h3>Keyboard Shortcuts</h3>
+                    <div class="help-shortcuts">
+                        <div class="shortcut">
+                            <span class="shortcut-keys">+ / -</span>
+                            <span class="shortcut-desc">Zoom in/out</span>
+                        </div>
+                        <div class="shortcut">
+                            <span class="shortcut-keys">Arrow Keys</span>
+                            <span class="shortcut-desc">Pan view</span>
+                        </div>
+                        <div class="shortcut">
+                            <span class="shortcut-keys">Home</span>
+                            <span class="shortcut-desc">Reset view</span>
+                        </div>
+                        <div class="shortcut">
+                            <span class="shortcut-keys">Ctrl + F</span>
+                            <span class="shortcut-desc">Focus search</span>
+                        </div>
+                        <div class="shortcut">
+                            <span class="shortcut-keys">Escape</span>
+                            <span class="shortcut-desc">Clear search/selection</span>
+                        </div>
+                        <div class="shortcut">
+                            <span class="shortcut-keys">?</span>
+                            <span class="shortcut-desc">Show this help</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="help-section">
+                    <h3>About the Collection</h3>
+                    <p>This spatial visualization displays all 3,892 objects from the Hans Gross Kriminalmuseum Archive. Objects are positioned based on their relationships and similarities, allowing for intuitive exploration and discovery.</p>
+                    <p>Zoom in to see progressively more detail, from simple dots at the overview level to full object information at maximum zoom.</p>
+                </div>
+            </div>
+            <div class="help-footer">
+                <a href="index.html" class="btn-secondary">
+                    <span aria-hidden="true">🏛️</span>
+                    Main Archive Interface
+                </a>
+                <button class="btn-primary" id="helpCloseBtn">
+                    Got it!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Monitor (Development) -->
+    <div class="performance-monitor" id="performanceMonitor" style="display: none;">
+        <div class="perf-item">
+            <span class="perf-label">FPS:</span>
+            <span class="perf-value" id="fpsCounter">60</span>
+        </div>
+        <div class="perf-item">
+            <span class="perf-label">Objects:</span>
+            <span class="perf-value" id="objectsRendered">0</span>
+        </div>
+        <div class="perf-item">
+            <span class="perf-label">Memory:</span>
+            <span class="perf-value" id="memoryUsage">0MB</span>
+        </div>
+    </div>
+
+    <!-- Back to Main Archive Link -->
+    <div class="back-to-main">
+        <a href="index.html" class="back-link" aria-label="Return to main archive interface">
+            <span aria-hidden="true">🏛️</span>
+            <span>Main Archive</span>
+        </a>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="explorer-core.js"></script>
+    <script src="explorer-ui.js"></script>
+    <script src="explorer-spatial.js"></script>
+
+    <!-- Initialization Script -->
+    <script>
+        // Initialize Collection Explorer when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🗺️ Initializing Collection Explorer...');
+            
+            // Check if we're in development mode
+            const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            if (isDev) {
+                document.getElementById('performanceMonitor').style.display = 'block';
+            }
+            
+            // Initialize the explorer
+            window.collectionExplorer = new CollectionExplorer();
+            
+            // Show help on first visit
+            const hasVisited = localStorage.getItem('collection-explorer-visited');
+            if (!hasVisited) {
+                setTimeout(() => {
+                    document.getElementById('helpOverlay').classList.add('active');
+                    localStorage.setItem('collection-explorer-visited', 'true');
+                }, 2000);
+            }
+        });
+
+        // Handle browser visibility changes for performance
+        document.addEventListener('visibilitychange', () => {
+            if (window.collectionExplorer) {
+                if (document.hidden) {
+                    window.collectionExplorer.pause();
+                } else {
+                    window.collectionExplorer.resume();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
