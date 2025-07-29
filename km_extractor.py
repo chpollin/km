@@ -357,22 +357,36 @@ class EnhancedKMExtractor:
             # ===== DATE EXTRACTION =====
             date_candidates = []
             
-            # Look for digitization date
-            digitization_events = tree.findall('.//lido:event[lido:eventType/lido:term="Digitalisierung"]', namespaces)
-            for event in digitization_events:
-                date_elem = event.find('lido:eventDate/lido:displayDate', namespaces)
-                if date_elem is not None and date_elem.text:
-                    date_candidates.append(('Digitization', date_elem.text.strip()))
+            # Look for dates with a simpler approach - find all events first
+            all_events = tree.findall('.//lido:event', namespaces)
+            for event in all_events:
+                # Check event type
+                event_type_elem = event.find('lido:eventType/lido:term', namespaces)
+                if event_type_elem is not None and event_type_elem.text:
+                    event_type = event_type_elem.text.strip()
+                    
+                    # Look for digitization date
+                    if event_type == "Digitalisierung":
+                        date_elem = event.find('lido:eventDate/lido:displayDate', namespaces)
+                        if date_elem is not None and date_elem.text:
+                            date_candidates.append(('Digitization', date_elem.text.strip()))
+                    
+                    # Look for restoration date
+                    elif event_type == "Restaurierung":
+                        date_elem = event.find('lido:eventDate/lido:displayDate', namespaces)
+                        if date_elem is not None and date_elem.text:
+                            date_candidates.append(('Restoration', date_elem.text.strip()))
+                    
+                    # Look for creation date
+                    elif event_type == "Herstellung":
+                        date_elem = event.find('lido:eventDate/lido:displayDate', namespaces)
+                        if date_elem is not None and date_elem.text:
+                            date_candidates.append(('Creation', date_elem.text.strip()))
             
-            # Look for restoration date
-            restoration_events = tree.findall('.//lido:event[lido:eventType/lido:term="Restaurierung"]', namespaces)
-            for event in restoration_events:
-                date_elem = event.find('lido:eventDate/lido:displayDate', namespaces)
-                if date_elem is not None and date_elem.text:
-                    date_candidates.append(('Restoration', date_elem.text.strip()))
-            
-            # Use first available date
+            # Use first available date (prioritize digitization)
             if date_candidates:
+                # Sort to prioritize digitization dates
+                date_candidates.sort(key=lambda x: {'Digitization': 0, 'Restoration': 1, 'Creation': 2}.get(x[0], 3))
                 created_date = date_candidates[0][1]
                 self.logger.debug(f"Found LIDO date for {identifier}: {created_date}")
             

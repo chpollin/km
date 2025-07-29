@@ -1,0 +1,34 @@
+============================================================
+ENHANCED HANS GROSS KRIMINALMUSEUM EXTRACTION REPORT
+============================================================
+
+OBJECT COUNTS:
+  Total objects processed: 3892
+  Karteikarten (TEI): 1657
+  Objekte (LIDO): 2235
+
+DOWNLOAD SUCCESS RATES:
+  RDF files: 1657/1657 (100.0%)
+  TEI files: 1657/1657 (100.0%)
+  LIDO files: 2235/2235 (100.0%)
+  Images: 3881/3892 (99.7%)
+
+METADATA EXTRACTION SUCCESS RATES:
+  Titles extracted: 3892/3892 (100.0%)
+  Descriptions extracted: 3892/3892 (100.0%)
+  Dates extracted: 3892/3892 (100.0%)
+  Full-text extracted: 2305/3892 (59.2%)
+
+DATA QUALITY ASSESSMENT:
+  ✅ Title extraction: EXCELLENT
+  ✅ Description extraction: EXCELLENT
+  ⚠️  Full-text extraction: GOOD
+
+RECOMMENDATIONS:
+
+FILES GENERATED:
+  • JSON metadata: km_archive/metadata/all_objects.json
+  • CSV metadata: km_archive/metadata/all_objects.csv
+  • Extraction log: km_archive/logs/extraction.log
+
+============================================================
