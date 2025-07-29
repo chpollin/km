@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hans Gross Kriminalmuseum Archive</title>
+    <meta name="description" content="Digital archive research tool for the Hans Gross Criminal Museum collection">
+    
+    <!-- Preconnect to GAMS for faster image loading -->
+    <link rel="preconnect" href="https://gams.uni-graz.at">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+</head>
+<body>
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="container">
+            <h1 class="header-title">
+                <span class="header-icon">🏛️</span>
+                Hans Gross Kriminalmuseum Archive
+            </h1>
+            <div class="header-stats">
+                <span id="object-count" aria-live="polite">Loading archive...</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section" aria-label="Search and filter interface">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <label for="main-search" class="sr-only">Search objects, titles, and descriptions</label>
+                    <input 
+                        type="search" 
+                        placeholder="Search objects, titles, descriptions..."
+                        class="search-input"
+                        id="main-search"
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+                    <button class="search-clear" aria-label="Clear search" type="button" style="display: none;">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="search-results-info">
+                    <span id="results-count" aria-live="polite">Ready to search archive</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content" role="main">
+        <div class="container">
+            <div class="main-layout">
+                
+                <!-- Filters Sidebar -->
+                <aside class="filters-sidebar" aria-label="Filters and collection statistics">
+                    <h2 class="sr-only">Filters and Statistics</h2>
+                    
+                    <!-- Quick Statistics -->
+                    <div class="filter-section">
+                        <h3 class="filter-title">Collection Overview</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-number" id="total-count" aria-label="Total objects">0</span>
+                                <span class="stat-label">Total Objects</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="cards-count" aria-label="Karteikarten count">0</span>
+                                <span class="stat-label">Karteikarten</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="objects-count" aria-label="Objekte count">0</span>
+                                <span class="stat-label">Objekte</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Object Type Filter -->
+                    <div class="filter-section">
+                        <h3 class="filter-title">Object Type</h3>
+                        <div class="filter-group" role="group" aria-labelledby="object-type-heading">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" checked data-filter="karteikarten" id="filter-karteikarten">
+                                <span class="checkmark" aria-hidden="true"></span>
+                                <span class="filter-label">Karteikarten <span class="filter-description">(Index Cards)</span></span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" checked data-filter="objekte" id="filter-objekte">
+                                <span class="checkmark" aria-hidden="true"></span>
+                                <span class="filter-label">Objekte <span class="filter-description">(Museum Objects)</span></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Availability Filters -->
+                    <div class="filter-section">
+                        <h3 class="filter-title">Available Content</h3>
+                        <div class="filter-group" role="group" aria-labelledby="availability-heading">
+                            <label class="filter-checkbox">
+                                <input type="checkbox" data-filter="has-image" id="filter-has-image">
+                                <span class="checkmark" aria-hidden="true"></span>
+                                <span class="filter-label">Has Image</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" data-filter="has-source" id="filter-has-source">
+                                <span class="checkmark" aria-hidden="true"></span>
+                                <span class="filter-label">Has TEI/LIDO Source</span>
+                            </label>
+                            <label class="filter-checkbox">
+                                <input type="checkbox" data-filter="has-rdf" id="filter-has-rdf">
+                                <span class="checkmark" aria-hidden="true"></span>
+                                <span class="filter-label">Has RDF Data</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Sort Options -->
+                    <div class="filter-section">
+                        <h3 class="filter-title">
+                            <label for="sort-options">Sort By</label>
+                        </h3>
+                        <select class="sort-select" id="sort-options" aria-label="Sort objects by">
+                            <option value="identifier">Object ID</option>
+                            <option value="title">Title A-Z</option>
+                            <option value="date">Creation Date</option>
+                            <option value="relevance">Relevance</option>
+                        </select>
+                    </div>
+
+                    <!-- Clear Filters -->
+                    <div class="filter-section">
+                        <button class="clear-filters-btn" type="button" id="clear-filters">
+                            Clear All Filters
+                        </button>
+                    </div>
+
+                    <!-- Mobile Filter Toggle -->
+                    <button class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="filters-sidebar">
+                        <span class="toggle-text">Filters</span>
+                        <span class="toggle-arrow" aria-hidden="true">▼</span>
+                    </button>
+                </aside>
+
+                <!-- Results Area -->
+                <section class="results-section" aria-label="Search results">
+                    <h2 class="sr-only">Archive Objects</h2>
+                    
+                    <!-- Loading State -->
+                    <div class="loading-state" id="loading-state" role="status" aria-label="Loading archive data">
+                        <div class="loading-message">
+                            <span class="loading-icon" aria-hidden="true">⏳</span>
+                            <span>Loading archive data...</span>
+                        </div>
+                        <div class="loading-skeleton-grid">
+                            <!-- Skeleton cards will be generated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Error State -->
+                    <div class="error-state" id="error-state" style="display: none;" role="alert">
+                        <div class="error-icon" aria-hidden="true">⚠️</div>
+                        <h3>Unable to load archive data</h3>
+                        <p>Please check your connection and try again.</p>
+                        <button class="btn-primary retry-load" type="button" id="retry-load">
+                            Retry Loading
+                        </button>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div class="empty-state" id="empty-state" style="display: none;">
+                        <div class="empty-icon" aria-hidden="true">🔍</div>
+                        <h3>No objects found</h3>
+                        <p>Try adjusting your search terms or filters to find what you're looking for.</p>
+                        <button class="btn-primary clear-search" type="button" id="clear-search">
+                            Clear Search
+                        </button>
+                    </div>
+
+                    <!-- Results Grid -->
+                    <div class="results-container" id="results-container" style="display: none;">
+                        <div class="results-header">
+                            <div class="view-controls">
+                                <button class="view-toggle active" data-view="grid" aria-label="Grid view" title="Grid view">
+                                    <span aria-hidden="true">⊞</span>
+                                </button>
+                                <button class="view-toggle" data-view="list" aria-label="List view" title="List view">
+                                    <span aria-hidden="true">☰</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="object-grid" id="object-grid" role="region" aria-label="Object cards">
+                            <!-- Object cards will be dynamically generated -->
+                        </div>
+
+                        <!-- Pagination -->
+                        <nav class="pagination" aria-label="Pagination navigation" id="pagination" style="display: none;">
+                            <button class="pagination-btn" id="prev-page" type="button" disabled>
+                                <span aria-hidden="true">‹</span>
+                                <span>Previous</span>
+                            </button>
+                            <div class="pagination-info">
+                                <span id="pagination-status">Page 1 of 1</span>
+                            </div>
+                            <button class="pagination-btn" id="next-page" type="button" disabled>
+                                <span>Next</span>
+                                <span aria-hidden="true">›</span>
+                            </button>
+                        </nav>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Object Detail Modal -->
+    <div class="modal-overlay" id="object-modal" role="dialog" aria-modal="true" aria-labelledby="modal-object-title" style="display: none;">
+        <div class="modal-container">
+            <header class="modal-header">
+                <h2 class="modal-title" id="modal-object-title">Object Details</h2>
+                <button class="modal-close" aria-label="Close modal" type="button">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </header>
+            
+            <div class="modal-content">
+                <div class="modal-image-section">
+                    <div class="image-container">
+                        <img 
+                            id="modal-image" 
+                            src="" 
+                            alt=""
+                            class="modal-image"
+                            style="display: none;"
+                        >
+                        <div class="image-placeholder" id="modal-image-placeholder">
+                            <span class="placeholder-icon" aria-hidden="true">🖼️</span>
+                            <span>No image available</span>
+                        </div>
+                    </div>
+                    <div class="image-controls">
+                        <button class="image-control-btn" id="image-zoom-in" aria-label="Zoom in" title="Zoom in">
+                            <span aria-hidden="true">🔍+</span>
+                        </button>
+                        <button class="image-control-btn" id="image-zoom-out" aria-label="Zoom out" title="Zoom out">
+                            <span aria-hidden="true">🔍-</span>
+                        </button>
+                        <button class="image-control-btn" id="image-fullscreen" aria-label="View fullscreen" title="Fullscreen">
+                            <span aria-hidden="true">⛶</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="modal-info-section">
+                    <div class="metadata-section">
+                        <h3>Object Information</h3>
+                        <div class="metadata-grid">
+                            <div class="metadata-item">
+                                <label>Object ID:</label>
+                                <span id="modal-identifier" class="metadata-value">-</span>
+                            </div>
+                            <div class="metadata-item">
+                                <label>Type:</label>
+                                <span id="modal-type" class="metadata-value">-</span>
+                            </div>
+                            <div class="metadata-item">
+                                <label>Created:</label>
+                                <span id="modal-date" class="metadata-value">-</span>
+                            </div>
+                            <div class="metadata-item description-item">
+                                <label>Description:</label>
+                                <div id="modal-description" class="metadata-value description-content">-</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="download-section">
+                        <h3>Available Downloads</h3>
+                        <div class="download-links" id="modal-downloads">
+                            <p class="download-note">Loading available files...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="sharing-section">
+                        <h3>Share & Cite</h3>
+                        <div class="share-actions">
+                            <button class="btn-secondary copy-link-btn" type="button" id="copy-link">
+                                <span aria-hidden="true">📋</span>
+                                Copy Link
+                            </button>
+                            <button class="btn-secondary generate-citation-btn" type="button" id="generate-citation">
+                                <span aria-hidden="true">📄</span>
+                                Generate Citation
+                            </button>
+                        </div>
+                        <div class="citation-output" id="citation-output" style="display: none;">
+                            <textarea readonly class="citation-text" id="citation-text"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="modal-footer">
+                <div class="modal-navigation">
+                    <button class="btn-secondary" id="prev-object" type="button" disabled>
+                        <span aria-hidden="true">←</span>
+                        Previous
+                    </button>
+                    <span class="object-position" id="object-position">Object 1 of 1</span>
+                    <button class="btn-secondary" id="next-object" type="button" disabled>
+                        Next
+                        <span aria-hidden="true">→</span>
+                    </button>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>Hans Gross Kriminalmuseum Digital Archive</p>
+                    <p>University of Graz • <a href="https://gams.uni-graz.at" target="_blank" rel="noopener">GAMS Repository</a></p>
+                </div>
+                <div class="footer-links">
+                    <button type="button" class="footer-link" id="about-link">About This Archive</button>
+                    <button type="button" class="footer-link" id="help-link">Help & Usage</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast notifications -->
+    <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true">
+        <!-- Toast messages will be dynamically inserted here -->
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.6.2/fuse.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
