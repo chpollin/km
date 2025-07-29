@@ -777,31 +777,6 @@ class EnhancedKMExtractor:
             summary_lines.append(f"  XML parsing failures: {self.stats['parsing_failures']} ({failure_rate:.1f}%)")
             summary_lines.append("")
         
-        # Data quality assessment
-        summary_lines.append("DATA QUALITY ASSESSMENT:")
-        if title_rate >= 90:
-            summary_lines.append("  ✅ Title extraction: EXCELLENT")
-        elif title_rate >= 70:
-            summary_lines.append("  ⚠️  Title extraction: GOOD")
-        else:
-            summary_lines.append("  ❌ Title extraction: NEEDS IMPROVEMENT")
-        
-        if desc_rate >= 90:
-            summary_lines.append("  ✅ Description extraction: EXCELLENT")
-        elif desc_rate >= 70:
-            summary_lines.append("  ⚠️  Description extraction: GOOD")
-        else:
-            summary_lines.append("  ❌ Description extraction: NEEDS IMPROVEMENT")
-        
-        if fulltext_rate >= 80:
-            summary_lines.append("  ✅ Full-text extraction: EXCELLENT")
-        elif fulltext_rate >= 50:
-            summary_lines.append("  ⚠️  Full-text extraction: GOOD")
-        else:
-            summary_lines.append("  ❌ Full-text extraction: NEEDS IMPROVEMENT")
-        
-        summary_lines.append("")
-        
         # Recommendations
         summary_lines.append("RECOMMENDATIONS:")
         if self.stats['parsing_failures'] > 0:

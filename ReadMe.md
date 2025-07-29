@@ -47,7 +47,6 @@ python km_extractor.py --output km_archive --limit 50 --debug-xml
 * Multi-threaded processing (`--workers`)
 * Enhanced XML parsing for TEI and LIDO with fallback
 * Full-text extraction for advanced search
-* Quality assurance via validation and statistical reporting
 * Output used by both interface layers
 
 ---

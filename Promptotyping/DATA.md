@@ -49,15 +49,6 @@ Every object includes a unique persistent identifier, container type classificat
 
 **File Downloads**: Complete success rates achieved for all metadata downloads. RDF files available for all index cards. TEI and LIDO source files successfully extracted for their respective object types.
 
-## Data Quality
-
-### Extraction Success Rates
-- **Titles**: 100% extraction success
-- **Descriptions**: 100% extraction success  
-- **Dates**: 100% extraction success
-- **Images**: 99.7% availability
-- **Full-text**: 59.2% coverage (concentrated in index cards)
-
 ### Content Assessment
 The archive demonstrates excellent metadata completeness with comprehensive coverage of descriptive fields. Title extraction benefits from structured XML encoding. Description generation utilizes multiple metadata sources for rich contextual information.
 
@@ -83,7 +74,7 @@ The archive maintains separate directories for each object type with organized s
 Objects accessible through persistent identifiers linking to original GAMS repository. Local archive provides enhanced search capabilities and aggregated metadata views.
 
 ### Data Formats
-Metadata available in both JSON and CSV formats for different research applications. Original XML files preserved for detailed scholarly analysis. High-resolution images maintain museum-quality documentation standards.
+Metadata available in both JSON and CSV formats for different research applications. Original XML files preserved for detailed scholarly analysis.
 
 ## Archive Statistics
 
@@ -101,6 +92,3 @@ This archive represents historical criminological materials primarily from the e
 
 ### Search Capabilities
 Enhanced metadata structure supports filtering by object type, temporal ranges, and content availability. Full-text search enables comprehensive exploration of criminal case documentation.
-
-### Data Integrity
-All extraction processes logged with comprehensive quality assessment. Metadata validation ensures consistency across object types and encoding standards.

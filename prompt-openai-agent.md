@@ -130,14 +130,6 @@ class KMAnalyzer:
     def generate_report()
 ```
 
-## Quality Requirements
-
-- **Robust downloading**: Handle network errors without crashing
-- **Clear logging**: Track what was downloaded and what failed
-- **Data validation**: Verify files were actually downloaded
-- **Progress tracking**: Show progress during batch downloads
-- **Clean organization**: Files sorted logically by type and identifier
-
 ## Expected Output
 
 After running the extraction:
