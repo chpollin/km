@@ -1,0 +1,11 @@
+2025-07-29 10:08:14,565 [INFO] KMExtractor initialized with output_dir=km_archive, max_workers=5, max_objects=None
+2025-07-29 10:08:19,872 [INFO] Total objects to process: 3892
+2025-07-29 10:50:03,930 [INFO] Metadata saved: JSON at km_archive\metadata\all_objects.json, CSV at km_archive\metadata\all_objects.csv
+2025-07-29 10:50:03,930 [INFO] Summary generated:
+2025-07-29 10:50:03,930 [INFO] Total objects processed: 3892
+Karteikarten objects: 1657
+Objekte objects: 2235
+RDF files downloaded: 1657 (success rate: 42.57%)
+TEI files downloaded: 1657
+LIDO files downloaded: 2235
+Images downloaded: 3881 (success rate: 99.72%)
