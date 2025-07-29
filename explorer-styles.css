@@ -1251,3 +1251,482 @@ body {
     padding-top: 0;
   }
 }
+
+/* Hierarchy Navigation Styles */
+
+/* Hierarchy Controls */
+.hierarchy-controls {
+  background: var(--panel-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  margin-bottom: var(--space-4);
+}
+
+.hierarchy-level-selector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.hierarchy-btn {
+  width: 44px;
+  height: 44px;
+  background: var(--glass-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s var(--ease-smooth);
+  position: relative;
+}
+
+.hierarchy-btn:hover {
+  background: var(--panel-border);
+  color: var(--text-primary);
+  transform: scale(1.05);
+}
+
+.hierarchy-btn.active {
+  background: var(--museum-orange);
+  border-color: var(--museum-orange);
+  color: white;
+  box-shadow: 0 0 20px rgba(230, 81, 0, 0.3);
+}
+
+.hierarchy-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.hierarchy-btn::after {
+  content: attr(title);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--collection-bg);
+  color: var(--text-primary);
+  padding: var(--space-1) var(--space-2);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  margin-left: var(--space-2);
+  border: 1px solid var(--panel-border);
+  transition: opacity 0.2s var(--ease-smooth);
+  z-index: 1000;
+}
+
+.hierarchy-btn:hover::after {
+  opacity: 1;
+}
+
+.hierarchy-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--panel-border);
+}
+
+.nav-btn {
+  width: 44px;
+  height: 36px;
+  background: var(--glass-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s var(--ease-smooth);
+}
+
+.nav-btn:hover:not(:disabled) {
+  background: var(--museum-orange);
+  border-color: var(--museum-orange);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Breadcrumb Navigation */
+.hierarchy-breadcrumb {
+  background: var(--glass-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  padding: var(--space-3) var(--space-4);
+  margin-top: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  font-size: 0.875rem;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.breadcrumb-item {
+  color: var(--text-secondary);
+  transition: color 0.2s var(--ease-smooth);
+  cursor: pointer;
+  padding: var(--space-1) var(--space-2);
+  border-radius: 4px;
+  white-space: nowrap;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.breadcrumb-item:hover {
+  color: var(--text-primary);
+  background: var(--panel-border);
+}
+
+.breadcrumb-item.active {
+  color: var(--text-primary);
+  font-weight: 600;
+  background: var(--museum-orange);
+  color: white;
+}
+
+.breadcrumb-separator {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin: 0 var(--space-1);
+}
+
+/* Level Indicator */
+.level-indicator {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--glass-bg);
+  padding: var(--space-1) var(--space-2);
+  border-radius: 4px;
+  border: 1px solid var(--panel-border);
+  margin-left: var(--space-3);
+}
+
+/* Container Object Styling */
+.container-object {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.container-object:hover {
+  transform: scale(1.02);
+  filter: brightness(1.1);
+}
+
+.container-object.selected {
+  filter: brightness(1.2);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.4);
+}
+
+/* Hierarchy-specific zoom levels */
+.zoom-level-hierarchy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--glass-bg);
+  border-radius: 8px;
+  margin-top: var(--space-3);
+}
+
+.zoom-level-hierarchy h4 {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-2) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hierarchy-zoom-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  padding: var(--space-1);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s var(--ease-smooth);
+}
+
+.hierarchy-zoom-item:hover {
+  background: var(--panel-border);
+}
+
+.hierarchy-zoom-item.active {
+  background: var(--museum-orange);
+  color: white;
+}
+
+.hierarchy-level-name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.hierarchy-level-desc {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+}
+
+/* Hierarchy Context Panel */
+.hierarchy-context {
+  position: fixed;
+  top: 160px;
+  left: var(--space-4);
+  width: 280px;
+  background: var(--panel-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  z-index: var(--z-controls);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s var(--ease-smooth);
+}
+
+.hierarchy-context.collapsed {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+}
+
+.hierarchy-context-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.hierarchy-context-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.hierarchy-context.collapsed .hierarchy-context-title {
+  display: none;
+}
+
+.hierarchy-context-toggle {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: var(--space-1);
+  border-radius: 4px;
+  transition: color 0.2s var(--ease-smooth);
+}
+
+.hierarchy-context-toggle:hover {
+  color: var(--text-primary);
+}
+
+.hierarchy-context.collapsed .hierarchy-context-toggle {
+  transform: rotate(180deg);
+}
+
+.hierarchy-context-content {
+  padding: var(--space-4);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.hierarchy-context.collapsed .hierarchy-context-content {
+  display: none;
+}
+
+.context-section {
+  margin-bottom: var(--space-4);
+}
+
+.context-section:last-child {
+  margin-bottom: 0;
+}
+
+.context-section h4 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 var(--space-2) 0;
+}
+
+.context-stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.context-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  padding: var(--space-2);
+  background: var(--glass-bg);
+  border-radius: 6px;
+}
+
+.context-stat-label {
+  color: var(--text-secondary);
+}
+
+.context-stat-value {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+/* Hierarchy Search Enhancements */
+.hierarchy-search-filters {
+  background: var(--glass-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 8px;
+  padding: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.search-scope-selector {
+  margin-bottom: var(--space-3);
+}
+
+.search-scope-selector label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-1);
+  display: block;
+}
+
+.search-scope-select {
+  width: 100%;
+  background: var(--glass-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+  padding: var(--space-2);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.search-hierarchy-level {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Responsive Design for Hierarchy Features */
+@media (max-width: 1024px) {
+  .hierarchy-controls {
+    transform: scale(0.9);
+  }
+  
+  .hierarchy-context {
+    width: 240px;
+    left: var(--space-3);
+  }
+  
+  .breadcrumb-item {
+    max-width: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hierarchy-controls {
+    flex-direction: row;
+    padding: var(--space-2);
+  }
+  
+  .hierarchy-level-selector {
+    flex-direction: row;
+  }
+  
+  .hierarchy-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+  
+  .hierarchy-btn::after {
+    display: none; /* Hide tooltips on mobile */
+  }
+  
+  .hierarchy-context {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: var(--space-3) 0;
+  }
+  
+  .hierarchy-breadcrumb {
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.75rem;
+  }
+  
+  .breadcrumb-item {
+    max-width: 80px;
+    padding: var(--space-1);
+  }
+  
+  .level-indicator {
+    display: none; /* Hide on mobile to save space */
+  }
+}
+
+/* Animation for hierarchy transitions */
+@keyframes hierarchyTransition {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hierarchy-transition {
+  animation: hierarchyTransition 0.3s var(--ease-smooth);
+}
+
+/* Focus states for accessibility */
+.hierarchy-btn:focus-visible,
+.nav-btn:focus-visible {
+  outline: 2px solid var(--focus-outline);
+  outline-offset: 2px;
+}
+
+.breadcrumb-item:focus-visible {
+  outline: 2px solid var(--focus-outline);
+  outline-offset: 1px;
+}

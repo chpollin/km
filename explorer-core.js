@@ -107,23 +107,13 @@ class CollectionExplorer {
         this.updateLoadingProgress(20);
         
         try {
-            let data;
-            
-            try {
-                // Try to load real data first
-                const response = await fetch('km_archive/metadata/all_objects.json');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                data = await response.json();
-                console.log('✅ Loaded real archive data');
-            } catch (fetchError) {
-                console.warn('⚠️ Could not load real data, using mock data for demonstration');
-                // Fallback to mock data
-                data = this.generateMockData();
+            const response = await fetch('km_archive/metadata/all_objects.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
             
             this.updateLoadingProgress(50);
+            const data = await response.json();
             
             if (!Array.isArray(data)) {
                 throw new Error('Invalid data format: expected an array');
@@ -143,46 +133,6 @@ class CollectionExplorer {
             console.error('💥 Error loading data:', error);
             throw error;
         }
-    }
-
-    generateMockData() {
-        console.log('🎭 Generating mock data for demonstration...');
-        const mockData = [];
-        const types = ['karteikarten', 'objekte'];
-        const titles = [
-            'Revolver Smith & Wesson', 'Fingerprint Analysis Kit', 'Crime Scene Photograph',
-            'Evidence Bag', 'Magnifying Glass', 'Handwriting Sample', 'Blood Analysis Report',
-            'Witness Statement', 'Court Document', 'Police Report', 'Autopsy Notes',
-            'Criminal Portrait', 'Weapon Analysis', 'Forensic Tools', 'Case File',
-            'Poison Bottle', 'Lock Pick Set', 'Counterfeit Money', 'Death Certificate',
-            'Diary Entry', 'Medical Examination', 'Burglar Tools', 'Suicide Note'
-        ];
-        
-        const crimes = ['Theft', 'Murder', 'Fraud', 'Burglary', 'Assault', 'Forgery', 'Poisoning', 'Counterfeiting'];
-        
-        // Generate 500 mock objects for demonstration
-        for (let i = 1; i <= 500; i++) {
-            const type = types[Math.floor(Math.random() * types.length)];
-            const title = titles[Math.floor(Math.random() * titles.length)];
-            const crime = crimes[Math.floor(Math.random() * crimes.length)];
-            const year = 1890 + Math.floor(Math.random() * 40);
-            
-            mockData.push({
-                pid: `info:fedora:o:km.${i}`,
-                identifier: `o:km.${String(i).padStart(4, '0')}`,
-                container: type,
-                title: `${title} (${year})`,
-                description: `${type === 'karteikarten' ? 'Index card documenting a' : 'Physical evidence from a'} ${crime.toLowerCase()} case from ${year}. Contains detailed forensic analysis and investigation notes.`,
-                createdDate: `${year}`,
-                image_downloaded: Math.random() > 0.3,
-                tei_downloaded: Math.random() > 0.4,
-                lido_downloaded: Math.random() > 0.5,
-                rdf_downloaded: Math.random() > 0.6,
-                fulltext: Math.random() > 0.7 ? `Detailed case notes for ${crime} investigation...` : null
-            });
-        }
-        
-        return mockData;
     }
 
     processObjects(data) {
