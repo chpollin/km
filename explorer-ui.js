@@ -98,14 +98,6 @@ class UIManager {
             });
         }
         
-        // View mode controls
-        document.querySelectorAll('.view-mode-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const mode = e.target.dataset.mode;
-                this.switchViewMode(mode);
-            });
-        });
-        
         // Panel controls
         document.getElementById('panelClose')?.addEventListener('click', () => {
             this.hideObjectDetails();
@@ -401,21 +393,6 @@ class UIManager {
         }
         
         this.performSearch('');
-    }
-
-    // View mode switching
-    switchViewMode(mode) {
-        console.log(`🔄 Switching to ${mode} view mode`);
-        
-        // Update button states
-        document.querySelectorAll('.view-mode-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.mode === mode);
-        });
-        
-        // Switch spatial strategy
-        if (this.explorer.spatialManager) {
-            this.explorer.spatialManager.switchStrategy(mode);
-        }
     }
 
     // UI updates
