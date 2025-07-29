@@ -26,6 +26,20 @@
                 <span class="header-icon">🏛️</span>
                 Hans Gross Kriminalmuseum Archive
             </h1>
+            <!-- Collection Explorer Button -->
+            <div>
+                <a href="collection-explorer.html" class="collection-explorer-btn" 
+   style="position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, #e65100, #ff8a50); color: white; border: none; border-radius: 12px; padding: 12px 20px; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 12px rgba(230, 81, 0, 0.3); transition: all 0.3s ease; z-index: 1000; text-decoration: none; font-family: -apple-system, BlinkMacSystemFont, sans-serif;"
+   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(230, 81, 0, 0.4)'"
+   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(230, 81, 0, 0.3)'"
+   aria-label="Open Collection Explorer - Spatial visualization">
+    <span aria-hidden="true">🗺️</span>
+    <div>
+        <div style="font-weight: 600;">Collection Explorer</div>
+        <div style="font-size: 11px; opacity: 0.9;">Spatial View</div>
+    </div>
+</a>
+            </div>
             <div class="header-stats">
                 <span id="object-count" aria-live="polite">Loading archive...</span>
             </div>
