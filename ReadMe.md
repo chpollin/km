@@ -35,11 +35,6 @@ python km_extractor.py --output km_archive --limit 50 --debug-xml
 - **Quality Assurance**: Comprehensive validation and statistical reporting
 - **Full-text Extraction**: Complete document indexing for advanced search capabilities
 
-**Output Metrics**:
-- Processing Rate: ~2.5 objects/second (network-dependent)
-- Success Rate: 99.8% metadata extraction, 99.7% image retrieval
-- Data Completeness: 100% core metadata, 94.2% enhanced descriptions
-
 ### 2. Primary Research Interface (`index.html`)
 
 Web-based interface for browsing and searching the archive collection.

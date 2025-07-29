@@ -47,6 +47,11 @@ class CollectionExplorer {
         // UI manager (will be initialized)
         this.uiManager = null;
         
+        // Layout systems (will be initialized)
+        this.categoryManager = null;
+        this.layoutManager = null;
+        this.layoutControls = null;
+        
         // Initialize
         this.init();
     }
@@ -69,10 +74,33 @@ class CollectionExplorer {
             this.startRenderLoop();
             this.hideLoading();
             
+            // Initialize layout systems
+            this.initializeLayoutSystems();
+            
             console.log('✅ Collection Explorer initialized successfully');
         } catch (error) {
             console.error('❌ Failed to initialize Collection Explorer:', error);
             this.showError(error.message);
+        }
+    }
+
+    initializeLayoutSystems() {
+        try {
+            console.log('🔧 Initializing layout systems...');
+            
+            // Initialize category manager
+            this.categoryManager = new CategoryManager(this);
+            this.categoryManager.initialize();
+            
+            // Initialize layout manager  
+            this.layoutManager = new LayoutManager(this);
+            
+            // Initialize layout controls
+            this.layoutControls = new LayoutControls(this);
+            
+            console.log('✅ Layout systems initialized');
+        } catch (error) {
+            console.error('❌ Failed to initialize layout systems:', error);
         }
     }
 
