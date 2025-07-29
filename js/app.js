@@ -1,7 +1,7 @@
 /**
- * Hans Gross Kriminalmuseum Archive - Enhanced Main Application
+ * Hans Gross Kriminalmuseum Archive - Improved Main Application
  * A research tool for exploring the digitized Hans Gross Criminal Museum collection
- * Enhanced with complete filter system and advanced functionality
+ * Streamlined with essential filters only
  */
 
 class ArchiveApp {
@@ -18,16 +18,11 @@ class ArchiveApp {
         this.modalListenersInitialized = false;
         this.fuse = null;
         
-        // Enhanced filter structure
+        // Simplified filter structure - only essential filters
         this.filters = {
             objectType: {
                 karteikarten: true,
                 objekte: true
-            },
-            availability: {
-                hasImage: false,
-                hasSource: false,
-                hasRdf: false
             }
         };
         
@@ -39,7 +34,7 @@ class ArchiveApp {
      * Initialize the application
      */
     async init() {
-        console.log('Initializing Hans Gross Kriminalmuseum Archive...');
+        console.log('🏛️ Initializing Hans Gross Kriminalmuseum Archive...');
         
         try {
             // Load the archive data
@@ -52,9 +47,9 @@ class ArchiveApp {
             this.updateStatistics();
             this.renderResults();
             
-            console.log('Archive application initialized successfully');
+            console.log('✅ Archive application initialized successfully');
         } catch (error) {
-            console.error('Failed to initialize archive application:', error);
+            console.error('❌ Failed to initialize archive application:', error);
             this.showError('Failed to load archive data. Please try refreshing the page.');
         }
     }
@@ -63,7 +58,7 @@ class ArchiveApp {
      * Load archive data from all_objects.json
      */
     async loadArchiveData() {
-        console.log('Loading archive data from all_objects.json...');
+        console.log('📂 Loading archive data from all_objects.json...');
         
         try {
             const response = await fetch('km_archive/metadata/all_objects.json');
@@ -82,10 +77,15 @@ class ArchiveApp {
             this.objects = data;
             this.filteredObjects = [...this.objects];
             
-            console.log(`Loaded ${this.objects.length} objects from archive`);
+            console.log(`📊 Loaded ${this.objects.length} objects from archive`);
+            console.log(`📋 Sample object structure:`, this.objects[0]);
+            
+            // Log object type distribution
+            const typeCount = this.getObjectTypeCounts();
+            console.log(`🔍 Object types found:`, typeCount);
             
         } catch (error) {
-            console.error('Error loading archive data:', error);
+            console.error('💥 Error loading archive data:', error);
             throw error;
         }
     }
@@ -95,7 +95,7 @@ class ArchiveApp {
      */
     initializeFuzzySearch() {
         if (typeof Fuse === 'undefined') {
-            console.warn('Fuse.js not loaded, falling back to basic search');
+            console.warn('⚠️ Fuse.js not loaded, falling back to basic search');
             return;
         }
 
@@ -113,26 +113,19 @@ class ArchiveApp {
         };
 
         this.fuse = new Fuse(this.objects, fuseOptions);
-        console.log('Fuzzy search initialized with Fuse.js');
+        console.log('🔍 Fuzzy search initialized with Fuse.js');
     }
 
     /**
-     * Initialize filter system
+     * Initialize filter system - simplified
      */
     initializeFilters() {
-        console.log('Initializing filter system...');
+        console.log('🎛️ Initializing filter system...');
 
-        // Object type filters
+        // Object type filters only
         document.querySelectorAll('[data-filter="karteikarten"], [data-filter="objekte"]').forEach(checkbox => {
             checkbox.addEventListener('change', (e) => {
                 this.updateObjectTypeFilter(e.target.dataset.filter, e.target.checked);
-            });
-        });
-
-        // Availability filters
-        document.querySelectorAll('[data-filter="has-image"], [data-filter="has-source"], [data-filter="has-rdf"]').forEach(checkbox => {
-            checkbox.addEventListener('change', (e) => {
-                this.updateAvailabilityFilter(e.target.dataset.filter, e.target.checked);
             });
         });
 
@@ -152,33 +145,16 @@ class ArchiveApp {
             });
         }
 
-        console.log('Filter system initialized');
+        console.log('✅ Filter system initialized');
     }
 
     /**
      * Update object type filter
      */
     updateObjectTypeFilter(filterType, checked) {
-        console.log(`Object type filter changed: ${filterType} = ${checked}`);
+        console.log(`🎯 Object type filter changed: ${filterType} = ${checked}`);
         
         this.filters.objectType[filterType] = checked;
-        this.applyFilters();
-        this.updateFilterCounts();
-    }
-
-    /**
-     * Update availability filter
-     */
-    updateAvailabilityFilter(filterType, checked) {
-        console.log(`Availability filter changed: ${filterType} = ${checked}`);
-        
-        const filterMap = {
-            'has-image': 'hasImage',
-            'has-source': 'hasSource',
-            'has-rdf': 'hasRdf'
-        };
-
-        this.filters.availability[filterMap[filterType]] = checked;
         this.applyFilters();
         this.updateFilterCounts();
     }
@@ -187,7 +163,7 @@ class ArchiveApp {
      * Update sort order
      */
     updateSort(sortValue) {
-        console.log(`Sort changed to: ${sortValue}`);
+        console.log(`📊 Sort changed to: ${sortValue}`);
         
         const [field, direction] = sortValue.includes('-desc') 
             ? [sortValue.replace('-desc', ''), 'desc']
@@ -199,21 +175,16 @@ class ArchiveApp {
     }
 
     /**
-     * Clear all filters
+     * Clear all filters - simplified
      */
     clearAllFilters() {
-        console.log('Clearing all filters...');
+        console.log('🧹 Clearing all filters...');
         
         // Reset filter state
         this.filters = {
             objectType: {
                 karteikarten: true,
                 objekte: true
-            },
-            availability: {
-                hasImage: false,
-                hasSource: false,
-                hasRdf: false
             }
         };
 
@@ -221,8 +192,6 @@ class ArchiveApp {
         document.querySelectorAll('[data-filter]').forEach(checkbox => {
             if (checkbox.dataset.filter === 'karteikarten' || checkbox.dataset.filter === 'objekte') {
                 checkbox.checked = true;
-            } else {
-                checkbox.checked = false;
             }
         });
 
@@ -244,14 +213,16 @@ class ArchiveApp {
         this.applyFilters();
         this.updateFilterCounts();
         
-        showToast('success', 'Filters Cleared', 'All filters have been reset');
+        if (typeof showToast === 'function') {
+            showToast('success', 'Filters Cleared', 'All filters have been reset');
+        }
     }
 
     /**
      * Initialize event listeners
      */
     initializeEventListeners() {
-        console.log('Setting up event listeners...');
+        console.log('🎧 Setting up event listeners...');
         
         // Search input with enhanced fuzzy search
         const searchInput = document.getElementById('main-search');
@@ -323,23 +294,23 @@ class ArchiveApp {
             });
         }
 
-        console.log('Event listeners initialized');
+        console.log('✅ Event listeners initialized');
     }
 
     /**
      * Handle search input with fuzzy search
      */
     handleSearch(query) {
-        console.log('Search query:', query);
+        console.log(`🔍 Search query: "${query}"`);
         this.searchQuery = query.trim();
         this.applyFilters();
     }
 
     /**
-     * Apply current filters, search, and sorting
+     * Apply current filters, search, and sorting - simplified
      */
     applyFilters() {
-        console.log('Applying filters, search, and sorting...');
+        console.log('⚙️ Applying filters, search, and sorting...');
         
         let filtered = [...this.objects];
         
@@ -355,19 +326,6 @@ class ArchiveApp {
             filtered = filtered.filter(obj => obj.container === 'karteikarten');
         }
         // If both checked, show all (no filter needed)
-
-        // Apply availability filters
-        if (this.filters.availability.hasImage) {
-            filtered = filtered.filter(obj => obj.image_downloaded);
-        }
-        
-        if (this.filters.availability.hasSource) {
-            filtered = filtered.filter(obj => obj.tei_downloaded || obj.lido_downloaded);
-        }
-        
-        if (this.filters.availability.hasRdf) {
-            filtered = filtered.filter(obj => obj.rdf_downloaded);
-        }
 
         // Apply search
         if (this.searchQuery) {
@@ -401,7 +359,7 @@ class ArchiveApp {
         this.filteredObjects = filtered;
         this.currentPage = 1;
         
-        console.log(`Filter results: ${this.filteredObjects.length} objects found`);
+        console.log(`📊 Filter results: ${this.filteredObjects.length} objects found`);
         
         this.updateStatistics();
         this.renderResults();
@@ -467,10 +425,7 @@ class ArchiveApp {
      * Update filter counts in sidebar
      */
     updateFilterCounts() {
-        const counts = this.getFilteredCounts();
-        
-        // Update available counts (would require more complex implementation)
-        // For now, just update the main stats
+        // For future implementation if needed
         this.updateStatistics();
     }
 
@@ -495,7 +450,9 @@ class ArchiveApp {
      */
     scrollToTop() {
         const resultsSection = document.querySelector('.results-section');
-        if (resultsSection) {
+        if (resultsSection && typeof smoothScrollTo === 'function') {
+            smoothScrollTo(resultsSection, 100);
+        } else if (resultsSection) {
             resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
@@ -514,9 +471,13 @@ class ArchiveApp {
         }
         
         // Update sidebar statistics (show total counts, not filtered)
-        document.getElementById('total-count').textContent = totalCounts.total;
-        document.getElementById('cards-count').textContent = totalCounts.karteikarten;
-        document.getElementById('objects-count').textContent = totalCounts.objekte;
+        const totalCountElement = document.getElementById('total-count');
+        const cardsCountElement = document.getElementById('cards-count');
+        const objectsCountElement = document.getElementById('objects-count');
+        
+        if (totalCountElement) totalCountElement.textContent = totalCounts.total;
+        if (cardsCountElement) cardsCountElement.textContent = totalCounts.karteikarten;
+        if (objectsCountElement) objectsCountElement.textContent = totalCounts.objekte;
         
         // Update results info
         const resultsCount = document.getElementById('results-count');
@@ -528,19 +489,15 @@ class ArchiveApp {
             }
         }
         
-        console.log('Statistics updated');
+        console.log('📊 Statistics updated');
     }
 
     /**
-     * Check if any filters are active
+     * Check if any filters are active - simplified
      */
     hasActiveFilters() {
         const typeFiltersActive = !this.filters.objectType.karteikarten || !this.filters.objectType.objekte;
-        const availabilityFiltersActive = this.filters.availability.hasImage || 
-                                         this.filters.availability.hasSource || 
-                                         this.filters.availability.hasRdf;
-        
-        return typeFiltersActive || availabilityFiltersActive || this.sortBy !== 'identifier';
+        return typeFiltersActive || this.sortBy !== 'identifier';
     }
 
     /**
@@ -564,6 +521,7 @@ class ArchiveApp {
                     break;
                 default:
                     counts.unknown++;
+                    console.warn('Unknown container type:', obj.container, 'for object:', obj.identifier);
             }
         });
 
@@ -574,7 +532,7 @@ class ArchiveApp {
      * Render search results
      */
     renderResults() {
-        console.log('Rendering results...');
+        console.log('🎨 Rendering results...');
         
         // Hide loading state
         const loadingState = document.getElementById('loading-state');
@@ -590,7 +548,9 @@ class ArchiveApp {
         
         // Check if we have results
         if (this.filteredObjects.length === 0) {
-            showEmptyState();
+            if (typeof showEmptyState === 'function') {
+                showEmptyState();
+            }
             return;
         }
         
@@ -601,13 +561,15 @@ class ArchiveApp {
         }
         
         // Render object cards
-        renderObjectCards(this.getPaginatedObjects(), (objectId) => {
-            this.showObjectModal(objectId);
-        });
+        if (typeof renderObjectCards === 'function') {
+            renderObjectCards(this.getPaginatedObjects(), (objectId) => {
+                this.showObjectModal(objectId);
+            });
+        }
         
         this.updatePagination();
         
-        console.log('Results rendered');
+        console.log('✅ Results rendered');
     }
 
     /**
@@ -655,7 +617,7 @@ class ArchiveApp {
             nextButton.disabled = this.currentPage === totalPages;
         }
         
-        console.log(`Pagination: Page ${this.currentPage} of ${totalPages}`);
+        console.log(`📄 Pagination: Page ${this.currentPage} of ${totalPages}`);
     }
 
     /**
@@ -664,23 +626,25 @@ class ArchiveApp {
     showObjectModal(objectId) {
         const obj = this.filteredObjects.find(o => o.identifier === objectId);
         if (!obj) {
-            console.error('Object not found:', objectId);
+            console.error('❌ Object not found:', objectId);
             return;
         }
 
-        console.log('Opening modal for object:', obj);
+        console.log('🔍 Opening modal for object:', obj);
 
         // Set current modal object for navigation
         this.currentModalObjectIndex = this.filteredObjects.findIndex(o => o.identifier === objectId);
         
         // Show modal using component function
-        showModal(obj, this.currentModalObjectIndex, this.filteredObjects.length, {
-            onNavigate: (direction) => this.navigateModal(direction),
-            onClose: () => this.closeObjectModal()
-        });
+        if (typeof showModal === 'function') {
+            showModal(obj, this.currentModalObjectIndex, this.filteredObjects.length, {
+                onNavigate: (direction) => this.navigateModal(direction),
+                onClose: () => this.closeObjectModal()
+            });
+        }
         
         // Initialize modal event listeners if not already done
-        if (!this.modalListenersInitialized) {
+        if (!this.modalListenersInitialized && typeof initializeModalEventListeners === 'function') {
             initializeModalEventListeners({
                 onNavigate: (direction) => this.navigateModal(direction),
                 onClose: () => this.closeObjectModal()
@@ -698,7 +662,10 @@ class ArchiveApp {
         if (newIndex >= 0 && newIndex < this.filteredObjects.length) {
             const newObject = this.filteredObjects[newIndex];
             this.currentModalObjectIndex = newIndex;
-            updateModalContent(newObject, this.currentModalObjectIndex, this.filteredObjects.length);
+            
+            if (typeof updateModalContent === 'function') {
+                updateModalContent(newObject, this.currentModalObjectIndex, this.filteredObjects.length);
+            }
         }
     }
 
@@ -706,14 +673,16 @@ class ArchiveApp {
      * Close object modal
      */
     closeObjectModal() {
-        closeModal();
+        if (typeof closeModal === 'function') {
+            closeModal();
+        }
     }
 
     /**
      * Show error message
      */
     showError(message) {
-        console.error('Error:', message);
+        console.error('💥 Error:', message);
         
         // Hide loading state
         const loadingState = document.getElementById('loading-state');
@@ -730,22 +699,69 @@ class ArchiveApp {
                 errorMessage.textContent = message;
             }
         }
+        
+        // Show toast notification if available
+        if (typeof showToast === 'function') {
+            showToast('error', 'Loading Error', message);
+        }
+    }
+
+    /**
+     * Get detailed archive analysis for debugging
+     */
+    getArchiveAnalysis() {
+        if (this.objects.length === 0) {
+            return { error: 'No data loaded' };
+        }
+
+        const analysis = {
+            totalObjects: this.objects.length,
+            objectTypes: this.getObjectTypeCounts(),
+            completeness: {
+                withImages: this.objects.filter(obj => obj.image_downloaded).length,
+                withTEI: this.objects.filter(obj => obj.tei_downloaded).length,
+                withLIDO: this.objects.filter(obj => obj.lido_downloaded).length,
+                withRDF: this.objects.filter(obj => obj.rdf_downloaded).length
+            },
+            searchCapabilities: {
+                fuseLoaded: !!this.fuse,
+                searchableFields: this.fuse ? this.fuse.options.keys.map(k => k.name) : []
+            },
+            currentState: {
+                filteredCount: this.filteredObjects.length,
+                currentPage: this.currentPage,
+                totalPages: Math.ceil(this.filteredObjects.length / this.itemsPerPage),
+                activeFilters: this.hasActiveFilters(),
+                searchQuery: this.searchQuery
+            }
+        };
+
+        return analysis;
     }
 }
 
 // Initialize the application when the DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, starting archive application...');
+    console.log('🚀 DOM loaded, starting archive application...');
     window.archiveApp = new ArchiveApp();
 });
 
 // Handle page errors
 window.addEventListener('error', (event) => {
-    console.error('Global error:', event.error);
+    console.error('💥 Global error:', event.error);
 });
 
 // Handle unhandled promise rejections
 window.addEventListener('unhandledrejection', (event) => {
-    console.error('Unhandled promise rejection:', event.reason);
+    console.error('💥 Unhandled promise rejection:', event.reason);
     event.preventDefault();
 });
+
+// Expose useful debugging function globally
+window.getArchiveAnalysis = () => {
+    if (window.archiveApp) {
+        return window.archiveApp.getArchiveAnalysis();
+    } else {
+        return { error: 'Archive app not initialized' };
+    }
+};
