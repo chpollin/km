@@ -108,5 +108,15 @@ fix: correct GAMS image URL format
 
 URLs now use proper GAMS format: {domain}/{object_id}/IMAGE.1
 
+- Add complete modal dialog with object metadata display
+- Implement image viewing with GAMS URL integration
+- Add dynamic download links generation (Image, TEI, LIDO, RDF)
+- Include keyboard navigation (ESC close, arrow keys for object navigation)
+- Add modal event handlers and focus management
+- Implement previous/next object navigation within filtered results
+- Add proper accessibility attributes and ARIA support
+- Include error handling for missing images and data
+
+
 ---
 *Generated via Claude AI assistance for KI im Museum training series*
