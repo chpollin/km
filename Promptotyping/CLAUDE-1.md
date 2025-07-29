@@ -79,5 +79,25 @@ km_extractor.py → all_objects.json → SPA Interface
 ### Deployment
 GitHub Pages ready with automated builds. All assets static, no server-side dependencies.
 
+# GitHub Commits
+
+### Features Implemented
+✅ **Data loading** from JSON with validation  
+✅ **Statistics dashboard** with live counts  
+✅ **Search functionality** (text matching, debounced, clear button)  
+✅ **Object cards** with images, titles, descriptions, availability indicators  
+✅ **Pagination** (24 items/page, 163 pages total)  
+✅ **Interactive elements** (click handlers, keyboard navigation)  
+✅ **Toast notifications** for user feedback  
+✅ **Image handling** (GAMS URLs, fallbacks)  
+✅ **Responsive layout** (mobile-first)  
+✅ **Error/empty states** with user feedback  
+
+### Features Planned
+🔲 Modal detail viewer with GAMS links  
+🔲 Advanced search with Fuse.js fuzzy matching  
+🔲 Faceted filtering (type, availability, date)  
+🔲 Sort options (ID, title, date, relevance)
+
 ---
 *Generated via Claude AI assistance for KI im Museum training series*

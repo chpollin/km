@@ -568,9 +568,10 @@ class ArchiveApp {
      * Get image URL for object
      */
     getImageUrl(obj) {
-        // GAMS URL pattern for images
-        const imageId = obj.identifier.replace('o:km.', '');
-        return `https://gams.uni-graz.at/archive/objects/${obj.container}/${imageId}/IMAGE.1`;
+        // GAMS URL pattern: gams.uni-graz.at/{object_id}/IMAGE.1
+        // Extract o:km.X from pid like "info:fedora/o:km.5"
+        const objectId = obj.pid.replace('info:fedora/', '');
+        return `https://gams.uni-graz.at/${objectId}/IMAGE.1`;
     }
 
     /**
