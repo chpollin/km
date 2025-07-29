@@ -23,6 +23,8 @@ class ArchiveApp {
             }
         };
         this.sortBy = 'identifier';
+        this.currentModalObjectIndex = 0;
+        this.modalListenersInitialized = false;
         
         // Initialize the application
         this.init();
@@ -517,9 +519,8 @@ class ArchiveApp {
                 if (e.target.closest('.quick-view-btn')) return;
                 
                 const objectId = card.dataset.objectId;
-                console.log('🎯 Card clicked:', objectId);
-                // TODO: Open modal (will implement next)
-                this.showToast('success', 'Object Selected', `Selected ${objectId} - Modal coming soon!`);
+                console.log('Card clicked:', objectId);
+                this.showObjectModal(objectId);
             });
             
             // Keyboard navigation
@@ -536,9 +537,8 @@ class ArchiveApp {
                 quickViewBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     const objectId = card.dataset.objectId;
-                    console.log('👁️ Quick view:', objectId);
-                    // TODO: Open modal (will implement next)
-                    this.showToast('info', 'Quick View', `Quick view for ${objectId} - Modal coming soon!`);
+                    console.log('Quick view:', objectId);
+                    this.showObjectModal(objectId);
                 });
             }
         });
@@ -583,12 +583,302 @@ class ArchiveApp {
     }
 
     /**
+     * Show object modal with detailed information
+     */
+    showObjectModal(objectId) {
+        const obj = this.filteredObjects.find(o => o.identifier === objectId);
+        if (!obj) {
+            console.error('Object not found:', objectId);
+            return;
+        }
+
+        console.log('Opening modal for object:', obj);
+
+        // Set current modal object for navigation
+        this.currentModalObjectIndex = this.filteredObjects.findIndex(o => o.identifier === objectId);
+        
+        // Populate modal content
+        this.populateModalContent(obj);
+        
+        // Show modal
+        const modal = document.getElementById('object-modal');
+        if (modal) {
+            modal.style.display = 'flex';
+            // Trigger animation after display
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+            
+            // Focus management
+            const closeButton = modal.querySelector('.modal-close');
+            if (closeButton) {
+                closeButton.focus();
+            }
+        }
+        
+        // Initialize modal event listeners if not already done
+        if (!this.modalListenersInitialized) {
+            this.initializeModalEventListeners();
+            this.modalListenersInitialized = true;
+        }
+    }
+
+    /**
+     * Populate modal with object data
+     */
+    populateModalContent(obj) {
+        // Title
+        const titleElement = document.getElementById('modal-object-title');
+        if (titleElement) {
+            titleElement.textContent = obj.title || 'Untitled Object';
+        }
+
+        // Metadata
+        const fields = {
+            'modal-identifier': obj.identifier,
+            'modal-type': obj.container === 'karteikarten' ? 'Karteikarte' : 'Museum Object',
+            'modal-date': obj.createdDate || 'Unknown',
+            'modal-description': obj.description || 'No description available'
+        };
+
+        Object.entries(fields).forEach(([elementId, value]) => {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = value;
+            }
+        });
+
+        // Handle image
+        this.setModalImage(obj);
+
+        // Generate download links
+        this.generateModalDownloadLinks(obj);
+
+        // Update navigation
+        this.updateModalNavigation();
+    }
+
+    /**
+     * Set modal image
+     */
+    setModalImage(obj) {
+        const modalImage = document.getElementById('modal-image');
+        const imagePlaceholder = document.getElementById('modal-image-placeholder');
+
+        if (obj.image_downloaded && modalImage && imagePlaceholder) {
+            const imageUrl = this.getImageUrl(obj);
+            modalImage.src = imageUrl;
+            modalImage.alt = obj.title || 'Object image';
+            modalImage.style.display = 'block';
+            imagePlaceholder.style.display = 'none';
+
+            // Handle image load error
+            modalImage.onerror = () => {
+                modalImage.style.display = 'none';
+                imagePlaceholder.style.display = 'flex';
+            };
+        } else if (imagePlaceholder && modalImage) {
+            modalImage.style.display = 'none';
+            imagePlaceholder.style.display = 'flex';
+        }
+    }
+
+    /**
+     * Generate download links for modal
+     */
+    generateModalDownloadLinks(obj) {
+        const downloadContainer = document.getElementById('modal-downloads');
+        if (!downloadContainer) return;
+
+        const links = [];
+
+        // Image download
+        if (obj.image_downloaded) {
+            const imageUrl = this.getImageUrl(obj);
+            links.push(`
+                <a href="${imageUrl}" class="download-link" target="_blank" rel="noopener">
+                    <span aria-hidden="true">🖼️</span>
+                    High Resolution Image
+                </a>
+            `);
+        }
+
+        // TEI/XML source
+        if (obj.tei_downloaded) {
+            const teiUrl = this.getTEIUrl(obj);
+            links.push(`
+                <a href="${teiUrl}" class="download-link" target="_blank" rel="noopener">
+                    <span aria-hidden="true">📄</span>
+                    TEI/XML Source
+                </a>
+            `);
+        }
+
+        // LIDO metadata
+        if (obj.lido_downloaded) {
+            const lidoUrl = this.getLIDOUrl(obj);
+            links.push(`
+                <a href="${lidoUrl}" class="download-link" target="_blank" rel="noopener">
+                    <span aria-hidden="true">📋</span>
+                    LIDO Metadata
+                </a>
+            `);
+        }
+
+        // RDF data
+        if (obj.rdf_downloaded) {
+            const rdfUrl = this.getRDFUrl(obj);
+            links.push(`
+                <a href="${rdfUrl}" class="download-link" target="_blank" rel="noopener">
+                    <span aria-hidden="true">🔗</span>
+                    RDF Data
+                </a>
+            `);
+        }
+
+        downloadContainer.innerHTML = links.length > 0 ? 
+            links.join('') : 
+            '<p class="download-note">No downloads available</p>';
+    }
+
+    /**
+     * Update modal navigation controls
+     */
+    updateModalNavigation() {
+        const totalObjects = this.filteredObjects.length;
+        const currentIndex = this.currentModalObjectIndex;
+
+        // Update position indicator
+        const positionElement = document.getElementById('object-position');
+        if (positionElement) {
+            positionElement.textContent = `Object ${currentIndex + 1} of ${totalObjects}`;
+        }
+
+        // Update navigation buttons
+        const prevButton = document.getElementById('prev-object');
+        const nextButton = document.getElementById('next-object');
+
+        if (prevButton) {
+            prevButton.disabled = currentIndex === 0;
+        }
+
+        if (nextButton) {
+            nextButton.disabled = currentIndex === totalObjects - 1;
+        }
+    }
+
+    /**
+     * Initialize modal event listeners
+     */
+    initializeModalEventListeners() {
+        const modal = document.getElementById('object-modal');
+        if (!modal) return;
+
+        // Close button
+        const closeButton = modal.querySelector('.modal-close');
+        if (closeButton) {
+            closeButton.addEventListener('click', () => {
+                this.closeObjectModal();
+            });
+        }
+
+        // Overlay click to close
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                this.closeObjectModal();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!modal.classList.contains('active')) return;
+
+            switch (e.key) {
+                case 'Escape':
+                    this.closeObjectModal();
+                    break;
+                case 'ArrowLeft':
+                    this.navigateModal(-1);
+                    break;
+                case 'ArrowRight':
+                    this.navigateModal(1);
+                    break;
+            }
+        });
+
+        // Navigation buttons
+        const prevButton = document.getElementById('prev-object');
+        const nextButton = document.getElementById('next-object');
+
+        if (prevButton) {
+            prevButton.addEventListener('click', () => {
+                this.navigateModal(-1);
+            });
+        }
+
+        if (nextButton) {
+            nextButton.addEventListener('click', () => {
+                this.navigateModal(1);
+            });
+        }
+    }
+
+    /**
+     * Navigate to previous/next object in modal
+     */
+    navigateModal(direction) {
+        const newIndex = this.currentModalObjectIndex + direction;
+        
+        if (newIndex >= 0 && newIndex < this.filteredObjects.length) {
+            const newObject = this.filteredObjects[newIndex];
+            this.currentModalObjectIndex = newIndex;
+            this.populateModalContent(newObject);
+        }
+    }
+
+    /**
+     * Close object modal
+     */
+    closeObjectModal() {
+        const modal = document.getElementById('object-modal');
+        if (modal) {
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+    }
+
+    /**
+     * Get TEI URL for object
+     */
+    getTEIUrl(obj) {
+        const objectId = obj.pid.replace('info:fedora/', '');
+        return `https://gams.uni-graz.at/${objectId}/TEI_SOURCE`;
+    }
+
+    /**
+     * Get LIDO URL for object
+     */
+    getLIDOUrl(obj) {
+        const objectId = obj.pid.replace('info:fedora/', '');
+        return `https://gams.uni-graz.at/${objectId}/LIDO`;
+    }
+
+    /**
+     * Get RDF URL for object
+     */
+    getRDFUrl(obj) {
+        const objectId = obj.pid.replace('info:fedora/', '');
+        return `https://gams.uni-graz.at/${objectId}/RDF`;
+    }
+
+    /**
      * Show toast notification
      */
     showToast(type, title, message) {
-        console.log(`🍞 Toast: [${type.toUpperCase()}] ${title}: ${message}`);
+        console.log(`Toast: [${type.toUpperCase()}] ${title}: ${message}`);
         
-        // For now, just console log. Will implement toast UI later
         const toastContainer = document.getElementById('toast-container');
         if (toastContainer) {
             const toast = document.createElement('div');

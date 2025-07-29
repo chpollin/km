@@ -99,5 +99,14 @@ GitHub Pages ready with automated builds. All assets static, no server-side depe
 🔲 Faceted filtering (type, availability, date)  
 🔲 Sort options (ID, title, date, relevance)
 
+fix: correct GAMS image URL format
+
+- Fix getImageUrl() to strip 'info:fedora/' prefix from pid
+- Change from: gams.uni-graz.at/info:fedora/o:km.5/IMAGE.1  
+- Change to: gams.uni-graz.at/o:km.5/IMAGE.1
+- Images now load correctly in object cards
+
+URLs now use proper GAMS format: {domain}/{object_id}/IMAGE.1
+
 ---
 *Generated via Claude AI assistance for KI im Museum training series*
