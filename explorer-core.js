@@ -137,17 +137,13 @@ class CollectionExplorer {
 
     processObjects(data) {
         return data.map((obj, index) => {
-            // Calculate completeness score
-            const completeness = this.calculateCompleteness(obj);
-            
-            // Determine colors based on type and completeness
-            const colors = this.getObjectColors(obj, completeness);
+            // Determine colors based on type only
+            const colors = this.getObjectColors(obj);
             
             return {
                 ...obj,
                 x: 0, // Will be set by spatial manager
                 y: 0, // Will be set by spatial manager
-                completeness: completeness,
                 colors: colors,
                 visible: false,
                 searchMatch: false,
@@ -157,36 +153,18 @@ class CollectionExplorer {
         });
     }
 
-    calculateCompleteness(obj) {
-        let score = 0;
-        let maxScore = 5;
-        
-        // Basic metadata
-        if (obj.title && obj.title.trim()) score += 1;
-        if (obj.description && obj.description.trim()) score += 1;
-        
-        // File availability
-        if (obj.image_downloaded) score += 1;
-        if (obj.tei_downloaded || obj.lido_downloaded) score += 1;
-        if (obj.rdf_downloaded) score += 1;
-        
-        return score / maxScore;
-    }
-
-    getObjectColors(obj, completeness) {
-        const isIncomplete = completeness < 0.7;
-        
+    getObjectColors(obj) {
         if (obj.container === 'karteikarten') {
             return {
-                primary: isIncomplete ? '#15803d' : '#22c55e',
+                primary: '#22c55e',
                 secondary: '#16a34a',
-                border: isIncomplete ? '#15803d' : '#22c55e'
+                border: '#22c55e'
             };
         } else {
             return {
-                primary: isIncomplete ? '#dc2626' : '#f97316',
+                primary: '#f97316',
                 secondary: '#ea580c',
-                border: isIncomplete ? '#dc2626' : '#f97316'
+                border: '#f97316'
             };
         }
     }

@@ -26,8 +26,8 @@ class SpatialManager {
         
         // Object type configurations
         this.objectTypes = {
-            karteikarten: { color: '#22c55e', incompleteColor: '#15803d' },
-            objekte: { color: '#f97316', incompleteColor: '#dc2626' }
+            karteikarten: { color: '#22c55e' },
+            objekte: { color: '#f97316' }
         };
     }
 
@@ -60,10 +60,6 @@ class SpatialManager {
         // Create main clusters
         this.positionCluster(karteikarten, -1000, -500, 'circular');
         this.positionCluster(objekte, 1000, 500, 'spiral');
-        
-        // Create sub-clusters based on completeness
-        this.createCompletenessSubclusters(karteikarten, -1000, -500);
-        this.createCompletenessSubclusters(objekte, 1000, 500);
     }
 
     positionCluster(objects, centerX, centerY, pattern = 'circular') {
@@ -134,28 +130,6 @@ class SpatialManager {
             x: centerX + offsetX + col * spacing,
             y: centerY + offsetY + row * spacing
         };
-    }
-
-    createCompletenessSubclusters(objects, baseX, baseY) {
-        const complete = objects.filter(obj => obj.completeness >= 0.8);
-        const partial = objects.filter(obj => obj.completeness >= 0.5 && obj.completeness < 0.8);
-        const incomplete = objects.filter(obj => obj.completeness < 0.5);
-        
-        // Slightly adjust positions based on completeness
-        complete.forEach(obj => {
-            obj.x += (Math.random() - 0.5) * 30;
-            obj.y += (Math.random() - 0.5) * 30;
-        });
-        
-        partial.forEach(obj => {
-            obj.x += 200 + (Math.random() - 0.5) * 30;
-            obj.y += (Math.random() - 0.5) * 30;
-        });
-        
-        incomplete.forEach(obj => {
-            obj.x += 400 + (Math.random() - 0.5) * 30;
-            obj.y += (Math.random() - 0.5) * 30;
-        });
     }
 
     createTemporalLayout() {
@@ -518,16 +492,6 @@ class SpatialManager {
         ctx.font = `${13/zoom}px sans-serif`;
         const title = (obj.title || 'Untitled').substring(0, 20);
         ctx.fillText(title, -width/2 + 8/zoom, infoY + 58/zoom);
-        
-        // Completeness indicators
-        const indicatorY = infoY + height * 0.25;
-        for (let i = 0; i < 4; i++) {
-            const filled = (i + 1) / 4 <= obj.completeness;
-            ctx.fillStyle = filled ? obj.colors.primary : '#404040';
-            ctx.beginPath();
-            ctx.arc(-width/2 + 20/zoom + i * 16/zoom, indicatorY, 4/zoom, 0, Math.PI * 2);
-            ctx.fill();
-        }
         
         // Selection indicator
         if (obj.selected) {

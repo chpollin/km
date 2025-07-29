@@ -546,7 +546,6 @@ class UIManager {
     }
 
     generateObjectDetailsHTML(obj) {
-        const completenessPercent = Math.round(obj.completeness * 100);
         const typeDisplay = obj.container === 'karteikarten' ? 'Karteikarte (Index Card)' : 'Objekt (Museum Object)';
         
         return `
@@ -575,10 +574,6 @@ class UIManager {
                         <div class="metadata-row">
                             <span class="metadata-label">Type:</span>
                             <span class="metadata-value">${typeDisplay}</span>
-                        </div>
-                        <div class="metadata-row">
-                            <span class="metadata-label">Completeness:</span>
-                            <span class="metadata-value">${completenessPercent}%</span>
                         </div>
                     </div>
                     
