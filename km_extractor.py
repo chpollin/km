@@ -63,7 +63,6 @@ class KMExtractor:
             "karteikarten/rdf",
             "karteikarten/tei",
             "karteikarten/images",
-            "objekte/rdf",
             "objekte/lido",
             "objekte/images",
             "logs",
@@ -352,16 +351,20 @@ class KMExtractor:
         metadata['title'] = title
         metadata['description'] = description
         metadata['createdDate'] = created_date
-        # Determine destination directories
-        if model_uri and 'cm:TEI' in model_uri:
-            # Karteikarte
+        
+        # Determine destination directories and object type
+        is_tei_object = model_uri and 'cm:TEI' in model_uri
+        is_lido_object = model_uri and 'cm:LIDO' in model_uri
+        
+        if is_tei_object:
+            # Karteikarte (TEI objects have RDF)
             rdf_dir = self.output_dir / 'karteikarten' / 'rdf'
             tei_dir = self.output_dir / 'karteikarten' / 'tei'
             img_dir = self.output_dir / 'karteikarten' / 'images'
             with self._stats_lock:
                 self.stats['karteikarten'] += 1
-        elif model_uri and 'cm:LIDO' in model_uri:
-            rdf_dir = self.output_dir / 'objekte' / 'rdf'
+        elif is_lido_object:
+            # Objekte (LIDO objects do NOT have RDF)
             lido_dir = self.output_dir / 'objekte' / 'lido'
             img_dir = self.output_dir / 'objekte' / 'images'
             with self._stats_lock:
@@ -373,23 +376,26 @@ class KMExtractor:
             (self.output_dir / 'unknown' / 'rdf').mkdir(parents=True, exist_ok=True)
             (self.output_dir / 'unknown' / 'images').mkdir(parents=True, exist_ok=True)
 
-        # Download RDF
-        rdf_path = rdf_dir / f"{identifier.replace(':', '_')}.rdf"
-        success_rdf = self._download_file(f"{BASE_URL}/{identifier}/RDF", rdf_path)
-        metadata['rdf_downloaded'] = success_rdf
-        if success_rdf:
-            with self._stats_lock:
-                self.stats['rdf_success'] += 1
-        time.sleep(DOWNLOAD_DELAY)
+        # Download RDF only for TEI objects (karteikarten)
+        if is_tei_object:
+            rdf_path = rdf_dir / f"{identifier.replace(':', '_')}.rdf"
+            success_rdf = self._download_file(f"{BASE_URL}/{identifier}/RDF", rdf_path)
+            metadata['rdf_downloaded'] = success_rdf
+            if success_rdf:
+                with self._stats_lock:
+                    self.stats['rdf_success'] += 1
+            time.sleep(DOWNLOAD_DELAY)
+        # Note: No RDF download for LIDO objects, leave rdf_downloaded as False
+        
         # Download TEI or LIDO source
-        if model_uri and 'cm:TEI' in model_uri:
+        if is_tei_object:
             tei_path = tei_dir / f"{identifier.replace(':', '_')}.tei.xml"
             success_source = self._download_file(f"{BASE_URL}/{identifier}/TEI_SOURCE", tei_path)
             metadata['tei_downloaded'] = success_source
             if success_source:
                 with self._stats_lock:
                     self.stats['tei_success'] += 1
-        elif model_uri and 'cm:LIDO' in model_uri:
+        elif is_lido_object:
             lido_path = lido_dir / f"{identifier.replace(':', '_')}.lido.xml"
             success_source = self._download_file(f"{BASE_URL}/{identifier}/LIDO_SOURCE", lido_path)
             metadata['lido_downloaded'] = success_source
@@ -399,6 +405,7 @@ class KMExtractor:
         else:
             success_source = False
         time.sleep(DOWNLOAD_DELAY)
+        
         # Download image
         success_img = self._download_image(identifier, img_dir)
         metadata['image_downloaded'] = success_img
@@ -406,6 +413,7 @@ class KMExtractor:
             with self._stats_lock:
                 self.stats['image_success'] += 1
         time.sleep(DOWNLOAD_DELAY)
+        
         return metadata
 
     def run_extraction(self):
