@@ -1,6 +1,7 @@
 /**
- * Hans Gross Kriminalmuseum Archive - Main Application
+ * Hans Gross Kriminalmuseum Archive - Enhanced Main Application
  * A research tool for exploring the digitized Hans Gross Criminal Museum collection
+ * Enhanced with complete filter system and advanced functionality
  */
 
 class ArchiveApp {
@@ -11,6 +12,13 @@ class ArchiveApp {
         this.itemsPerPage = 24;
         this.currentView = 'grid';
         this.searchQuery = '';
+        this.sortBy = 'identifier';
+        this.sortDirection = 'asc';
+        this.currentModalObjectIndex = 0;
+        this.modalListenersInitialized = false;
+        this.fuse = null;
+        
+        // Enhanced filter structure
         this.filters = {
             objectType: {
                 karteikarten: true,
@@ -22,9 +30,6 @@ class ArchiveApp {
                 hasRdf: false
             }
         };
-        this.sortBy = 'identifier';
-        this.currentModalObjectIndex = 0;
-        this.modalListenersInitialized = false;
         
         // Initialize the application
         this.init();
@@ -40,8 +45,10 @@ class ArchiveApp {
             // Load the archive data
             await this.loadArchiveData();
             
-            // Initialize UI components
+            // Initialize components
             this.initializeEventListeners();
+            this.initializeFilters();
+            this.initializeFuzzySearch();
             this.updateStatistics();
             this.renderResults();
             
@@ -76,12 +83,6 @@ class ArchiveApp {
             this.filteredObjects = [...this.objects];
             
             console.log(`Loaded ${this.objects.length} objects from archive`);
-            console.log('Sample object structure:', this.objects[0]);
-            console.log('Object types found:', this.getObjectTypeCounts());
-            console.log('Download statistics:', this.getDownloadStatistics());
-            
-            // Log detailed breakdown
-            this.logDataBreakdown();
             
         } catch (error) {
             console.error('Error loading archive data:', error);
@@ -90,108 +91,160 @@ class ArchiveApp {
     }
 
     /**
-     * Get counts of different object types
+     * Initialize fuzzy search with Fuse.js
      */
-    getObjectTypeCounts() {
-        const counts = {
-            total: this.objects.length,
-            karteikarten: 0,
-            objekte: 0,
-            unknown: 0
+    initializeFuzzySearch() {
+        if (typeof Fuse === 'undefined') {
+            console.warn('Fuse.js not loaded, falling back to basic search');
+            return;
+        }
+
+        const fuseOptions = {
+            keys: [
+                { name: 'title', weight: 0.4 },
+                { name: 'description', weight: 0.3 },
+                { name: 'identifier', weight: 0.2 },
+                { name: 'createdDate', weight: 0.1 }
+            ],
+            threshold: 0.3,
+            includeScore: true,
+            includeMatches: true,
+            minMatchCharLength: 2
         };
 
-        this.objects.forEach(obj => {
-            switch (obj.container) {
-                case 'karteikarten':
-                    counts.karteikarten++;
-                    break;
-                case 'objekte':
-                    counts.objekte++;
-                    break;
-                default:
-                    counts.unknown++;
-            }
-        });
-
-        return counts;
+        this.fuse = new Fuse(this.objects, fuseOptions);
+        console.log('Fuzzy search initialized with Fuse.js');
     }
 
     /**
-     * Get download statistics
+     * Initialize filter system
      */
-    getDownloadStatistics() {
-        const stats = {
-            withImages: 0,
-            withTEI: 0,
-            withLIDO: 0,
-            withRDF: 0,
-            complete: 0
-        };
+    initializeFilters() {
+        console.log('Initializing filter system...');
 
-        this.objects.forEach(obj => {
-            if (obj.image_downloaded) stats.withImages++;
-            if (obj.tei_downloaded) stats.withTEI++;
-            if (obj.lido_downloaded) stats.withLIDO++;
-            if (obj.rdf_downloaded) stats.withRDF++;
-            
-            // Complete means has image and source (TEI or LIDO)
-            if (obj.image_downloaded && (obj.tei_downloaded || obj.lido_downloaded)) {
-                stats.complete++;
-            }
+        // Object type filters
+        document.querySelectorAll('[data-filter="karteikarten"], [data-filter="objekte"]').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                this.updateObjectTypeFilter(e.target.dataset.filter, e.target.checked);
+            });
         });
 
-        return stats;
-    }
+        // Availability filters
+        document.querySelectorAll('[data-filter="has-image"], [data-filter="has-source"], [data-filter="has-rdf"]').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                this.updateAvailabilityFilter(e.target.dataset.filter, e.target.checked);
+            });
+        });
 
-    /**
-     * Log detailed data breakdown
-     */
-    logDataBreakdown() {
-        console.group('Detailed Archive Analysis');
-        
-        // Sample objects by type
-        const karteikarten = this.objects.filter(obj => obj.container === 'karteikarten');
-        const objekte = this.objects.filter(obj => obj.container === 'objekte');
-        
-        console.log('Sample Karteikarte:', karteikarten[0]);
-        console.log('Sample Objekt:', objekte[0]);
-        
-        // Date range analysis
-        const dates = this.objects
-            .map(obj => obj.createdDate)
-            .filter(date => date && date.trim())
-            .sort();
-        
-        if (dates.length > 0) {
-            console.log('Date range:', {
-                earliest: dates[0],
-                latest: dates[dates.length - 1],
-                totalWithDates: dates.length
+        // Sort dropdown
+        const sortSelect = document.getElementById('sort-options');
+        if (sortSelect) {
+            sortSelect.addEventListener('change', (e) => {
+                this.updateSort(e.target.value);
             });
         }
+
+        // Clear filters button
+        const clearFiltersBtn = document.getElementById('clear-filters');
+        if (clearFiltersBtn) {
+            clearFiltersBtn.addEventListener('click', () => {
+                this.clearAllFilters();
+            });
+        }
+
+        console.log('Filter system initialized');
+    }
+
+    /**
+     * Update object type filter
+     */
+    updateObjectTypeFilter(filterType, checked) {
+        console.log(`Object type filter changed: ${filterType} = ${checked}`);
         
-        // Title analysis
-        const titlesWithContent = this.objects.filter(obj => obj.title && obj.title.trim()).length;
-        const descriptionsWithContent = this.objects.filter(obj => obj.description && obj.description.trim()).length;
+        this.filters.objectType[filterType] = checked;
+        this.applyFilters();
+        this.updateFilterCounts();
+    }
+
+    /**
+     * Update availability filter
+     */
+    updateAvailabilityFilter(filterType, checked) {
+        console.log(`Availability filter changed: ${filterType} = ${checked}`);
         
-        console.log('Content analysis:', {
-            objectsWithTitles: titlesWithContent,
-            objectsWithDescriptions: descriptionsWithContent,
-            averageTitleLength: this.objects
-                .filter(obj => obj.title)
-                .reduce((sum, obj) => sum + obj.title.length, 0) / titlesWithContent || 0
+        const filterMap = {
+            'has-image': 'hasImage',
+            'has-source': 'hasSource',
+            'has-rdf': 'hasRdf'
+        };
+
+        this.filters.availability[filterMap[filterType]] = checked;
+        this.applyFilters();
+        this.updateFilterCounts();
+    }
+
+    /**
+     * Update sort order
+     */
+    updateSort(sortValue) {
+        console.log(`Sort changed to: ${sortValue}`);
+        
+        const [field, direction] = sortValue.includes('-desc') 
+            ? [sortValue.replace('-desc', ''), 'desc']
+            : [sortValue, 'asc'];
+        
+        this.sortBy = field;
+        this.sortDirection = direction;
+        this.applyFilters();
+    }
+
+    /**
+     * Clear all filters
+     */
+    clearAllFilters() {
+        console.log('Clearing all filters...');
+        
+        // Reset filter state
+        this.filters = {
+            objectType: {
+                karteikarten: true,
+                objekte: true
+            },
+            availability: {
+                hasImage: false,
+                hasSource: false,
+                hasRdf: false
+            }
+        };
+
+        // Reset UI checkboxes
+        document.querySelectorAll('[data-filter]').forEach(checkbox => {
+            if (checkbox.dataset.filter === 'karteikarten' || checkbox.dataset.filter === 'objekte') {
+                checkbox.checked = true;
+            } else {
+                checkbox.checked = false;
+            }
         });
+
+        // Reset sort
+        const sortSelect = document.getElementById('sort-options');
+        if (sortSelect) {
+            sortSelect.value = 'identifier';
+        }
+        this.sortBy = 'identifier';
+        this.sortDirection = 'asc';
+
+        // Clear search
+        const searchInput = document.getElementById('main-search');
+        if (searchInput) {
+            searchInput.value = '';
+        }
+        this.searchQuery = '';
+
+        this.applyFilters();
+        this.updateFilterCounts();
         
-        // Model analysis
-        const models = {};
-        this.objects.forEach(obj => {
-            const model = obj.model || 'unknown';
-            models[model] = (models[model] || 0) + 1;
-        });
-        
-        console.log('Model distribution:', models);
-        
-        console.groupEnd();
+        showToast('success', 'Filters Cleared', 'All filters have been reset');
     }
 
     /**
@@ -200,7 +253,7 @@ class ArchiveApp {
     initializeEventListeners() {
         console.log('Setting up event listeners...');
         
-        // Search input
+        // Search input with enhanced fuzzy search
         const searchInput = document.getElementById('main-search');
         if (searchInput) {
             searchInput.addEventListener('input', debounce((e) => {
@@ -254,7 +307,187 @@ class ArchiveApp {
             });
         }
 
+        // Retry button for error state
+        const retryButton = document.getElementById('retry-load');
+        if (retryButton) {
+            retryButton.addEventListener('click', () => {
+                this.init();
+            });
+        }
+
+        // Clear search button in empty state
+        const clearSearchBtn = document.getElementById('clear-search');
+        if (clearSearchBtn) {
+            clearSearchBtn.addEventListener('click', () => {
+                this.clearAllFilters();
+            });
+        }
+
         console.log('Event listeners initialized');
+    }
+
+    /**
+     * Handle search input with fuzzy search
+     */
+    handleSearch(query) {
+        console.log('Search query:', query);
+        this.searchQuery = query.trim();
+        this.applyFilters();
+    }
+
+    /**
+     * Apply current filters, search, and sorting
+     */
+    applyFilters() {
+        console.log('Applying filters, search, and sorting...');
+        
+        let filtered = [...this.objects];
+        
+        // Apply object type filters
+        if (!this.filters.objectType.karteikarten && !this.filters.objectType.objekte) {
+            // If both unchecked, show none
+            filtered = [];
+        } else if (!this.filters.objectType.karteikarten) {
+            // Show only objekte
+            filtered = filtered.filter(obj => obj.container === 'objekte');
+        } else if (!this.filters.objectType.objekte) {
+            // Show only karteikarten
+            filtered = filtered.filter(obj => obj.container === 'karteikarten');
+        }
+        // If both checked, show all (no filter needed)
+
+        // Apply availability filters
+        if (this.filters.availability.hasImage) {
+            filtered = filtered.filter(obj => obj.image_downloaded);
+        }
+        
+        if (this.filters.availability.hasSource) {
+            filtered = filtered.filter(obj => obj.tei_downloaded || obj.lido_downloaded);
+        }
+        
+        if (this.filters.availability.hasRdf) {
+            filtered = filtered.filter(obj => obj.rdf_downloaded);
+        }
+
+        // Apply search
+        if (this.searchQuery) {
+            if (this.fuse) {
+                // Use Fuse.js for fuzzy search
+                const searchResults = this.fuse.search(this.searchQuery);
+                const searchedObjects = searchResults.map(result => result.item);
+                // Filter to only include objects that passed other filters
+                filtered = filtered.filter(obj => 
+                    searchedObjects.some(searchObj => searchObj.identifier === obj.identifier)
+                );
+            } else {
+                // Fallback to basic search
+                const query = this.searchQuery.toLowerCase();
+                filtered = filtered.filter(obj => {
+                    const searchableText = [
+                        obj.title || '',
+                        obj.description || '',
+                        obj.identifier || '',
+                        obj.createdDate || ''
+                    ].join(' ').toLowerCase();
+                    
+                    return searchableText.includes(query);
+                });
+            }
+        }
+
+        // Apply sorting
+        filtered = this.sortObjects(filtered);
+        
+        this.filteredObjects = filtered;
+        this.currentPage = 1;
+        
+        console.log(`Filter results: ${this.filteredObjects.length} objects found`);
+        
+        this.updateStatistics();
+        this.renderResults();
+    }
+
+    /**
+     * Sort objects based on current sort settings
+     */
+    sortObjects(objects) {
+        return objects.sort((a, b) => {
+            let aValue, bValue;
+            
+            switch (this.sortBy) {
+                case 'title':
+                    aValue = (a.title || '').toLowerCase();
+                    bValue = (b.title || '').toLowerCase();
+                    break;
+                case 'date':
+                    aValue = a.createdDate || '';
+                    bValue = b.createdDate || '';
+                    break;
+                case 'relevance':
+                    // For relevance, prefer objects with more complete data
+                    aValue = this.calculateRelevanceScore(a);
+                    bValue = this.calculateRelevanceScore(b);
+                    break;
+                case 'identifier':
+                default:
+                    aValue = a.identifier || '';
+                    bValue = b.identifier || '';
+            }
+            
+            let comparison = 0;
+            if (aValue < bValue) comparison = -1;
+            if (aValue > bValue) comparison = 1;
+            
+            return this.sortDirection === 'desc' ? -comparison : comparison;
+        });
+    }
+
+    /**
+     * Calculate relevance score for sorting
+     */
+    calculateRelevanceScore(obj) {
+        let score = 0;
+        
+        // Points for having content
+        if (obj.title && obj.title.trim()) score += 3;
+        if (obj.description && obj.description.trim()) score += 3;
+        if (obj.image_downloaded) score += 2;
+        if (obj.tei_downloaded || obj.lido_downloaded) score += 2;
+        if (obj.rdf_downloaded) score += 1;
+        if (obj.createdDate && obj.createdDate.trim()) score += 1;
+        
+        // Bonus for longer descriptions/titles
+        if (obj.description) score += Math.min(obj.description.length / 100, 2);
+        if (obj.title) score += Math.min(obj.title.length / 20, 1);
+        
+        return score;
+    }
+
+    /**
+     * Update filter counts in sidebar
+     */
+    updateFilterCounts() {
+        const counts = this.getFilteredCounts();
+        
+        // Update available counts (would require more complex implementation)
+        // For now, just update the main stats
+        this.updateStatistics();
+    }
+
+    /**
+     * Get counts for current filter state
+     */
+    getFilteredCounts() {
+        const counts = {
+            total: this.filteredObjects.length,
+            karteikarten: this.filteredObjects.filter(obj => obj.container === 'karteikarten').length,
+            objekte: this.filteredObjects.filter(obj => obj.container === 'objekte').length,
+            withImages: this.filteredObjects.filter(obj => obj.image_downloaded).length,
+            withSource: this.filteredObjects.filter(obj => obj.tei_downloaded || obj.lido_downloaded).length,
+            withRdf: this.filteredObjects.filter(obj => obj.rdf_downloaded).length
+        };
+
+        return counts;
     }
 
     /**
@@ -268,74 +501,73 @@ class ArchiveApp {
     }
 
     /**
-     * Handle search input
-     */
-    handleSearch(query) {
-        console.log('Search query:', query);
-        this.searchQuery = query.trim();
-        this.applyFilters();
-    }
-
-    /**
-     * Apply current filters and search
-     */
-    applyFilters() {
-        console.log('Applying filters and search...');
-        
-        let filtered = [...this.objects];
-        
-        // Apply search if query exists
-        if (this.searchQuery) {
-            const query = this.searchQuery.toLowerCase();
-            filtered = filtered.filter(obj => {
-                const searchableText = [
-                    obj.title || '',
-                    obj.description || '',
-                    obj.identifier || '',
-                    obj.createdDate || ''
-                ].join(' ').toLowerCase();
-                
-                return searchableText.includes(query);
-            });
-        }
-        
-        this.filteredObjects = filtered;
-        this.currentPage = 1;
-        
-        console.log(`Filter results: ${this.filteredObjects.length} objects found`);
-        
-        this.updateStatistics();
-        this.renderResults();
-    }
-
-    /**
      * Update statistics display
      */
     updateStatistics() {
-        const counts = this.getObjectTypeCounts();
+        const totalCounts = this.getObjectTypeCounts();
+        const filteredCounts = this.getFilteredCounts();
         
         // Update header count
         const objectCount = document.getElementById('object-count');
         if (objectCount) {
-            objectCount.textContent = `${counts.total} objects in archive`;
+            objectCount.textContent = `${totalCounts.total} objects in archive`;
         }
         
-        // Update sidebar statistics
-        document.getElementById('total-count').textContent = counts.total;
-        document.getElementById('cards-count').textContent = counts.karteikarten;
-        document.getElementById('objects-count').textContent = counts.objekte;
+        // Update sidebar statistics (show total counts, not filtered)
+        document.getElementById('total-count').textContent = totalCounts.total;
+        document.getElementById('cards-count').textContent = totalCounts.karteikarten;
+        document.getElementById('objects-count').textContent = totalCounts.objekte;
         
         // Update results info
         const resultsCount = document.getElementById('results-count');
         if (resultsCount) {
-            if (this.searchQuery) {
-                resultsCount.textContent = `${this.filteredObjects.length} objects found for "${this.searchQuery}"`;
+            if (this.searchQuery || this.hasActiveFilters()) {
+                resultsCount.textContent = `${filteredCounts.total} objects found`;
             } else {
-                resultsCount.textContent = `${this.filteredObjects.length} objects in collection`;
+                resultsCount.textContent = `${filteredCounts.total} objects in collection`;
             }
         }
         
         console.log('Statistics updated');
+    }
+
+    /**
+     * Check if any filters are active
+     */
+    hasActiveFilters() {
+        const typeFiltersActive = !this.filters.objectType.karteikarten || !this.filters.objectType.objekte;
+        const availabilityFiltersActive = this.filters.availability.hasImage || 
+                                         this.filters.availability.hasSource || 
+                                         this.filters.availability.hasRdf;
+        
+        return typeFiltersActive || availabilityFiltersActive || this.sortBy !== 'identifier';
+    }
+
+    /**
+     * Get counts of different object types
+     */
+    getObjectTypeCounts() {
+        const counts = {
+            total: this.objects.length,
+            karteikarten: 0,
+            objekte: 0,
+            unknown: 0
+        };
+
+        this.objects.forEach(obj => {
+            switch (obj.container) {
+                case 'karteikarten':
+                    counts.karteikarten++;
+                    break;
+                case 'objekte':
+                    counts.objekte++;
+                    break;
+                default:
+                    counts.unknown++;
+            }
+        });
+
+        return counts;
     }
 
     /**
