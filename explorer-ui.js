@@ -580,10 +580,6 @@ class UIManager {
                             <span>🎯</span>
                             Focus Object
                         </button>
-                        <button class="action-btn secondary" onclick="window.collectionExplorer.uiManager.findSimilar('${obj.identifier}')">
-                            <span>🔍</span>
-                            Find Similar
-                        </button>
                         <a href="https://gams.uni-graz.at/${obj.identifier}" target="_blank" class="action-btn gams-link">
                             <span>🔗</span>
                             View in GAMS
@@ -601,49 +597,7 @@ class UIManager {
         }
     }
 
-    findSimilar(objectId) {
-        const obj = this.explorer.objects.find(o => o.identifier === objectId);
-        if (!obj) return;
-        
-        // Simple similarity based on type and title keywords
-        const keywords = this.extractSimpleKeywords(obj.title || '');
-        
-        const similar = this.explorer.objects.filter(other => {
-            if (other.identifier === obj.identifier) return false;
-            if (other.container !== obj.container) return false;
-            
-            const otherKeywords = this.extractSimpleKeywords(other.title || '');
-            return this.hasCommonKeywords(keywords, otherKeywords);
-        }).slice(0, 20);
-        
-        // Highlight similar objects
-        this.explorer.objects.forEach(o => o.searchMatch = false);
-        similar.forEach(o => o.searchMatch = true);
-        
-        this.explorer.searchResults = similar;
-        this.explorer.searchTerm = `Similar to ${obj.identifier}`;
-        this.explorer.needsRedraw = true;
-        
-        // Update search UI
-        document.getElementById('searchInput').value = this.explorer.searchTerm;
-        this.updateSearchResults();
-        
-        // Zoom to show similar objects
-        if (similar.length > 0) {
-            this.explorer.zoomToSearchResults();
-        }
-    }
 
-    extractSimpleKeywords(text) {
-        return text.toLowerCase()
-            .split(/\s+/)
-            .filter(word => word.length > 3)
-            .slice(0, 3);
-    }
-
-    hasCommonKeywords(keywords1, keywords2) {
-        return keywords1.some(keyword => keywords2.includes(keyword));
-    }
 
     // UI toggles
     toggleLegend() {
