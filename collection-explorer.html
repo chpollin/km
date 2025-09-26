@@ -22,22 +22,40 @@
     <!-- Header with Collection Info -->
     <header class="explorer-header">
         <div class="header-content">
-            <div class="header-title">
-                <h1>
+            <div class="header-left">
+                <h1 class="header-title">
                     <span class="header-icon">🗺️</span>
                     Collection Explorer
                 </h1>
-                <p class="header-subtitle">Hans Gross Kriminalmuseum Archive</p>
-            </div>
-            <div class="experiment-notice">
-                <span class="notice-badge">EXPERIMENTAL</span>
-                <span class="notice-text">Workshop "KI und Museum" - Work in Progress</span>
-            </div>
-            <div class="header-actions">
                 <a href="index.html" class="nav-link-main">
                     <span class="link-icon">🏛️</span>
-                    <span class="link-text">Main Archive</span>
+                    Main Archive
                 </a>
+            </div>
+
+            <div class="header-center">
+                <div class="search-wrapper">
+                    <input
+                        type="search"
+                        id="explorer-search"
+                        class="explorer-search-input"
+                        placeholder="Search 3,892 objects..."
+                        autocomplete="off"
+                    >
+                    <button class="search-clear-btn" id="search-clear" style="display: none;" aria-label="Clear search">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="search-results-count" id="search-results-count" style="display: none;">
+                    <span class="results-number">0</span> found
+                </div>
+            </div>
+
+            <div class="header-right">
+                <div class="experiment-notice">
+                    <span class="notice-badge">EXPERIMENTAL</span>
+                    <span class="notice-text">Workshop "KI und Museum"</span>
+                </div>
             </div>
         </div>
     </header>
@@ -127,16 +145,30 @@
             </div>
         </nav>
 
-        <!-- Minimap -->
-        <div class="minimap" id="minimap">
-            <div class="minimap-header">
-                <span class="minimap-title">Collection Map</span>
-                <button class="minimap-toggle" id="minimapToggle" aria-label="Toggle minimap">
-                    <span aria-hidden="true">📍</span>
-                </button>
+        <!-- Combined Map & Legend Panel -->
+        <div class="map-legend-panel" id="mapLegendPanel">
+            <div class="minimap-section">
+                <div class="section-header">
+                    <span class="section-title">Map</span>
+                </div>
+                <canvas id="minimapCanvas" class="minimap-canvas"></canvas>
+                <div class="minimap-viewport" id="minimapViewport"></div>
             </div>
-            <canvas id="minimapCanvas" class="minimap-canvas"></canvas>
-            <div class="minimap-viewport" id="minimapViewport"></div>
+            <div class="legend-section-compact">
+                <div class="section-header">
+                    <span class="section-title">Legend</span>
+                </div>
+                <div class="legend-items-compact">
+                    <div class="legend-item-compact">
+                        <span class="color-dot" style="background: #007AFF;"></span>
+                        <span>Karteikarten</span>
+                    </div>
+                    <div class="legend-item-compact">
+                        <span class="color-dot" style="background: #FF9500;"></span>
+                        <span>Objekte</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Information Panel -->
@@ -170,55 +202,6 @@
             </div>
         </aside>
 
-        <!-- Legend -->
-        <div class="legend" id="legend">
-            <div class="legend-header">
-                <span class="legend-title">Legend</span>
-                <button class="legend-toggle" id="legendToggle" aria-label="Toggle legend">
-                    <span aria-hidden="true">▼</span>
-                </button>
-            </div>
-            <div class="legend-content">
-                <div class="legend-section">
-                    <h4>Object Types</h4>
-                    <div class="legend-items">
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: #007AFF;"></div>
-                            <span>Karteikarten (Index Cards)</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: #FF9500;"></div>
-                            <span>Objekte (Museum Objects)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="legend-section">
-                    <h4>Zoom Levels</h4>
-                    <div class="zoom-levels">
-                        <div class="zoom-level-item">
-                            <span class="zoom-range">0.1x - 0.3x</span>
-                            <span class="zoom-desc">Dots</span>
-                        </div>
-                        <div class="zoom-level-item">
-                            <span class="zoom-range">0.3x - 0.6x</span>
-                            <span class="zoom-desc">Chips</span>
-                        </div>
-                        <div class="zoom-level-item">
-                            <span class="zoom-range">0.6x - 1.5x</span>
-                            <span class="zoom-desc">Thumbnails</span>
-                        </div>
-                        <div class="zoom-level-item">
-                            <span class="zoom-range">1.5x - 3.0x</span>
-                            <span class="zoom-desc">Cards</span>
-                        </div>
-                        <div class="zoom-level-item">
-                            <span class="zoom-range">3.0x+</span>
-                            <span class="zoom-desc">Full Details</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
 
     <!-- Help Overlay -->
