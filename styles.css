@@ -281,7 +281,7 @@ textarea {
 .search-section {
   background: var(--color-surface);
   border-bottom: 1px solid var(--color-border);
-  padding: var(--space-4) 0;
+  padding: var(--space-2) 0;
   position: sticky;
   top: 60px;
   z-index: 10;
@@ -295,25 +295,24 @@ textarea {
 
 .search-input-wrapper {
   position: relative;
-  margin-bottom: var(--space-6);
+  margin-bottom: 0;
 }
 
 .search-input {
   width: 100%;
-  padding: var(--space-6) var(--space-8);
-  font-size: var(--text-xl);
-  border: 3px solid var(--color-border);
-  border-radius: var(--radius-xl);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-base);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   background: var(--color-surface);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  font-weight: var(--font-medium);
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  font-weight: var(--font-normal);
 }
 
 .search-input:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px rgba(230, 81, 0, 0.15);
-  transform: translateY(-2px);
+  box-shadow: 0 0 0 2px rgba(230, 81, 0, 0.1);
 }
 
 .search-input::placeholder {
@@ -373,13 +372,15 @@ textarea {
 /* Filters Sidebar */
 .filters-sidebar {
   background: var(--color-surface);
-  border-radius: var(--radius-xl);
-  padding: var(--space-6);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
   height: fit-content;
   position: sticky;
-  top: 120px;
+  top: 90px;
   border: 1px solid var(--color-border-light);
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
 }
 
 @media (max-width: 1023px) {
@@ -390,7 +391,7 @@ textarea {
 }
 
 .filter-section {
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-4);
 }
 
 .filter-section:last-child {
@@ -501,12 +502,12 @@ textarea {
 }
 
 .filter-title {
-  font-size: var(--text-lg);
-  font-weight: var(--font-bold);
-  margin-bottom: var(--space-5);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  margin-bottom: var(--space-2);
   color: var(--color-text);
-  border-bottom: 2px solid var(--color-accent);
-  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-accent);
+  padding-bottom: var(--space-1);
   display: inline-block;
 }
 
@@ -856,7 +857,7 @@ textarea {
 
 .object-grid.list-view {
   grid-template-columns: 1fr;
-  gap: var(--space-4);
+  gap: 1px;
 }
 
 /* Object Card */
@@ -1094,29 +1095,77 @@ textarea {
   padding: 0 var(--space-4) var(--space-4);
 }
 
-/* List View Styles */
+/* List View Styles - Compact without images */
 .object-grid.list-view .object-card {
   display: flex;
   align-items: center;
-  padding: var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  box-shadow: none;
+  border: 1px solid var(--color-border-light);
+  background: var(--color-bg);
+}
+
+.object-grid.list-view .object-card:hover {
+  transform: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: var(--color-surface);
 }
 
 .object-grid.list-view .card-image {
-  width: 120px;
-  height: 90px;
-  flex-shrink: 0;
-  margin-right: var(--space-4);
-  aspect-ratio: 4/3;
+  display: none;
 }
 
 .object-grid.list-view .card-content {
   flex: 1;
   padding: 0;
+  display: grid;
+  grid-template-columns: 120px 1fr 200px auto;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.object-grid.list-view .card-title {
+  font-size: var(--text-sm);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.object-grid.list-view .card-meta {
+  display: none;
+}
+
+.object-grid.list-view .card-description {
+  font-size: var(--text-xs);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--color-text-muted);
+}
+
+.object-grid.list-view .card-badges {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.object-grid.list-view .card-badge {
+  font-size: 9px;
+  padding: 2px 6px;
 }
 
 .object-grid.list-view .card-actions {
   padding: 0;
-  margin-left: var(--space-4);
+  display: flex;
+  gap: var(--space-1);
+}
+
+.object-grid.list-view .card-action {
+  font-size: var(--text-xs);
+  padding: var(--space-1) var(--space-2);
 }
 
 /* Buttons */
