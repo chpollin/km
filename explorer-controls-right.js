@@ -69,7 +69,7 @@ class LayoutControlsRight {
         const styles = `
             .layout-controls-panel {
                 position: fixed;
-                right: 0;
+                right: -180px;
                 top: 50%;
                 transform: translateY(-50%);
                 z-index: 999;
@@ -78,10 +78,6 @@ class LayoutControlsRight {
 
             .layout-controls-panel.open {
                 right: 0;
-            }
-
-            .layout-controls-panel:not(.open) .controls-panel-content {
-                transform: translateX(100%);
             }
 
             .controls-tab {
@@ -136,7 +132,6 @@ class LayoutControlsRight {
                 border-right: none;
                 border-radius: 8px 0 0 8px;
                 box-shadow: -2px 0 8px rgba(0,0,0,0.1);
-                transition: transform 0.3s ease;
                 overflow: hidden;
             }
 
