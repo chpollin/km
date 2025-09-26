@@ -70,9 +70,7 @@
             
             <!-- Zoom Level Indicator -->
             <div class="zoom-indicator" id="zoomIndicator">
-                <span class="zoom-label">Zoom:</span>
                 <span class="zoom-value">0.5x</span>
-                <div class="zoom-description">Overview</div>
             </div>
         </div>
 
@@ -165,112 +163,7 @@
 
     </main>
 
-    <!-- Help Overlay -->
-    <div class="help-overlay" id="helpOverlay">
-        <div class="help-content">
-            <div class="help-header">
-                <h2>Collection Explorer Help</h2>
-                <button class="help-close" id="helpClose" aria-label="Close help">
-                    <span aria-hidden="true">✕</span>
-                </button>
-            </div>
-            <div class="help-body">
-                <div class="help-section">
-                    <h3>Navigation</h3>
-                    <div class="help-shortcuts">
-                        <div class="shortcut">
-                            <span class="shortcut-keys">Mouse Wheel</span>
-                            <span class="shortcut-desc">Zoom in/out</span>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-keys">Click + Drag</span>
-                            <span class="shortcut-desc">Pan around collection</span>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-keys">Click Object</span>
-                            <span class="shortcut-desc">Select and view details</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="help-section">
-                    <h3>Layout Controls</h3>
-                    <div class="help-shortcuts">
-                        <div class="shortcut">
-                            <span class="shortcut-keys">Layout Panel</span>
-                            <span class="shortcut-desc">Switch between grid, timeline, and cluster layouts</span>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-keys">Primary Grouping</span>
-                            <span class="shortcut-desc">Group by object type, time period, or region</span>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-keys">Apply Layout</span>
-                            <span class="shortcut-desc">Apply selected layout configuration</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="help-section">
-                    <h3>Keyboard Shortcuts</h3>
-                    <div class="help-shortcuts">
-                        <div class="shortcut">
-                            <span class="shortcut-keys">+ / -</span>
-                            <span class="shortcut-desc">Zoom in/out</span>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-keys">Arrow Keys</span>
-                            <span class="shortcut-desc">Pan view</span>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-keys">Home</span>
-                            <span class="shortcut-desc">Reset view</span>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-keys">Ctrl + F</span>
-                            <span class="shortcut-desc">Focus search</span>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-keys">Escape</span>
-                            <span class="shortcut-desc">Clear search/selection</span>
-                        </div>
-                        <div class="shortcut">
-                            <span class="shortcut-keys">?</span>
-                            <span class="shortcut-desc">Show this help</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="help-section">
-                    <h3>About the Collection</h3>
-                    <p>This spatial visualization displays all 3,892 objects from the Hans Gross Kriminalmuseum Archive. Objects can be arranged in different layouts to explore patterns by type, time period, and other categories.</p>
-                    <p>Use the Layout Controls panel to switch between organizational systems and zoom in to see progressively more detail.</p>
-                </div>
-            </div>
-            <div class="help-footer">
-                <a href="index.html" class="btn-secondary">
-                    <span aria-hidden="true">🏛️</span>
-                    Main Archive Interface
-                </a>
-                <button class="btn-primary" id="helpCloseBtn">
-                    Got it!
-                </button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Performance Monitor (Development) -->
-    <div class="performance-monitor" id="performanceMonitor" style="display: none;">
-        <div class="perf-item">
-            <span class="perf-label">FPS:</span>
-            <span class="perf-value" id="fpsCounter">60</span>
-        </div>
-        <div class="perf-item">
-            <span class="perf-label">Objects:</span>
-            <span class="perf-value" id="objectsRendered">0</span>
-        </div>
-        <div class="perf-item">
-            <span class="perf-label">Memory:</span>
-            <span class="perf-value" id="memoryUsage">0MB</span>
-        </div>
-    </div>
 
 
     <!-- JavaScript -->
@@ -287,23 +180,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             console.log('🗺️ Initializing Collection Explorer...');
             
-            // Check if we're in development mode
-            const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-            if (isDev) {
-                document.getElementById('performanceMonitor').style.display = 'block';
-            }
-            
             // Initialize the explorer
             window.collectionExplorer = new CollectionExplorer();
-            
-            // Show help on first visit
-            const hasVisited = localStorage.getItem('collection-explorer-visited');
-            if (!hasVisited) {
-                setTimeout(() => {
-                    document.getElementById('helpOverlay').classList.add('active');
-                    localStorage.setItem('collection-explorer-visited', 'true');
-                }, 2000);
-            }
         });
 
         // Handle browser visibility changes for performance
