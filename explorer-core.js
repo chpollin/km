@@ -95,8 +95,10 @@ class CollectionExplorer {
             // Initialize layout manager  
             this.layoutManager = new LayoutManager(this);
             
-            // Initialize layout controls
-            this.layoutControls = new LayoutControls(this);
+            // Initialize layout controls (right-side panel)
+            if (window.LayoutControlsRight) {
+                this.layoutControls = new LayoutControlsRight(this);
+            }
             
             console.log('✅ Layout systems initialized');
         } catch (error) {
