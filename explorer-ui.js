@@ -76,18 +76,19 @@ class UIManager {
             });
         }
         
-        // Search controls
-        const searchInput = document.getElementById('searchInput');
+        // Search controls - now in header
+        const searchInput = document.getElementById('explorer-search');
         if (searchInput) {
             searchInput.addEventListener('input', (e) => {
                 this.debouncedSearch(e.target.value);
             });
-        }
-        
-        const searchClear = document.getElementById('searchClear');
-        if (searchClear) {
-            searchClear.addEventListener('click', () => {
-                this.clearSearch();
+
+            // Clear on Escape
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    searchInput.value = '';
+                    this.clearSearch();
+                }
             });
         }
         

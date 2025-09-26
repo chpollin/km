@@ -211,8 +211,15 @@ class SpatialManager {
     // Rendering methods for different zoom levels
     renderObjects(ctx, zoom) {
         const level = this.getZoomLevel(zoom);
-        
+
+        // If there's an active search, only render matching objects
+        const hasActiveSearch = this.explorer.searchTerm && this.explorer.searchTerm.length > 0;
+
         for (const obj of this.explorer.visibleObjects) {
+            // Skip non-matching objects during search (filter mode)
+            if (hasActiveSearch && !obj.searchMatch) {
+                continue;
+            }
             this.renderObject(ctx, obj, level, zoom);
         }
     }
