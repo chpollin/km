@@ -2014,3 +2014,51 @@ body {
   outline-offset: 1px;
 }
 
+/* Action buttons in object details */
+.object-actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: var(--font-small);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.action-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-primary);
+}
+
+.action-btn.primary {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.action-btn.primary:hover {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+.action-btn.gams-link {
+  background: var(--bg-tertiary);
+  border-color: var(--border-accent);
+}
+
+.action-btn.gams-link:hover {
+  background: var(--bg-hover);
+  border-color: var(--color-accent);
+}
+

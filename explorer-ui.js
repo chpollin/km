@@ -584,6 +584,10 @@ class UIManager {
                             <span>🔍</span>
                             Find Similar
                         </button>
+                        <a href="https://gams.uni-graz.at/${obj.identifier}" target="_blank" class="action-btn gams-link">
+                            <span>🔗</span>
+                            View in GAMS
+                        </a>
                     </div>
                 </div>
             </div>
