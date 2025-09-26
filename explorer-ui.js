@@ -529,7 +529,7 @@ class UIManager {
         // Build GAMS image URL
         let imageHTML = '';
         if (obj.image_downloaded) {
-            const imageUrl = `https://gams.uni-graz.at/${obj.identifier}/sdef:TEI/get?mode=view&width=400`;
+            const imageUrl = `https://gams.uni-graz.at/${obj.identifier}/IMAGE.1`;
             imageHTML = `
                 <img
                     class="object-image"
