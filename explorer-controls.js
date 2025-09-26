@@ -32,15 +32,15 @@ class LayoutControls {
         if (document.getElementById('layoutControls')) return;
         
         const controlsHTML = `
-            <div class="layout-controls" id="layoutControls">
+            <div class="layout-controls collapsed" id="layoutControls">
                 <div class="controls-header">
                     <h3>Layout Controls</h3>
-                    <button class="controls-toggle" id="controlsToggle" aria-label="Toggle layout controls">
-                        <span aria-hidden="true">⚙️</span>
+                    <button class="controls-toggle" id="controlsToggle" aria-label="Toggle layout controls" aria-expanded="false">
+                        <span class="toggle-icon" aria-hidden="true">▶</span>
                     </button>
                 </div>
-                
-                <div class="controls-content" id="controlsContent">
+
+                <div class="controls-content" id="controlsContent" style="display: none;">
                     <div class="control-section">
                         <label for="layoutType">Layout Style</label>
                         <div class="layout-buttons">
@@ -370,14 +370,27 @@ class LayoutControls {
     toggleControls() {
         const content = document.getElementById('controlsContent');
         const toggle = document.getElementById('controlsToggle');
-        
-        if (content) {
-            const isVisible = content.style.display !== 'none';
-            content.style.display = isVisible ? 'none' : 'block';
-            
+        const controls = document.getElementById('layoutControls');
+
+        if (content && controls) {
+            const isVisible = !controls.classList.contains('collapsed');
+
+            if (isVisible) {
+                // Collapse
+                controls.classList.add('collapsed');
+                content.style.display = 'none';
+            } else {
+                // Expand
+                controls.classList.remove('collapsed');
+                content.style.display = 'block';
+            }
+
             if (toggle) {
+                const icon = toggle.querySelector('.toggle-icon');
+                if (icon) {
+                    icon.textContent = isVisible ? '▶' : '▼';
+                }
                 toggle.setAttribute('aria-expanded', !isVisible);
-                toggle.style.transform = isVisible ? 'rotate(180deg)' : 'rotate(0deg)';
             }
         }
     }
@@ -448,13 +461,29 @@ class LayoutControls {
                 border: none;
                 color: #666;
                 cursor: pointer;
-                font-size: 16px;
+                font-size: 14px;
                 transition: transform 0.3s ease;
-                display: none; /* Hide toggle for now */
+                padding: 4px;
+                display: flex;
+                align-items: center;
             }
 
             .controls-toggle:hover {
                 color: #333;
+            }
+
+            .toggle-icon {
+                transition: transform 0.2s ease;
+                display: inline-block;
+            }
+
+            .layout-controls.collapsed {
+                width: auto;
+                min-width: 200px;
+            }
+
+            .layout-controls.collapsed .controls-content {
+                display: none;
             }
             
             .controls-content {
