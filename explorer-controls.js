@@ -411,47 +411,54 @@ class LayoutControls {
         const css = `
             .layout-controls {
                 position: fixed;
-                top: 120px;
-                right: 20px;
-                width: 280px;
-                background: rgba(26, 26, 26, 0.95);
-                border: 1px solid #404040;
-                border-radius: 12px;
-                backdrop-filter: blur(10px);
+                bottom: 20px;
+                left: 20px;
+                width: 320px;
+                background: rgba(255, 255, 255, 0.98);
+                border: 1px solid #e0e0e0;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.08);
                 z-index: 1000;
                 font-family: system-ui, -apple-system, sans-serif;
+                max-height: 400px;
+                overflow-y: auto;
             }
             
             .controls-header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 16px 20px 12px;
-                border-bottom: 1px solid #404040;
+                padding: 12px 16px;
+                border-bottom: 1px solid #e0e0e0;
+                background: #f8f8f8;
+                border-radius: 8px 8px 0 0;
             }
             
             .controls-header h3 {
                 margin: 0;
-                color: #ffffff;
-                font-size: 16px;
+                color: #333333;
+                font-size: 14px;
                 font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
             }
             
             .controls-toggle {
                 background: none;
                 border: none;
-                color: #a1a1aa;
+                color: #666;
                 cursor: pointer;
-                font-size: 18px;
+                font-size: 16px;
                 transition: transform 0.3s ease;
+                display: none; /* Hide toggle for now */
             }
-            
+
             .controls-toggle:hover {
-                color: #ffffff;
+                color: #333;
             }
             
             .controls-content {
-                padding: 20px;
+                padding: 16px;
             }
             
             .control-section {
@@ -464,10 +471,12 @@ class LayoutControls {
             
             .control-section label {
                 display: block;
-                color: #e5e5e5;
-                font-size: 13px;
-                font-weight: 500;
+                color: #666;
+                font-size: 11px;
+                font-weight: 600;
                 margin-bottom: 8px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
             }
             
             .layout-buttons {
@@ -482,26 +491,27 @@ class LayoutControls {
                 flex-direction: column;
                 align-items: center;
                 gap: 4px;
-                padding: 12px 8px;
-                background: #2a2a2a;
-                border: 1px solid #404040;
-                border-radius: 8px;
-                color: #a1a1aa;
+                padding: 10px 6px;
+                background: white;
+                border: 2px solid #e0e0e0;
+                border-radius: 6px;
+                color: #666;
                 cursor: pointer;
                 transition: all 0.2s ease;
-                font-size: 12px;
+                font-size: 11px;
             }
-            
+
             .layout-btn:hover {
-                background: #353535;
-                border-color: #525252;
-                color: #ffffff;
+                background: #f5f5f5;
+                border-color: #007AFF;
+                color: #333;
             }
-            
+
             .layout-btn.active {
-                background: #f97316;
-                border-color: #f97316;
-                color: #ffffff;
+                background: #007AFF;
+                border-color: #007AFF;
+                color: white;
+                font-weight: 600;
             }
             
             .btn-icon {
@@ -598,8 +608,9 @@ class LayoutControls {
             }
             
             .action-btn.secondary:hover {
-                background: #353535;
-                color: #ffffff;
+                background: #f5f5f5;
+                border-color: #999;
+                color: #333;
                 transform: translateY(-1px);
             }
             

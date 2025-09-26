@@ -110,6 +110,11 @@ body {
   padding: var(--space-4) var(--space-6);
 }
 
+.explorer-header .experiment-notice {
+  display: inline-flex;
+  margin-left: 20px;
+}
+
 .header-content {
   display: flex;
   justify-content: space-between;

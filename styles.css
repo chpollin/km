@@ -204,6 +204,39 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+/* Experimental Notice */
+.experiment-notice {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 243, 205, 0.95);
+  padding: 4px 12px;
+  border-radius: 4px;
+  border: 1px solid #ffc107;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.notice-badge {
+  background: #ffc107;
+  color: #000;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.notice-text {
+  color: #856404;
+  font-weight: 500;
 }
 
 .header-title {

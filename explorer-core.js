@@ -212,55 +212,29 @@ class CollectionExplorer {
     }
 
     getObjectColors(obj) {
-        // Color coding based on enhanced classification
-        if (obj.objectClass) {
-            const primaryClass = obj.objectClass.split('.')[0];
-            switch(primaryClass) {
-                case 'Waffe':
-                    return {
-                        primary: '#dc2626',
-                        secondary: '#b91c1c',
-                        border: '#dc2626'
-                    };
-                case 'Dokument':
-                    return {
-                        primary: '#2563eb',
-                        secondary: '#1d4ed8',
-                        border: '#2563eb'
-                    };
-                case 'Beweisstück':
-                    return {
-                        primary: '#7c3aed',
-                        secondary: '#6d28d9',
-                        border: '#7c3aed'
-                    };
-                case 'Werkzeug':
-                    return {
-                        primary: '#ca8a04',
-                        secondary: '#a16207',
-                        border: '#ca8a04'
-                    };
-                default:
-                    return {
-                        primary: '#6b7280',
-                        secondary: '#4b5563',
-                        border: '#6b7280'
-                    };
-            }
-        }
+        // Simplified color scheme - only 2 main categories
+        // This improves visual clarity and reduces cognitive load
 
-        // Fallback for non-enhanced data
         if (obj.container === 'karteikarten') {
+            // Blue for Karteikarten (index cards/documents)
             return {
-                primary: '#22c55e',
-                secondary: '#16a34a',
-                border: '#22c55e'
+                primary: '#007AFF',      // iOS blue
+                secondary: '#0051D5',    // Darker blue
+                border: '#007AFF'
+            };
+        } else if (obj.container === 'objekte') {
+            // Orange for physical museum objects
+            return {
+                primary: '#FF9500',      // iOS orange
+                secondary: '#CC7700',    // Darker orange
+                border: '#FF9500'
             };
         } else {
+            // Gray for unknown/uncategorized
             return {
-                primary: '#f97316',
-                secondary: '#ea580c',
-                border: '#f97316'
+                primary: '#8E8E93',      // iOS gray
+                secondary: '#636366',    // Darker gray
+                border: '#8E8E93'
             };
         }
     }
@@ -420,7 +394,8 @@ class CollectionExplorer {
     // View manipulation methods
     setZoom(newZoom, centerX = 0, centerY = 0) {
         const oldZoom = this.targetZoom;
-        this.targetZoom = Math.max(0.1, Math.min(5, newZoom));
+        // Set reasonable zoom limits: 0.1x (overview) to 3x (detailed view)
+        this.targetZoom = Math.max(0.1, Math.min(3, newZoom));
         
         // Zoom toward specific point
         if (centerX !== 0 || centerY !== 0) {
