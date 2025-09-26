@@ -147,7 +147,29 @@ body {
 .header-nav {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
+}
+
+.header-search {
+  flex: 0 1 250px;
+  padding: 5px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  color: white;
+  font-size: 0.8125rem;
+  outline: none;
+  transition: all 0.2s var(--ease-smooth);
+}
+
+.header-search::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.header-search:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 .search-wrapper {

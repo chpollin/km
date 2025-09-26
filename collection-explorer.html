@@ -27,15 +27,22 @@
                 Collection Explorer
             </h1>
 
+            <input
+                type="search"
+                id="explorer-search"
+                class="header-search"
+                placeholder="Search..."
+                autocomplete="off"
+            >
+
             <div class="header-nav">
+                <div class="experiment-notice">
+                    <span class="notice-badge">BETA</span>
+                </div>
                 <a href="index.html" class="nav-link-main">
                     <span class="link-icon">🏛️</span>
                     Main Archive
                 </a>
-                <div class="experiment-notice">
-                    <span class="notice-badge">BETA</span>
-                    <span class="notice-text">Workshop KI & Museum</span>
-                </div>
             </div>
         </div>
     </header>
@@ -291,13 +298,6 @@
         </div>
     </div>
 
-    <!-- Back to Main Archive Link -->
-    <div class="back-to-main">
-        <a href="index.html" class="back-link" aria-label="Return to main archive interface">
-            <span aria-hidden="true">🏛️</span>
-            <span>Main Archive</span>
-        </a>
-    </div>
 
     <!-- JavaScript -->
     <script src="explorer-core.js"></script>
