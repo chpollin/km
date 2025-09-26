@@ -343,8 +343,8 @@ function generateDownloadLinksHtml(obj) {
             }
         }
 
-        // RDF data
-        if (obj.rdf_downloaded) {
+        // RDF data - only for Karteikarten
+        if (obj.rdf_downloaded && obj.container === 'karteikarten') {
             const rdfUrl = getRDFUrl(obj);
             if (rdfUrl) {
                 links.push(`

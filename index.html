@@ -285,8 +285,32 @@
                             <span aria-hidden="true">⛶</span>
                         </button>
                     </div>
+
+                    <!-- Action sections below image -->
+                    <div class="action-sections">
+                        <div class="download-section compact">
+                            <h3>Available Downloads</h3>
+                            <div class="download-links" id="modal-downloads">
+                                <p class="download-note">Loading available files...</p>
+                            </div>
+                        </div>
+
+                        <div class="sharing-section compact">
+                            <h3>Share & Cite</h3>
+                            <div class="share-actions">
+                                <button class="btn-secondary copy-link-btn" type="button" id="copy-link">
+                                    <span aria-hidden="true">📋</span>
+                                    Copy Link
+                                </button>
+                                <button class="btn-secondary generate-citation-btn" type="button" id="generate-citation">
+                                    <span aria-hidden="true">📄</span>
+                                    Citation
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
+
                 <div class="modal-info-section">
                     <div class="metadata-section">
                         <h3>Object Information</h3>
@@ -309,29 +333,9 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="download-section">
-                        <h3>Available Downloads</h3>
-                        <div class="download-links" id="modal-downloads">
-                            <p class="download-note">Loading available files...</p>
-                        </div>
-                    </div>
-                    
-                    <div class="sharing-section">
-                        <h3>Share & Cite</h3>
-                        <div class="share-actions">
-                            <button class="btn-secondary copy-link-btn" type="button" id="copy-link">
-                                <span aria-hidden="true">📋</span>
-                                Copy Link
-                            </button>
-                            <button class="btn-secondary generate-citation-btn" type="button" id="generate-citation">
-                                <span aria-hidden="true">📄</span>
-                                Generate Citation
-                            </button>
-                        </div>
-                        <div class="citation-output" id="citation-output" style="display: none;">
-                            <textarea readonly class="citation-text" id="citation-text"></textarea>
-                        </div>
+
+                    <div class="citation-output" id="citation-output" style="display: none;">
+                        <textarea readonly class="citation-text" id="citation-text"></textarea>
                     </div>
                 </div>
             </div>
