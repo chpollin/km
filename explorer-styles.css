@@ -875,6 +875,84 @@ body {
   opacity: 0.5;
 }
 
+/* Object Details */
+.object-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.object-image-section {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.object-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 400px;
+  object-fit: contain;
+}
+
+.object-image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  color: var(--text-secondary);
+}
+
+.image-icon {
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+.object-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.object-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.object-metadata {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.metadata-row {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.metadata-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  min-width: 60px;
+}
+
+.metadata-value {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  flex: 1;
+}
+
 .no-selection h3 {
   font-size: 1.125rem;
   margin-bottom: var(--space-3);

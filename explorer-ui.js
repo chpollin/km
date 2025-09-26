@@ -525,20 +525,35 @@ class UIManager {
 
     generateObjectDetailsHTML(obj) {
         const typeDisplay = obj.container === 'karteikarten' ? 'Karteikarte (Index Card)' : 'Objekt (Museum Object)';
-        
+
+        // Build GAMS image URL
+        let imageHTML = '';
+        if (obj.image_downloaded) {
+            const imageUrl = `https://gams.uni-graz.at/${obj.identifier}/sdef:TEI/get?mode=view&width=400`;
+            imageHTML = `
+                <img
+                    class="object-image"
+                    src="${imageUrl}"
+                    alt="${obj.title || 'Object image'}"
+                    loading="lazy"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                >
+                <div class="object-image-placeholder" style="display: none;">
+                    <span class="image-icon">⚠️</span>
+                    <span>Image load failed</span>
+                </div>`;
+        } else {
+            imageHTML = `
+                <div class="object-image-placeholder">
+                    <span class="image-icon">📄</span>
+                    <span>No Image</span>
+                </div>`;
+        }
+
         return `
             <div class="object-details">
                 <div class="object-image-section">
-                    ${obj.image_downloaded ? 
-                        `<div class="object-image-placeholder">
-                            <span class="image-icon">📷</span>
-                            <span>Image Available</span>
-                        </div>` :
-                        `<div class="object-image-placeholder">
-                            <span class="image-icon">📄</span>
-                            <span>No Image</span>
-                        </div>`
-                    }
+                    ${imageHTML}
                 </div>
                 
                 <div class="object-info-section">
