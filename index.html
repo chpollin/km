@@ -22,26 +22,16 @@
     <!-- Header -->
     <header class="app-header">
         <div class="container">
-            <h1 class="header-title">
-                <span class="header-icon">🏛️</span>
-                Hans Gross Kriminalmuseum Archive
-            </h1>
-            <!-- Collection Explorer Button -->
-            <div>
-                <a href="collection-explorer.html" class="collection-explorer-btn" 
-   style="position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, #e65100, #ff8a50); color: white; border: none; border-radius: 12px; padding: 12px 20px; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 12px rgba(230, 81, 0, 0.3); transition: all 0.3s ease; z-index: 1000; text-decoration: none; font-family: -apple-system, BlinkMacSystemFont, sans-serif;"
-   onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(230, 81, 0, 0.4)'"
-   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(230, 81, 0, 0.3)'"
-   aria-label="Open Collection Explorer - Spatial visualization">
-    <span aria-hidden="true">🗺️</span>
-    <div>
-        <div style="font-weight: 600;">Collection Explorer</div>
-        <div style="font-size: 11px; opacity: 0.9;">Spatial View</div>
-    </div>
-</a>
-            </div>
-            <div class="header-stats">
-                <span id="object-count" aria-live="polite">Loading archive...</span>
+            <div class="header-content">
+                <h1 class="header-title">
+                    Hans Gross Kriminalmuseum Archive
+                </h1>
+                <nav class="header-nav">
+                    <a href="collection-explorer.html" class="nav-explorer-btn">
+                        <span class="explorer-icon">🗺️</span>
+                        <span>Collection Explorer</span>
+                    </a>
+                </nav>
             </div>
         </div>
     </header>
@@ -113,6 +103,27 @@
                                 <span class="checkmark" aria-hidden="true"></span>
                                 <span class="filter-label">Objekte <span class="filter-description">(Museum Objects)</span></span>
                             </label>
+                        </div>
+                    </div>
+
+                    <!-- Time Period Filter -->
+                    <div class="filter-section">
+                        <h3 class="filter-title">Time Period</h3>
+                        <div class="time-slider-container">
+                            <div class="time-slider-labels">
+                                <span id="time-start">1890</span>
+                                <span id="time-end">2024</span>
+                            </div>
+                            <div class="time-slider-wrapper">
+                                <input type="range" id="time-slider-min" class="time-slider" min="1890" max="2024" value="1890" aria-label="Start year">
+                                <input type="range" id="time-slider-max" class="time-slider" min="1890" max="2024" value="2024" aria-label="End year">
+                                <div class="time-slider-track"></div>
+                                <div class="time-slider-range" id="time-range"></div>
+                            </div>
+                            <div class="time-slider-output">
+                                <span id="time-output">1890 - 2024</span>
+                                <button type="button" id="reset-time" class="reset-time-btn">Reset</button>
+                            </div>
                         </div>
                     </div>
 
@@ -368,7 +379,5 @@
     <script src="js/components.js"></script>
     <script src="js/app.js"></script>
 
-    <!-- test -->
-    <script src="test.js"></script>
 </body>
 </html>

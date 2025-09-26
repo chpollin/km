@@ -23,7 +23,8 @@ class ArchiveApp {
             objectType: {
                 karteikarten: true,
                 objekte: true
-            }
+            },
+            timePeriod: '' // New time period filter
         };
         
         // Initialize the application
@@ -129,6 +130,9 @@ class ArchiveApp {
             });
         });
 
+        // Time period range slider
+        this.initializeTimeSlider();
+
         // Sort dropdown
         const sortSelect = document.getElementById('sort-options');
         if (sortSelect) {
@@ -146,6 +150,69 @@ class ArchiveApp {
         }
 
         console.log('✅ Filter system initialized');
+    }
+
+    /**
+     * Initialize time period slider
+     */
+    initializeTimeSlider() {
+        const minSlider = document.getElementById('time-slider-min');
+        const maxSlider = document.getElementById('time-slider-max');
+        const timeRange = document.getElementById('time-range');
+        const timeOutput = document.getElementById('time-output');
+        const resetBtn = document.getElementById('reset-time');
+
+        if (!minSlider || !maxSlider) return;
+
+        const updateSliders = () => {
+            let minVal = parseInt(minSlider.value);
+            let maxVal = parseInt(maxSlider.value);
+
+            // Prevent crossover
+            if (minVal >= maxVal) {
+                if (event.target === minSlider) {
+                    minSlider.value = maxVal - 1;
+                    minVal = maxVal - 1;
+                } else {
+                    maxSlider.value = minVal + 1;
+                    maxVal = minVal + 1;
+                }
+            }
+
+            // Update range display
+            const percentMin = ((minVal - 1890) / (2024 - 1890)) * 100;
+            const percentMax = ((maxVal - 1890) / (2024 - 1890)) * 100;
+            timeRange.style.left = percentMin + '%';
+            timeRange.style.width = (percentMax - percentMin) + '%';
+
+            // Update output text
+            timeOutput.textContent = `${minVal} - ${maxVal}`;
+
+            // Update filter
+            this.filters.timePeriod = { min: minVal, max: maxVal };
+            console.log(`📅 Time period: ${minVal} - ${maxVal}`);
+            this.applyFilters();
+        };
+
+        minSlider.addEventListener('input', updateSliders);
+        maxSlider.addEventListener('input', updateSliders);
+
+        // Reset button
+        if (resetBtn) {
+            resetBtn.addEventListener('click', () => {
+                minSlider.value = 1890;
+                maxSlider.value = 2024;
+                timeRange.style.left = '0%';
+                timeRange.style.width = '100%';
+                timeOutput.textContent = '1890 - 2024';
+                this.filters.timePeriod = '';
+                this.applyFilters();
+            });
+        }
+
+        // Initialize display
+        timeRange.style.left = '0%';
+        timeRange.style.width = '100%';
     }
 
     /**
@@ -185,7 +252,8 @@ class ArchiveApp {
             objectType: {
                 karteikarten: true,
                 objekte: true
-            }
+            },
+            timePeriod: ''
         };
 
         // Reset UI checkboxes
@@ -194,6 +262,23 @@ class ArchiveApp {
                 checkbox.checked = true;
             }
         });
+
+        // Reset time period sliders
+        const minSlider = document.getElementById('time-slider-min');
+        const maxSlider = document.getElementById('time-slider-max');
+        if (minSlider && maxSlider) {
+            minSlider.value = 1890;
+            maxSlider.value = 2024;
+            const timeRange = document.getElementById('time-range');
+            if (timeRange) {
+                timeRange.style.left = '0%';
+                timeRange.style.width = '100%';
+            }
+            const timeOutput = document.getElementById('time-output');
+            if (timeOutput) {
+                timeOutput.textContent = '1890 - 2024';
+            }
+        }
 
         // Reset sort
         const sortSelect = document.getElementById('sort-options');
@@ -311,9 +396,9 @@ class ArchiveApp {
      */
     applyFilters() {
         console.log('⚙️ Applying filters, search, and sorting...');
-        
+
         let filtered = [...this.objects];
-        
+
         // Apply object type filters
         if (!this.filters.objectType.karteikarten && !this.filters.objectType.objekte) {
             // If both unchecked, show none
@@ -326,6 +411,31 @@ class ArchiveApp {
             filtered = filtered.filter(obj => obj.container === 'karteikarten');
         }
         // If both checked, show all (no filter needed)
+
+        // Apply time period filter
+        if (this.filters.timePeriod && this.filters.timePeriod.min && this.filters.timePeriod.max) {
+            filtered = filtered.filter(obj => {
+                if (!obj.createdDate) return false;
+
+                // Handle various date formats
+                let year;
+                const dateStr = obj.createdDate.toString();
+
+                // Extract year from various formats
+                if (/^\d{4}$/.test(dateStr)) {
+                    // Simple year: "1920"
+                    year = parseInt(dateStr);
+                } else if (/\d{4}/.test(dateStr)) {
+                    // Extract first 4-digit year found
+                    const match = dateStr.match(/\d{4}/);
+                    year = match ? parseInt(match[0]) : null;
+                } else {
+                    return false;
+                }
+
+                return year && year >= this.filters.timePeriod.min && year <= this.filters.timePeriod.max;
+            });
+        }
 
         // Apply search
         if (this.searchQuery) {

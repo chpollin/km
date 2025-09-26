@@ -37,25 +37,63 @@ function throttle(func, limit) {
 }
 
 /**
+ * SVG Placeholder for missing images
+ */
+const IMAGE_PLACEHOLDER_SVG = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect fill='%23f5f5f5' width='400' height='300'/%3E%3Cg opacity='0.3'%3E%3Crect x='150' y='100' width='100' height='80' fill='none' stroke='%23999' stroke-width='2'/%3E%3Ccircle cx='180' cy='130' r='8' fill='%23999'/%3E%3Cpath d='M160,170 L200,140 L240,170' fill='none' stroke='%23999' stroke-width='2'/%3E%3C/g%3E%3Ctext x='50%25' y='220' text-anchor='middle' font-family='system-ui, sans-serif' font-size='14' fill='%23666'%3EBild nicht verfügbar%3C/text%3E%3C/svg%3E`;
+
+/**
+ * Load image with fallback and retry logic
+ */
+function loadImageWithFallback(src, retries = 2) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        let attempts = 0;
+
+        const tryLoad = () => {
+            // Add cache buster for retries
+            img.src = attempts === 0 ? src : `${src}?retry=${attempts}`;
+
+            img.onload = () => {
+                console.log(`✅ Image loaded: ${src}`);
+                resolve(img.src);
+            };
+
+            img.onerror = () => {
+                attempts++;
+                if (attempts <= retries) {
+                    console.warn(`⚠️ Image load failed, retrying (${attempts}/${retries}): ${src}`);
+                    setTimeout(tryLoad, 1000 * attempts);
+                } else {
+                    console.error(`❌ Image load failed after ${retries} retries: ${src}`);
+                    resolve(IMAGE_PLACEHOLDER_SVG);
+                }
+            };
+        };
+
+        tryLoad();
+    });
+}
+
+/**
  * Get image URL for object with fallback handling
  */
 function getImageUrl(obj) {
     if (!obj || !obj.pid) {
         console.warn('Invalid object for image URL generation:', obj);
-        return '';
+        return IMAGE_PLACEHOLDER_SVG;
     }
-    
+
     try {
         // GAMS URL pattern: gams.uni-graz.at/{object_id}/IMAGE.1
         // Extract o:km.X from pid like "info:fedora/o:km.5"
         const objectId = obj.pid.replace('info:fedora/', '');
         const imageUrl = `https://gams.uni-graz.at/${objectId}/IMAGE.1`;
-        
+
         console.log(`Generated image URL for ${obj.identifier}: ${imageUrl}`);
         return imageUrl;
     } catch (error) {
         console.error('Error generating image URL:', error, obj);
-        return '';
+        return IMAGE_PLACEHOLDER_SVG;
     }
 }
 
@@ -88,11 +126,11 @@ function getLIDOUrl(obj) {
         console.warn('Invalid object for LIDO URL generation:', obj);
         return '';
     }
-    
+
     try {
         const objectId = obj.pid.replace('info:fedora/', '');
-        const lidoUrl = `https://gams.uni-graz.at/${objectId}/LIDO`;
-        
+        const lidoUrl = `https://gams.uni-graz.at/${objectId}/LIDO_SOURCE`;
+
         console.log(`Generated LIDO URL for ${obj.identifier}: ${lidoUrl}`);
         return lidoUrl;
     } catch (error) {
@@ -761,6 +799,98 @@ const storage = {
 };
 
 /**
+ * Lazy Image Loading with IntersectionObserver
+ */
+class LazyImageLoader {
+    constructor() {
+        this.observer = null;
+        this.loadedImages = new Set();
+        this.init();
+    }
+
+    init() {
+        if ('IntersectionObserver' in window) {
+            this.observer = new IntersectionObserver(
+                (entries) => this.handleIntersection(entries),
+                {
+                    rootMargin: '100px',
+                    threshold: 0.01
+                }
+            );
+        }
+    }
+
+    observe(element) {
+        if (!this.observer) {
+            // Fallback for browsers without IntersectionObserver
+            this.loadImage(element);
+            return;
+        }
+
+        // Store original src and set placeholder
+        if (!element.dataset.src && element.src) {
+            element.dataset.src = element.src;
+            element.src = IMAGE_PLACEHOLDER_SVG;
+        }
+
+        this.observer.observe(element);
+    }
+
+    handleIntersection(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                this.loadImage(entry.target);
+                this.observer.unobserve(entry.target);
+            }
+        });
+    }
+
+    async loadImage(img) {
+        const src = img.dataset.src || img.src;
+
+        if (!src || this.loadedImages.has(src)) {
+            return;
+        }
+
+        // Add loading class
+        img.classList.add('loading');
+
+        try {
+            const finalSrc = await loadImageWithFallback(src);
+            img.src = finalSrc;
+            this.loadedImages.add(src);
+
+            // Remove loading class after image loads
+            img.onload = () => {
+                img.classList.remove('loading');
+                img.classList.add('loaded');
+            };
+        } catch (error) {
+            console.error('Failed to lazy load image:', error);
+            img.src = IMAGE_PLACEHOLDER_SVG;
+            img.classList.remove('loading');
+            img.classList.add('error');
+        }
+    }
+
+    disconnect() {
+        if (this.observer) {
+            this.observer.disconnect();
+        }
+    }
+}
+
+// Global lazy loader instance
+let lazyImageLoader = null;
+
+function initLazyLoading() {
+    if (!lazyImageLoader) {
+        lazyImageLoader = new LazyImageLoader();
+    }
+    return lazyImageLoader;
+}
+
+/**
  * Export functions for external use if needed
  */
 if (typeof module !== 'undefined' && module.exports) {
@@ -768,6 +898,9 @@ if (typeof module !== 'undefined' && module.exports) {
         debounce,
         throttle,
         getImageUrl,
+        loadImageWithFallback,
+        LazyImageLoader,
+        initLazyLoading,
         getTEIUrl,
         getLIDOUrl,
         getRDFUrl,
@@ -790,6 +923,7 @@ if (typeof module !== 'undefined' && module.exports) {
         prefersReducedMotion,
         prefersDarkMode,
         smoothScrollTo,
-        storage
+        storage,
+        IMAGE_PLACEHOLDER_SVG
     };
 }
