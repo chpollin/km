@@ -308,39 +308,29 @@ class SpatialManager {
     }
 
     renderThumbnail(ctx, obj, zoom) {
-        const size = 80 / zoom;
-        
+        const size = 60 / zoom;
+
+        // Background
+        ctx.fillStyle = 'rgba(42, 42, 42, 0.9)';
+        ctx.fillRect(-size/2, -size/2, size, size);
+
         // Border
         ctx.strokeStyle = obj.colors.border;
         ctx.lineWidth = 2 / zoom;
         ctx.strokeRect(-size/2, -size/2, size, size);
-        
-        // Background
+
+        // Type indicator
         ctx.fillStyle = obj.colors.primary;
-        ctx.globalAlpha = 0.1;
-        ctx.fillRect(-size/2, -size/2, size, size);
-        ctx.globalAlpha = 1;
-        
-        // Image area
-        if (obj.image_downloaded) {
-            ctx.fillStyle = '#404040';
-            ctx.fillRect(-size/2 + 4/zoom, -size/2 + 4/zoom, size - 8/zoom, size * 0.7);
-            
-            // Image icon
-            ctx.fillStyle = '#666';
-            ctx.font = `${16/zoom}px sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText('📷', 0, -size * 0.15);
-        }
-        
+        ctx.fillRect(-size/2, -size/2, size, 4/zoom);
+
         // ID text
         ctx.fillStyle = 'white';
-        ctx.font = `${12/zoom}px sans-serif`;
+        ctx.font = `${11/zoom}px sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(obj.identifier || '', 0, size * 0.35);
-        
+        const shortId = obj.identifier ? obj.identifier.replace('o:km.', '') : '???';
+        ctx.fillText(shortId, 0, 0);
+
         // Selection indicator
         if (obj.selected) {
             ctx.strokeStyle = '#3b82f6';
@@ -350,55 +340,49 @@ class SpatialManager {
     }
 
     renderCard(ctx, obj, zoom) {
-        const width = 200 / zoom;
-        const height = 250 / zoom;
-        
+        const width = 180 / zoom;
+        const height = 120 / zoom;
+
         // Background
         ctx.fillStyle = 'rgba(42, 42, 42, 0.9)';
         ctx.fillRect(-width/2, -height/2, width, height);
-        
+
         // Border
         ctx.strokeStyle = obj.colors.border;
         ctx.lineWidth = 2 / zoom;
         ctx.strokeRect(-width/2, -height/2, width, height);
-        
-        // Image area
-        const imageHeight = height * 0.6;
-        if (obj.image_downloaded) {
-            ctx.fillStyle = '#404040';
-            ctx.fillRect(-width/2 + 4/zoom, -height/2 + 4/zoom, width - 8/zoom, imageHeight - 8/zoom);
-            
-            // Image icon
-            ctx.fillStyle = '#666';
-            ctx.font = `${24/zoom}px sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText('📷', 0, -height/2 + imageHeight/2);
-        }
-        
-        // Info area
-        const infoY = -height/2 + imageHeight;
-        
+
+        // Type indicator bar at top
+        ctx.fillStyle = obj.colors.primary;
+        ctx.fillRect(-width/2, -height/2, width, 6/zoom);
+
+        // Content area
+        const padding = 8/zoom;
+
         // Type badge
         ctx.fillStyle = obj.colors.primary;
-        ctx.fillRect(-width/2 + 8/zoom, infoY + 8/zoom, 60/zoom, 20/zoom);
-        
+        ctx.globalAlpha = 0.2;
+        ctx.fillRect(-width/2 + padding, -height/2 + 16/zoom, 50/zoom, 18/zoom);
+        ctx.globalAlpha = 1;
+
         ctx.fillStyle = 'white';
-        ctx.font = `${10/zoom}px sans-serif`;
+        ctx.font = `${9/zoom}px sans-serif`;
         ctx.textAlign = 'left';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(obj.container || '', -width/2 + 12/zoom, infoY + 18/zoom);
-        
+        ctx.textBaseline = 'top';
+        const typeText = obj.container || obj.object_type || 'Object';
+        ctx.fillText(typeText, -width/2 + padding + 4/zoom, -height/2 + 20/zoom);
+
         // ID
         ctx.fillStyle = '#a1a1aa';
-        ctx.font = `${11/zoom}px sans-serif`;
-        ctx.fillText(obj.identifier || '', -width/2 + 8/zoom, infoY + 38/zoom);
-        
-        // Title
+        ctx.font = `${10/zoom}px sans-serif`;
+        ctx.fillText(obj.identifier || '', -width/2 + padding, -height/2 + 42/zoom);
+
+        // Title (multi-line support)
         ctx.fillStyle = 'white';
-        ctx.font = `${13/zoom}px sans-serif`;
-        const title = (obj.title || 'Untitled').substring(0, 20);
-        ctx.fillText(title, -width/2 + 8/zoom, infoY + 58/zoom);
+        ctx.font = `${12/zoom}px sans-serif`;
+        const title = obj.title || 'Untitled';
+        const maxWidth = width - padding * 2;
+        this.wrapText(ctx, title, -width/2 + padding, -height/2 + 60/zoom, maxWidth, 14/zoom, 2);
         
         // Selection indicator
         if (obj.selected) {
@@ -409,76 +393,94 @@ class SpatialManager {
     }
 
     renderFullCard(ctx, obj, zoom) {
-        const width = 300 / zoom;
-        const height = 400 / zoom;
-        
-        // Background with higher opacity
+        const width = 240 / zoom;
+        const height = 160 / zoom;
+
+        // Background
         ctx.fillStyle = 'rgba(42, 42, 42, 0.95)';
         ctx.fillRect(-width/2, -height/2, width, height);
-        
+
         // Border
         ctx.strokeStyle = obj.colors.border;
         ctx.lineWidth = 2 / zoom;
         ctx.strokeRect(-width/2, -height/2, width, height);
-        
-        // Image area
-        const imageHeight = height * 0.5;
-        if (obj.image_downloaded) {
-            ctx.fillStyle = '#404040';
-            ctx.fillRect(-width/2 + 8/zoom, -height/2 + 8/zoom, width - 16/zoom, imageHeight - 16/zoom);
-            
-            // Image icon
-            ctx.fillStyle = '#666';
-            ctx.font = `${32/zoom}px sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText('📷', 0, -height/2 + imageHeight/2);
-        }
-        
-        // Info area
-        const infoY = -height/2 + imageHeight;
-        let currentY = infoY + 16/zoom;
-        
-        // Type and ID
+
+        // Type indicator bar
         ctx.fillStyle = obj.colors.primary;
-        ctx.font = `${12/zoom}px sans-serif`;
+        ctx.fillRect(-width/2, -height/2, width, 8/zoom);
+
+        // Content area
+        const padding = 12/zoom;
+        let currentY = -height/2 + 20/zoom;
+
+        // Type and ID on same line
+        ctx.fillStyle = obj.colors.primary;
+        ctx.font = `${11/zoom}px sans-serif`;
         ctx.textAlign = 'left';
         ctx.textBaseline = 'top';
-        ctx.fillText(`${(obj.container || '').toUpperCase()} • ${obj.identifier || ''}`, -width/2 + 12/zoom, currentY);
-        currentY += 20/zoom;
-        
+        const typeId = `${(obj.container || 'Object').toUpperCase()} • ${obj.identifier || ''}`;
+        ctx.fillText(typeId, -width/2 + padding, currentY);
+        currentY += 18/zoom;
+
         // Title
         ctx.fillStyle = 'white';
-        ctx.font = `bold ${14/zoom}px sans-serif`;
+        ctx.font = `bold ${13/zoom}px sans-serif`;
         const title = obj.title || 'Untitled Object';
-        ctx.fillText(title.substring(0, 25), -width/2 + 12/zoom, currentY);
-        currentY += 24/zoom;
-        
-        // Description (truncated)
-        ctx.fillStyle = '#a1a1aa';
-        ctx.font = `${11/zoom}px sans-serif`;
-        const description = (obj.description || 'No description available').substring(0, 80) + '...';
-        ctx.fillText(description, -width/2 + 12/zoom, currentY);
-        currentY += 20/zoom;
-        
-        // Completeness bar
-        const barWidth = width - 24/zoom;
-        ctx.fillStyle = '#404040';
-        ctx.fillRect(-width/2 + 12/zoom, currentY, barWidth, 6/zoom);
-        ctx.fillStyle = obj.colors.primary;
-        ctx.fillRect(-width/2 + 12/zoom, currentY, barWidth * obj.completeness, 6/zoom);
-        
-        // Completeness percentage
+        this.wrapText(ctx, title, -width/2 + padding, currentY, width - padding * 2, 16/zoom, 2);
+        currentY += 36/zoom;
+
+        // Description preview
         ctx.fillStyle = '#a1a1aa';
         ctx.font = `${10/zoom}px sans-serif`;
-        ctx.textAlign = 'right';
-        ctx.fillText(`${Math.round(obj.completeness * 100)}% complete`, width/2 - 12/zoom, currentY + 18/zoom);
-        
+        const description = (obj.description || 'No description available').substring(0, 60);
+        this.wrapText(ctx, description, -width/2 + padding, currentY, width - padding * 2, 12/zoom, 2);
+        currentY += 28/zoom;
+
+        // Metadata bar at bottom
+        ctx.fillStyle = '#404040';
+        ctx.fillRect(-width/2, height/2 - 20/zoom, width, 20/zoom);
+
+        // Date if available
+        if (obj.historical_year) {
+            ctx.fillStyle = '#a1a1aa';
+            ctx.font = `${9/zoom}px sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.fillText(`Year: ${obj.historical_year}`, 0, height/2 - 8/zoom);
+        }
+
         // Selection indicator
         if (obj.selected) {
             ctx.strokeStyle = '#3b82f6';
             ctx.lineWidth = 3 / zoom;
             ctx.strokeRect(-width/2 - 3/zoom, -height/2 - 3/zoom, width + 6/zoom, height + 6/zoom);
+        }
+    }
+
+    // Helper function to wrap text
+    wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 3) {
+        const words = text.split(' ');
+        let line = '';
+        let lineCount = 0;
+
+        for (let n = 0; n < words.length; n++) {
+            const testLine = line + words[n] + ' ';
+            const metrics = ctx.measureText(testLine);
+            const testWidth = metrics.width;
+
+            if (testWidth > maxWidth && n > 0) {
+                ctx.fillText(line, x, y + (lineCount * lineHeight));
+                line = words[n] + ' ';
+                lineCount++;
+                if (lineCount >= maxLines) {
+                    ctx.fillText('...', x + ctx.measureText(line).width, y + ((lineCount - 1) * lineHeight));
+                    break;
+                }
+            } else {
+                line = testLine;
+            }
+        }
+        if (lineCount < maxLines && line) {
+            ctx.fillText(line, x, y + (lineCount * lineHeight));
         }
     }
 
