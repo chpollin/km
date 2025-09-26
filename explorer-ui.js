@@ -230,11 +230,11 @@ class UIManager {
 
     onClick(e) {
         if (this.isDragging) return;
-        
+
         const rect = this.explorer.canvas.getBoundingClientRect();
-        const mouseX = e.clientX - rect.left - rect.width / 2;
-        const mouseY = e.clientY - rect.top - rect.height / 2;
-        
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
         const worldPos = this.explorer.screenToWorld(mouseX, mouseY);
         const clickedObject = this.explorer.findObjectAt(worldPos.x, worldPos.y);
         
