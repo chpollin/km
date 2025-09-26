@@ -131,15 +131,20 @@ class CollectionExplorer {
     }
 
     async loadData() {
-        console.log('📂 Loading archive data...');
+        console.log('📂 Loading enhanced archive data...');
         this.updateLoadingProgress(20);
-        
+
         try {
-            const response = await fetch('km_archive/metadata/all_objects.json');
+            // Try to load enhanced data first, fallback to original
+            let response = await fetch('km_archive/metadata/enhanced_objects_v2.json');
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                console.warn('Enhanced data not found, falling back to original data');
+                response = await fetch('km_archive/metadata/all_objects.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
             }
-            
+
             this.updateLoadingProgress(50);
             const data = await response.json();
             
@@ -165,9 +170,13 @@ class CollectionExplorer {
 
     processObjects(data) {
         return data.map((obj, index) => {
-            // Determine colors based on type only
+            // Enhanced data processing
             const colors = this.getObjectColors(obj);
-            
+
+            // Extract year for timeline
+            const year = obj.historicalYear || parseInt(obj.createdDate) || null;
+            const isEstimated = obj.dateSource === 'estimated';
+
             return {
                 ...obj,
                 x: 0, // Will be set by spatial manager
@@ -176,12 +185,71 @@ class CollectionExplorer {
                 visible: false,
                 searchMatch: false,
                 selected: false,
-                index: index
+                index: index,
+                year: year,
+                isEstimated: isEstimated,
+                category: this.extractCategory(obj)
             };
         });
     }
 
+    extractCategory(obj) {
+        if (obj.objectClass) {
+            // Use enhanced classification
+            const parts = obj.objectClass.split('.');
+            return {
+                primary: parts[0] || 'Unbekannt',
+                secondary: parts[1] || '',
+                tertiary: parts[2] || ''
+            };
+        }
+        // Fallback for non-enhanced data
+        return {
+            primary: obj.container === 'karteikarten' ? 'Dokument' : 'Objekt',
+            secondary: '',
+            tertiary: ''
+        };
+    }
+
     getObjectColors(obj) {
+        // Color coding based on enhanced classification
+        if (obj.objectClass) {
+            const primaryClass = obj.objectClass.split('.')[0];
+            switch(primaryClass) {
+                case 'Waffe':
+                    return {
+                        primary: '#dc2626',
+                        secondary: '#b91c1c',
+                        border: '#dc2626'
+                    };
+                case 'Dokument':
+                    return {
+                        primary: '#2563eb',
+                        secondary: '#1d4ed8',
+                        border: '#2563eb'
+                    };
+                case 'Beweisstück':
+                    return {
+                        primary: '#7c3aed',
+                        secondary: '#6d28d9',
+                        border: '#7c3aed'
+                    };
+                case 'Werkzeug':
+                    return {
+                        primary: '#ca8a04',
+                        secondary: '#a16207',
+                        border: '#ca8a04'
+                    };
+                default:
+                    return {
+                        primary: '#6b7280',
+                        secondary: '#4b5563',
+                        border: '#6b7280'
+                    };
+            }
+        }
+
+        // Fallback for non-enhanced data
         if (obj.container === 'karteikarten') {
             return {
                 primary: '#22c55e',

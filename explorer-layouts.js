@@ -221,23 +221,88 @@ class LayoutManager {
 
     /**
      * Create temporal timeline layout (horizontal chronological arrangement)
+     * Uses historical dates from 1850-1950 instead of digitization dates
      */
     createTemporalTimeline() {
-        console.log('📅 Creating temporal timeline layout');
-        
+        console.log('📅 Creating temporal timeline layout with historical dates');
+
         this.currentLayout = 'timeline';
-        const temporalCategories = this.explorer.categoryManager.categories.temporal;
-        const decades = Object.keys(temporalCategories).sort();
-        
-        const timelineWidth = decades.length * this.config.gridSpacing;
+
+        // Group objects by historical decade
+        const objectsByDecade = {};
+        const minYear = 1850;
+        const maxYear = 1950;
+
+        // Initialize decades
+        for (let year = minYear; year <= maxYear; year += 10) {
+            const decadeKey = `${year}s`;
+            objectsByDecade[decadeKey] = {
+                label: decadeKey,
+                year: year,
+                objects: [],
+                exactCount: 0,
+                estimatedCount: 0
+            };
+        }
+
+        // Add "Unknown" category for objects without dates
+        objectsByDecade['Unknown'] = {
+            label: 'Unknown',
+            year: maxYear + 20,
+            objects: [],
+            exactCount: 0,
+            estimatedCount: 0
+        };
+
+        // Sort objects into decades based on historical year
+        this.explorer.objects.forEach(obj => {
+            let year = obj.year || obj.historicalYear;
+            let isEstimated = obj.dateEstimated === true;
+
+            if (!year || year < minYear || year > maxYear) {
+                // Put objects without valid historical dates in Unknown
+                objectsByDecade['Unknown'].objects.push(obj);
+                if (year && isEstimated) {
+                    objectsByDecade['Unknown'].estimatedCount++;
+                }
+            } else {
+                // Calculate decade
+                const decade = Math.floor(year / 10) * 10;
+                const decadeKey = `${decade}s`;
+
+                if (objectsByDecade[decadeKey]) {
+                    objectsByDecade[decadeKey].objects.push(obj);
+                    if (isEstimated) {
+                        objectsByDecade[decadeKey].estimatedCount++;
+                    } else {
+                        objectsByDecade[decadeKey].exactCount++;
+                    }
+                }
+            }
+        });
+
+        // Filter out empty decades and sort
+        const activeDecades = Object.keys(objectsByDecade)
+            .filter(key => objectsByDecade[key].objects.length > 0)
+            .sort((a, b) => objectsByDecade[a].year - objectsByDecade[b].year);
+
+        console.log(`📊 Timeline spans ${activeDecades.length} decades with objects`);
+        activeDecades.forEach(decade => {
+            const data = objectsByDecade[decade];
+            console.log(`  ${decade}: ${data.objects.length} objects (${data.exactCount} exact, ${data.estimatedCount} estimated)`);
+        });
+
+        // Calculate timeline layout
+        const timelineWidth = activeDecades.length * this.config.gridSpacing;
         const startX = -timelineWidth / 2;
-        
-        decades.forEach((decade, index) => {
-            const category = temporalCategories[decade];
+
+        activeDecades.forEach((decadeKey, index) => {
+            const decadeData = objectsByDecade[decadeKey];
             const x = startX + (index * this.config.gridSpacing);
-            
+
             // Position objects in vertical column for each decade
-            this.positionObjectsInColumn(category.objects, x, decade);
+            // Pass additional info for potential visual differentiation
+            this.positionObjectsInTimelineColumn(decadeData.objects, x, decadeKey, decadeData);
         });
     }
 
@@ -246,23 +311,62 @@ class LayoutManager {
      */
     positionObjectsInColumn(objects, centerX, categoryLabel) {
         if (!objects || objects.length === 0) return;
-        
+
         const objectsPerRow = 8;
         const rows = Math.ceil(objects.length / objectsPerRow);
         const totalHeight = rows * this.config.objectSpacing;
         const startY = -totalHeight / 2;
-        
+
         objects.forEach((obj, index) => {
             const row = Math.floor(index / objectsPerRow);
             const col = index % objectsPerRow;
-            
+
             const offsetX = (col - objectsPerRow / 2) * (this.config.objectSpacing * 0.7);
             const jitterX = (Math.random() - 0.5) * 5;
             const jitterY = (Math.random() - 0.5) * 5;
-            
+
             obj.x = centerX + offsetX + jitterX;
             obj.y = startY + (row * this.config.objectSpacing) + jitterY;
             obj.gridCategory = categoryLabel;
+        });
+    }
+
+    /**
+     * Position objects in timeline column with chronological sorting
+     */
+    positionObjectsInTimelineColumn(objects, centerX, categoryLabel, decadeData) {
+        if (!objects || objects.length === 0) return;
+
+        // Sort objects by year within decade for better visual organization
+        const sortedObjects = [...objects].sort((a, b) => {
+            const yearA = a.year || a.historicalYear || 0;
+            const yearB = b.year || b.historicalYear || 0;
+            return yearA - yearB;
+        });
+
+        const objectsPerRow = 10; // Slightly more objects per row for timeline
+        const rows = Math.ceil(sortedObjects.length / objectsPerRow);
+        const totalHeight = rows * this.config.objectSpacing;
+        const startY = -totalHeight / 2;
+
+        sortedObjects.forEach((obj, index) => {
+            const row = Math.floor(index / objectsPerRow);
+            const col = index % objectsPerRow;
+
+            // Tighter horizontal spacing for timeline view
+            const offsetX = (col - objectsPerRow / 2) * (this.config.objectSpacing * 0.5);
+
+            // Less jitter for cleaner timeline appearance
+            const jitterX = (Math.random() - 0.5) * 3;
+            const jitterY = (Math.random() - 0.5) * 3;
+
+            obj.x = centerX + offsetX + jitterX;
+            obj.y = startY + (row * this.config.objectSpacing) + jitterY;
+            obj.gridCategory = categoryLabel;
+
+            // Store timeline metadata for rendering
+            obj.timelineDecade = categoryLabel;
+            obj.isEstimatedDate = obj.dateEstimated === true;
         });
     }
 

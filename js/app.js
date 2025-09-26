@@ -56,13 +56,18 @@ class ArchiveApp {
     }
 
     /**
-     * Load archive data from all_objects.json
+     * Load archive data with enhanced metadata
      */
     async loadArchiveData() {
-        console.log('📂 Loading archive data from all_objects.json...');
-        
+        console.log('📂 Loading archive data with enhanced metadata...');
+
         try {
-            const response = await fetch('km_archive/metadata/all_objects.json');
+            // Try enhanced data first, fallback to original
+            let response = await fetch('km_archive/metadata/enhanced_objects_v2.json');
+            if (!response.ok) {
+                console.warn('Enhanced data not found, falling back to original data');
+                response = await fetch('km_archive/metadata/all_objects.json');
+            }
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -412,28 +417,34 @@ class ArchiveApp {
         }
         // If both checked, show all (no filter needed)
 
-        // Apply time period filter
+        // Apply time period filter using historical years from enhanced metadata
         if (this.filters.timePeriod && this.filters.timePeriod.min && this.filters.timePeriod.max) {
             filtered = filtered.filter(obj => {
-                if (!obj.createdDate) return false;
+                // Use historical year from enhanced metadata
+                const year = obj.year || obj.historicalYear;
 
-                // Handle various date formats
-                let year;
-                const dateStr = obj.createdDate.toString();
+                if (!year) {
+                    // Try extracting from createdDate as fallback
+                    if (obj.createdDate) {
+                        const dateStr = obj.createdDate.toString();
+                        let extractedYear;
 
-                // Extract year from various formats
-                if (/^\d{4}$/.test(dateStr)) {
-                    // Simple year: "1920"
-                    year = parseInt(dateStr);
-                } else if (/\d{4}/.test(dateStr)) {
-                    // Extract first 4-digit year found
-                    const match = dateStr.match(/\d{4}/);
-                    year = match ? parseInt(match[0]) : null;
-                } else {
+                        // Extract year from various formats
+                        if (/^\d{4}$/.test(dateStr)) {
+                            // Simple year: "1920"
+                            extractedYear = parseInt(dateStr);
+                        } else if (/\d{4}/.test(dateStr)) {
+                            // Extract first 4-digit year found
+                            const match = dateStr.match(/\d{4}/);
+                            extractedYear = match ? parseInt(match[0]) : null;
+                        }
+
+                        return extractedYear && extractedYear >= this.filters.timePeriod.min && extractedYear <= this.filters.timePeriod.max;
+                    }
                     return false;
                 }
 
-                return year && year >= this.filters.timePeriod.min && year <= this.filters.timePeriod.max;
+                return year >= this.filters.timePeriod.min && year <= this.filters.timePeriod.max;
             });
         }
 

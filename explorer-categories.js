@@ -38,6 +38,7 @@ class CategoryManager {
      */
     extractAllCategories() {
         this.extractObjectTypes();
+        this.extractObjectClasses(); // New: hierarchical classification
         this.extractTemporalCategories();
         this.extractBasicCrimeTypes();
         this.extractGeographicRegions();
@@ -48,7 +49,7 @@ class CategoryManager {
      */
     extractObjectTypes() {
         const types = {};
-        
+
         this.explorer.objects.forEach(obj => {
             const type = obj.container || 'unknown';
             if (!types[type]) {
@@ -61,68 +62,150 @@ class CategoryManager {
             types[type].count++;
             types[type].objects.push(obj);
         });
-        
+
         this.categories.type = types;
         console.log('📂 Object types extracted:', Object.keys(types));
     }
 
     /**
-     * Extract temporal categories from creation dates
+     * Extract hierarchical object classes from enhanced metadata
+     * Categories like Waffe.Feuerwaffe.Pistole, Dokument.Karteikarte, etc.
+     */
+    extractObjectClasses() {
+        const classes = {};
+        const primaryClasses = {};
+        const secondaryClasses = {};
+
+        this.explorer.objects.forEach(obj => {
+            const fullClass = obj.objectClass || 'Beweisstück.Sonstiges';
+            const parts = fullClass.split('.');
+
+            // Primary classification (e.g., Waffe, Dokument, Beweisstück)
+            const primary = parts[0];
+            if (!primaryClasses[primary]) {
+                primaryClasses[primary] = {
+                    count: 0,
+                    objects: [],
+                    displayName: primary,
+                    subcategories: {}
+                };
+            }
+            primaryClasses[primary].count++;
+            primaryClasses[primary].objects.push(obj);
+
+            // Secondary classification if exists (e.g., Feuerwaffe, Karteikarte)
+            if (parts[1]) {
+                const secondary = parts[1];
+                const secondaryKey = `${primary}.${secondary}`;
+
+                if (!secondaryClasses[secondaryKey]) {
+                    secondaryClasses[secondaryKey] = {
+                        count: 0,
+                        objects: [],
+                        displayName: secondary,
+                        parent: primary
+                    };
+                }
+                secondaryClasses[secondaryKey].count++;
+                secondaryClasses[secondaryKey].objects.push(obj);
+
+                // Add to parent's subcategories
+                primaryClasses[primary].subcategories[secondary] = secondaryClasses[secondaryKey];
+            }
+
+            // Full classification for detailed grouping
+            if (!classes[fullClass]) {
+                classes[fullClass] = {
+                    count: 0,
+                    objects: [],
+                    displayName: this.getClassDisplayName(fullClass),
+                    hierarchy: parts
+                };
+            }
+            classes[fullClass].count++;
+            classes[fullClass].objects.push(obj);
+        });
+
+        this.categories.objectClass = classes;
+        this.categories.primaryClass = primaryClasses;
+        this.categories.secondaryClass = secondaryClasses;
+
+        console.log('🎯 Object classes extracted:');
+        console.log('  Primary:', Object.keys(primaryClasses));
+        console.log('  Full classes:', Object.keys(classes).length, 'unique classifications');
+    }
+
+    /**
+     * Get display name for object class
+     */
+    getClassDisplayName(classPath) {
+        const parts = classPath.split('.');
+        return parts[parts.length - 1]; // Return the most specific part
+    }
+
+    /**
+     * Extract temporal categories from historical dates (1850-1950)
+     * Uses enhanced metadata with extracted historical years
      */
     extractTemporalCategories() {
         const decades = {};
-        
+        let exactDateCount = 0;
+        let estimatedDateCount = 0;
+        let unknownDateCount = 0;
+
         this.explorer.objects.forEach(obj => {
-            const decade = this.extractDecade(obj);
-            if (decade) {
+            // Use historical year from enhanced metadata
+            const year = obj.year || obj.historicalYear;
+            const isEstimated = obj.dateEstimated === true;
+
+            if (year && year >= 1850 && year <= 1950) {
+                const decade = this.yearToDecade(year);
+
                 if (!decades[decade]) {
                     decades[decade] = {
                         count: 0,
                         objects: [],
                         displayName: decade,
-                        range: this.getDecadeRange(decade)
+                        range: this.getDecadeRange(decade),
+                        exactCount: 0,
+                        estimatedCount: 0
                     };
                 }
+
                 decades[decade].count++;
                 decades[decade].objects.push(obj);
+
+                if (isEstimated) {
+                    decades[decade].estimatedCount++;
+                    estimatedDateCount++;
+                } else {
+                    decades[decade].exactCount++;
+                    exactDateCount++;
+                }
+            } else {
+                unknownDateCount++;
             }
         });
-        
+
         this.categories.temporal = decades;
-        console.log('📅 Temporal categories extracted:', Object.keys(decades).sort());
+
+        console.log('📅 Temporal categories extracted (1850-1950):', Object.keys(decades).sort());
+        console.log(`  📊 Date statistics: ${exactDateCount} exact, ${estimatedDateCount} estimated, ${unknownDateCount} unknown`);
     }
 
     /**
-     * Extract decade from object metadata
+     * Extract decade from object metadata (legacy - kept for compatibility)
+     * New implementation uses historical years from enhanced metadata directly
      */
     extractDecade(obj) {
-        // Try multiple date fields
-        const dateFields = ['created', 'date_created', 'creation_date', 'year'];
-        let year = null;
-        
-        for (const field of dateFields) {
-            if (obj[field]) {
-                year = this.parseYear(obj[field]);
-                if (year) break;
-            }
+        // Use historical year from enhanced metadata first
+        const year = obj.year || obj.historicalYear;
+
+        if (year && year >= 1850 && year <= 1950) {
+            return this.yearToDecade(year);
         }
-        
-        // Try extracting from description or title
-        if (!year && obj.description) {
-            year = this.extractYearFromText(obj.description);
-        }
-        
-        if (!year && obj.title) {
-            year = this.extractYearFromText(obj.title);
-        }
-        
-        // Default fallback based on collection period
-        if (!year) {
-            // Hans Gross collection is primarily 1890-1940
-            year = 1900 + Math.floor(Math.random() * 40); // Random within range for visualization
-        }
-        
-        return year ? this.yearToDecade(year) : null;
+
+        return null;
     }
 
     /**
