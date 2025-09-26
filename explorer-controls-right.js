@@ -139,6 +139,9 @@ class LayoutControlsRight {
                 padding: 10px 12px;
                 background: #f8f8f8;
                 border-bottom: 1px solid #e0e0e0;
+            }
+
+            .panel-title {
                 font-size: 12px;
                 font-weight: 600;
                 text-transform: uppercase;
